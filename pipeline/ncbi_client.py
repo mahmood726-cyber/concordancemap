@@ -26,6 +26,12 @@ from lxml import etree
 NCBI_ESEARCH_URL = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi"
 NCBI_EFETCH_URL = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi"
 
+# Hardened XML parser: disable entity resolution (billion-laughs / XXE
+# defense) and network access (no external DTD fetches). NCBI responses
+# never require entity expansion, and cached bytes on disk should not
+# trigger amplified allocation if tampered with.
+_XML_PARSER = etree.XMLParser(resolve_entities=False, no_network=True)
+
 
 @dataclass
 class RateLimiter:
@@ -264,8 +270,13 @@ def esearch_pubmed(
         NCBI_ESEARCH_URL, params, session=session, limiter=limiter, cache=cache
     )
     try:
-        root = etree.fromstring(body)
+        root = etree.fromstring(body, _XML_PARSER)
     except etree.XMLSyntaxError as exc:
         raise MalformedResponseError(f"esearch XML parse failed: {exc}") from exc
 
-    return [id_elem.text or "" for id_elem in root.iter("Id")]
+    pmids: list[str] = []
+    for id_elem in root.iter("Id"):
+        text = (id_elem.text or "").strip()
+        if text:
+            pmids.append(text)
+    return pmids

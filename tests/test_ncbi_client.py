@@ -379,3 +379,59 @@ def test_esearch_pubmed_empty_result_returns_empty_list(tmp_path):
     )
 
     assert pmids == []
+
+
+def test_esearch_pubmed_api_key_included_when_provided(tmp_path):
+    """api_key=str inserts 'api_key' into request params; api_key=None omits it."""
+    cache = RequestCache(cache_dir=tmp_path)
+    fake_xml = b"<?xml version='1.0'?><eSearchResult><IdList><Id>1</Id></IdList></eSearchResult>"
+
+    sess_keyed = _FakeSession(_FakeResponse(200, fake_xml))
+    limiter = RateLimiter(rate_per_sec=10.0, burst=10)
+    esearch_pubmed(
+        query="x", cache=cache, session=sess_keyed, limiter=limiter, api_key="TESTKEY",
+    )
+    _, params_keyed = sess_keyed.calls[0]
+    assert params_keyed["api_key"] == "TESTKEY"
+
+    # Use fresh tmp_path subdir to avoid cache-hit short-circuit
+    sess_none = _FakeSession(_FakeResponse(200, fake_xml))
+    cache2 = RequestCache(cache_dir=tmp_path / "no_key")
+    esearch_pubmed(
+        query="x", cache=cache2, session=sess_none, limiter=limiter, api_key=None,
+    )
+    _, params_none = sess_none.calls[0]
+    assert "api_key" not in params_none
+
+
+def test_esearch_pubmed_retmax_passed_to_params(tmp_path):
+    """retmax parameter must appear in request params as a string."""
+    cache = RequestCache(cache_dir=tmp_path)
+    fake_xml = b"<?xml version='1.0'?><eSearchResult><IdList><Id>1</Id></IdList></eSearchResult>"
+    sess = _FakeSession(_FakeResponse(200, fake_xml))
+    limiter = RateLimiter(rate_per_sec=10.0, burst=10)
+
+    esearch_pubmed(
+        query="x", cache=cache, session=sess, limiter=limiter, api_key=None, retmax=42,
+    )
+    _, params = sess.calls[0]
+    assert params["retmax"] == "42"
+
+
+def test_esearch_pubmed_filters_empty_pmid_elements(tmp_path):
+    """Empty or whitespace <Id/> elements must be filtered, not returned as '' strings."""
+    cache = RequestCache(cache_dir=tmp_path)
+    xml_with_empty = b"""<?xml version="1.0"?>
+<eSearchResult><IdList>
+  <Id>123</Id>
+  <Id></Id>
+  <Id>   </Id>
+  <Id>456</Id>
+</IdList></eSearchResult>"""
+    sess = _FakeSession(_FakeResponse(200, xml_with_empty))
+    limiter = RateLimiter(rate_per_sec=10.0, burst=10)
+
+    pmids = esearch_pubmed(
+        query="x", cache=cache, session=sess, limiter=limiter, api_key=None,
+    )
+    assert pmids == ["123", "456"]
