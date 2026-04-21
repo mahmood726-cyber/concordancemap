@@ -6,7 +6,12 @@ from pathlib import Path
 
 import pytest
 
-from pipeline.ncbi_client import RateLimiter, RequestCache
+from pipeline.ncbi_client import (
+    MalformedResponseError,
+    RateLimiter,
+    RequestCache,
+    fetch_raw,
+)
 
 
 def test_rate_limiter_allows_burst_up_to_capacity(monkeypatch):
@@ -138,9 +143,6 @@ def test_cache_put_failure_after_write_unlinks_tmp(tmp_path: Path, monkeypatch):
 
     tmp_files = list(tmp_path.glob("*.tmp"))
     assert tmp_files == [], f"orphan tmp files remain: {tmp_files}"
-
-
-from pipeline.ncbi_client import MalformedResponseError, fetch_raw
 
 
 class _FakeResponse:
