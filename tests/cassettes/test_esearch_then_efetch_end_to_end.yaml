@@ -1,0 +1,1340 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-requests/2.32.5
+    method: GET
+    uri: https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&retmax=10&retmode=xml&term=empagliflozin+AND+heart+failure+AND+systematic%5Bsb%5D
+  response:
+    body:
+      string: '<?xml version="1.0" encoding="UTF-8" ?>
+
+        <!DOCTYPE eSearchResult PUBLIC "-//NLM//DTD esearch 20060628//EN" "https://eutils.ncbi.nlm.nih.gov/eutils/dtd/20060628/esearch.dtd">
+
+        <eSearchResult><Count>110</Count><RetMax>10</RetMax><RetStart>0</RetStart><IdList>
+
+        <Id>41968841</Id>
+
+        <Id>41892868</Id>
+
+        <Id>41550872</Id>
+
+        <Id>41527634</Id>
+
+        <Id>41517628</Id>
+
+        <Id>41477427</Id>
+
+        <Id>41384193</Id>
+
+        <Id>41235287</Id>
+
+        <Id>41164749</Id>
+
+        <Id>41122555</Id>
+
+        </IdList><TranslationSet><Translation>     <From>empagliflozin</From>     <To>"empagliflozin"[Supplementary
+        Concept] OR "empagliflozin"[All Fields]</To>    </Translation><Translation>     <From>heart
+        failure</From>     <To>"heart failure"[MeSH Terms] OR ("heart"[All Fields]
+        AND "failure"[All Fields]) OR "heart failure"[All Fields]</To>    </Translation></TranslationSet><QueryTranslation>("empagliflozin"[Supplementary
+        Concept] OR "empagliflozin"[All Fields]) AND ("heart failure"[MeSH Terms]
+        OR ("heart"[All Fields] AND "failure"[All Fields]) OR "heart failure"[All
+        Fields]) AND "systematic"[Filter]</QueryTranslation></eSearchResult>
+
+        '
+    headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      Access-Control-Expose-Headers:
+      - X-RateLimit-Limit,X-RateLimit-Remaining
+      Cache-Control:
+      - private
+      Connection:
+      - Keep-Alive
+      Content-Security-Policy:
+      - upgrade-insecure-requests
+      Content-Type:
+      - text/xml; charset=UTF-8
+      Date:
+      - Tue, 21 Apr 2026 22:54:38 GMT
+      Keep-Alive:
+      - timeout=4, max=40
+      NCBI-PHID:
+      - 1D34DC232975038500005E84FA5FCDF8.1.1.m_1
+      NCBI-SID:
+      - 31431E5E15C01E60_979FSID
+      Referrer-Policy:
+      - origin-when-cross-origin
+      Server:
+      - Finatra
+      Set-Cookie:
+      - ncbi_sid=31431E5E15C01E60_979FSID; domain=.nih.gov; path=/; expires=Wed, 21
+        Apr 2027 22:54:38 GMT
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Transfer-Encoding:
+      - chunked
+      X-RateLimit-Limit:
+      - '3'
+      X-RateLimit-Remaining:
+      - '2'
+      X-UA-Compatible:
+      - IE=Edge
+      X-XSS-Protection:
+      - 1; mode=block
+      content-encoding:
+      - gzip
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Cookie:
+      - ncbi_sid=31431E5E15C01E60_979FSID
+      User-Agent:
+      - python-requests/2.32.5
+    method: GET
+    uri: https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=41968841%2C41892868%2C41550872&retmode=xml
+  response:
+    body:
+      string: "<?xml version=\"1.0\" ?>\n<!DOCTYPE PubmedArticleSet PUBLIC \"-//NLM//DTD
+        PubMedArticle, 1st January 2025//EN\" \"https://dtd.nlm.nih.gov/ncbi/pubmed/out/pubmed_250101.dtd\">\n<PubmedArticleSet>\n<PubmedArticle><MedlineCitation
+        Status=\"Publisher\" Owner=\"NLM\"><PMID Version=\"1\">41968841</PMID><DateRevised><Year>2026</Year><Month>04</Month><Day>13</Day></DateRevised><Article
+        PubModel=\"Print-Electronic\"><Journal><ISSN IssnType=\"Electronic\">1875-6557</ISSN><JournalIssue
+        CitedMedium=\"Internet\"><PubDate><Year>2026</Year><Month>Apr</Month><Day>09</Day></PubDate></JournalIssue><Title>Current
+        cardiology reviews</Title><ISOAbbreviation>Curr Cardiol Rev</ISOAbbreviation></Journal><ArticleTitle>Cost-Effectiveness
+        of Empagliflozin in Patients with Chronic Heart Failure and Chronic Kidney
+        Disease: A Systematic Review.</ArticleTitle><ELocationID EIdType=\"doi\" ValidYN=\"Y\">10.2174/011573403X403324251130140853</ELocationID><Abstract><AbstractText
+        Label=\"INTRODUCTION\" NlmCategory=\"BACKGROUND\">To evaluate the cost-effectiveness
+        of empagliflozin in patients with chronic heart failure with preserved ejection
+        fraction (CHFpEF) and moderately reduced ejection fraction (CHFmrEF) across
+        various healthcare systems.</AbstractText><AbstractText Label=\"MATERIALS
+        AND METHODS\" NlmCategory=\"METHODS\">A systematic review was conducted according
+        to PRISMA 2024 guidelines. A total of 6 studies were included after screening
+        225 records from PubMed, Web of Science, ScienceDirect, and Google Scholar.
+        Studies evaluating cost-effectiveness outcomes, including incremental cost-effectiveness
+        ratios (ICER), quality-adjusted life years (QALY), and healthcare costs, were
+        analyzed.</AbstractText><AbstractText Label=\"RESULTS\" NlmCategory=\"RESULTS\">All
+        included studies applied a Markov model over a 10-year time horizon. Empagliflozin
+        was associated with a 15-18% reduction in hospitalizations, an increase in
+        QALYs by 0.11-0.67, and ICERs ranging from &#x20ac;5,089/QALY to $174,053/QALY,
+        depending on the healthcare setting and model assumptions. Examples include:
+        Spain: &#x20ac;5,089/QALY, China: $11,292/QALY, USA: $25,974-$174,053/QALY,
+        Australia: A$29,202/QALY. ICER per life year (LY) ranged from $6,246 to $151,929,
+        indicating variable cost-effectiveness based on country-specific cost structures
+        and thresholds.</AbstractText><AbstractText Label=\"CONCLUSIONS\" NlmCategory=\"CONCLUSIONS\">Empagliflozin
+        appears to be a cost-effective add-on therapy to standard care for CHFpEF
+        and CHFmrEF, especially in healthcare systems with high hospitalization costs.
+        However, its value is highly sensitive to drug pricing and national willingness-to-pay
+        thresholds. Further real-world studies are needed to confirm long-term economic
+        benefits. The review was registered with PROSPERO (CRD420250654439). Available
+        from: https://www.crd.york.ac.uk/PROSPERO/view/CRD420250654439.</AbstractText><CopyrightInformation>Copyright&#xa9;
+        Bentham Science Publishers; For any queries, please email at epub@benthamscience.net.</CopyrightInformation></Abstract><AuthorList
+        CompleteYN=\"Y\"><Author ValidYN=\"Y\"><LastName>Nargiza</LastName><ForeName>Sultanbaeva</ForeName><Initials>S</Initials><Identifier
+        Source=\"ORCID\">0000-0002-1658-7972</Identifier><AffiliationInfo><Affiliation>Head
+        of the Master's Degree Department, PhD, Institute of Pharmaceutical Education
+        and Research, Tashkent, Republic of Uzbekistan.</Affiliation></AffiliationInfo></Author><Author
+        ValidYN=\"Y\"><LastName>Shohista</LastName><ForeName>Mukhamedova</ForeName><Initials>M</Initials><Identifier
+        Source=\"ORCID\">0000-0002-1120-7352</Identifier><AffiliationInfo><Affiliation>Republican
+        Specialized Cardiology Scientific-Practical Medicine Center, Tashkent, Republic
+        of Uzbekistan.</Affiliation></AffiliationInfo></Author><Author ValidYN=\"Y\"><LastName>Shakhnoz</LastName><ForeName>Umarova</ForeName><Initials>U</Initials><Identifier
+        Source=\"ORCID\">0000-0003-4106-0395</Identifier><AffiliationInfo><Affiliation>Institute
+        of Pharmaceutical Education and Research, Tashkent, Republic of Uzbekistan.</Affiliation></AffiliationInfo></Author><Author
+        ValidYN=\"Y\"><LastName>Guzal</LastName><ForeName>Mullabaeva</ForeName><Initials>M</Initials><Identifier
+        Source=\"ORCID\">0000-0003-3255-2443</Identifier><AffiliationInfo><Affiliation>Republican
+        Specialized Cardiology Scientific-Practical Medicine Center, Tashkent, Republic
+        of Uzbekistan.</Affiliation></AffiliationInfo></Author></AuthorList><Language>eng</Language><PublicationTypeList><PublicationType
+        UI=\"D016428\">Journal Article</PublicationType></PublicationTypeList><ArticleDate
+        DateType=\"Electronic\"><Year>2026</Year><Month>04</Month><Day>09</Day></ArticleDate></Article><MedlineJournalInfo><Country>United
+        Arab Emirates</Country><MedlineTA>Curr Cardiol Rev</MedlineTA><NlmUniqueID>101261935</NlmUniqueID><ISSNLinking>1573-403X</ISSNLinking></MedlineJournalInfo><CitationSubset>IM</CitationSubset><KeywordList
+        Owner=\"NOTNLM\"><Keyword MajorTopicYN=\"N\">Empagliflozin</Keyword><Keyword
+        MajorTopicYN=\"N\">ICER.</Keyword><Keyword MajorTopicYN=\"N\">QALY</Keyword><Keyword
+        MajorTopicYN=\"N\">chronic heart failure</Keyword><Keyword MajorTopicYN=\"N\">cost-effectiveness</Keyword></KeywordList></MedlineCitation><PubmedData><History><PubMedPubDate
+        PubStatus=\"received\"><Year>2025</Year><Month>3</Month><Day>28</Day></PubMedPubDate><PubMedPubDate
+        PubStatus=\"revised\"><Year>2025</Year><Month>8</Month><Day>22</Day></PubMedPubDate><PubMedPubDate
+        PubStatus=\"accepted\"><Year>2025</Year><Month>8</Month><Day>26</Day></PubMedPubDate><PubMedPubDate
+        PubStatus=\"medline\"><Year>2026</Year><Month>4</Month><Day>13</Day><Hour>6</Hour><Minute>32</Minute></PubMedPubDate><PubMedPubDate
+        PubStatus=\"pubmed\"><Year>2026</Year><Month>4</Month><Day>13</Day><Hour>6</Hour><Minute>32</Minute></PubMedPubDate><PubMedPubDate
+        PubStatus=\"entrez\"><Year>2026</Year><Month>4</Month><Day>13</Day><Hour>3</Hour><Minute>2</Minute></PubMedPubDate></History><PublicationStatus>aheadofprint</PublicationStatus><ArticleIdList><ArticleId
+        IdType=\"pubmed\">41968841</ArticleId><ArticleId IdType=\"doi\">10.2174/011573403X403324251130140853</ArticleId><ArticleId
+        IdType=\"pii\">CCR-EPUB-153787</ArticleId></ArticleIdList></PubmedData></PubmedArticle><PubmedArticle><MedlineCitation
+        Status=\"MEDLINE\" Owner=\"NLM\" IndexingMethod=\"Automated\"><PMID Version=\"1\">41892868</PMID><DateCompleted><Year>2026</Year><Month>03</Month><Day>27</Day></DateCompleted><DateRevised><Year>2026</Year><Month>03</Month><Day>29</Day></DateRevised><Article
+        PubModel=\"Electronic\"><Journal><ISSN IssnType=\"Electronic\">2076-3271</ISSN><JournalIssue
+        CitedMedium=\"Internet\"><Volume>14</Volume><Issue>1</Issue><PubDate><Year>2026</Year><Month>Mar</Month><Day>20</Day></PubDate></JournalIssue><Title>Medical
+        sciences (Basel, Switzerland)</Title><ISOAbbreviation>Med Sci (Basel)</ISOAbbreviation></Journal><ArticleTitle>Safety
+        Profile of SGLT-2 Inhibitors in Older Adults: A Systematic Review and Network
+        Meta-Analysis.</ArticleTitle><ELocationID EIdType=\"pii\" ValidYN=\"Y\">153</ELocationID><ELocationID
+        EIdType=\"doi\" ValidYN=\"Y\">10.3390/medsci14010153</ELocationID><Abstract><AbstractText
+        Label=\"BACKGROUND\" NlmCategory=\"BACKGROUND\">Sodium-glucose cotransporter-2
+        inhibitors (SGLT2i) are widely used in older adults for diabetes, heart failure,
+        and kidney disease. This is the first network meta-analysis focusing on the
+        effects of SGLT2i in older adults.</AbstractText><AbstractText Label=\"METHODS\"
+        NlmCategory=\"METHODS\">Databases were searched for randomized clinical trials
+        comparing SGLT2i against non-SGLT2i controls or other SGLT2i in relevant populations.
+        Key safety outcomes included acute renal failure (ARF), genital infections,
+        volume depletion, mortality, and serious adverse events (SAEs). Pooled odds
+        ratios (OR) with 95% confidence intervals (CI) were generated using random-effects
+        models for direct and mixed treatment comparisons.</AbstractText><AbstractText
+        Label=\"RESULTS\" NlmCategory=\"RESULTS\">From 97 included trials in the meta-analysis,
+        SGLT2i versus non-SGLT2i were associated with reduced risks of ARF (OR 0.86,
+        95% CI 0.79-0.94), mortality (OR 0.84, 0.75-0.93), and SAEs (OR 0.84, 0.78-0.89),
+        but increased risks of genital infections (OR 3.32, 2.68-4.12) and volume
+        depletion (OR 1.18, 1.09-1.27). The risk of genital infections was observed
+        more frequently with higher doses (high-dose OR 4.73 vs. low-dose OR 2.90)
+        and escalated sharply with age (&#x2265;75 years OR 9.29, 3.13-27.6). The
+        mortality benefit was strongest in adults &#x2265;75 years (OR 0.58, 0.38-0.88).
+        Intra-class analysis revealed distinct safety profiles; for instance, empagliflozin
+        reduced the ARF risk, while sotagliflozin increased the volume depletion risk.
+        Bootstrap and trial sequential analyses confirmed the results' robustness.
+        Grading of Recommendations Assessment, Development, and Evaluation assessment
+        indicated moderate certainty of evidence.</AbstractText><AbstractText Label=\"CONCLUSIONS\"
+        NlmCategory=\"CONCLUSIONS\">In older adults, SGLT2i maintain a favorable benefit-risk
+        profile, with significant reductions in mortality and SAEs, though risks of
+        genital infections and volume depletion require vigilance. The risk of genital
+        infections exhibits a strong dose-response relationship and increases markedly
+        in the oldest adults, while the mortality benefit appears to be most pronounced
+        in those aged 75 years and older. This study provides actionable insights
+        for personalized therapy in geriatric care.</AbstractText></Abstract><AuthorList
+        CompleteYN=\"Y\"><Author ValidYN=\"Y\"><LastName>Sridharan</LastName><ForeName>Kannan</ForeName><Initials>K</Initials><Identifier
+        Source=\"ORCID\">0000-0003-3811-6503</Identifier><AffiliationInfo><Affiliation>Department
+        of Pharmacology &amp; Therapeutics, College of Medicine &amp; Health Sciences,
+        Arabian Gulf University, Manama P.O. Box 26671, Bahrain.</Affiliation></AffiliationInfo></Author><Author
+        ValidYN=\"Y\"><LastName>Sivaramakrishnan</LastName><ForeName>Gowri</ForeName><Initials>G</Initials><Identifier
+        Source=\"ORCID\">0000-0002-5877-205X</Identifier><AffiliationInfo><Affiliation>Bahrain
+        Defence Force Royal Medical Services, Riffa P.O. Box 28743, Bahrain.</Affiliation></AffiliationInfo></Author></AuthorList><Language>eng</Language><PublicationTypeList><PublicationType
+        UI=\"D016428\">Journal Article</PublicationType><PublicationType UI=\"D000078182\">Systematic
+        Review</PublicationType><PublicationType UI=\"D017418\">Meta-Analysis</PublicationType><PublicationType
+        UI=\"D016454\">Review</PublicationType></PublicationTypeList><ArticleDate
+        DateType=\"Electronic\"><Year>2026</Year><Month>03</Month><Day>20</Day></ArticleDate></Article><MedlineJournalInfo><Country>Switzerland</Country><MedlineTA>Med
+        Sci (Basel)</MedlineTA><NlmUniqueID>101629322</NlmUniqueID><ISSNLinking>2076-3271</ISSNLinking></MedlineJournalInfo><ChemicalList><Chemical><RegistryNumber>0</RegistryNumber><NameOfSubstance
+        UI=\"D000077203\">Sodium-Glucose Transporter 2 Inhibitors</NameOfSubstance></Chemical></ChemicalList><CitationSubset>IM</CitationSubset><MeshHeadingList><MeshHeading><DescriptorName
+        UI=\"D006801\" MajorTopicYN=\"N\">Humans</DescriptorName></MeshHeading><MeshHeading><DescriptorName
+        UI=\"D000077203\" MajorTopicYN=\"Y\">Sodium-Glucose Transporter 2 Inhibitors</DescriptorName><QualifierName
+        UI=\"Q000009\" MajorTopicYN=\"N\">adverse effects</QualifierName><QualifierName
+        UI=\"Q000627\" MajorTopicYN=\"N\">therapeutic use</QualifierName></MeshHeading><MeshHeading><DescriptorName
+        UI=\"D000368\" MajorTopicYN=\"N\">Aged</DescriptorName></MeshHeading><MeshHeading><DescriptorName
+        UI=\"D000071076\" MajorTopicYN=\"N\">Network Meta-Analysis as Topic</DescriptorName></MeshHeading><MeshHeading><DescriptorName
+        UI=\"D016032\" MajorTopicYN=\"N\">Randomized Controlled Trials as Topic</DescriptorName></MeshHeading><MeshHeading><DescriptorName
+        UI=\"D003924\" MajorTopicYN=\"Y\">Diabetes Mellitus, Type 2</DescriptorName><QualifierName
+        UI=\"Q000188\" MajorTopicYN=\"N\">drug therapy</QualifierName></MeshHeading><MeshHeading><DescriptorName
+        UI=\"D058186\" MajorTopicYN=\"N\">Acute Kidney Injury</DescriptorName><QualifierName
+        UI=\"Q000139\" MajorTopicYN=\"N\">chemically induced</QualifierName></MeshHeading></MeshHeadingList><KeywordList
+        Owner=\"NOTNLM\"><Keyword MajorTopicYN=\"N\">SGLT2i</Keyword><Keyword MajorTopicYN=\"N\">canagliflozin</Keyword><Keyword
+        MajorTopicYN=\"N\">dapagliflozin</Keyword><Keyword MajorTopicYN=\"N\">empagliflozin</Keyword><Keyword
+        MajorTopicYN=\"N\">sotagliflozin</Keyword></KeywordList><CoiStatement>The
+        authors have no relevant affiliations or financial involvement with any organization
+        or entity with a financial interest in or financial conflict with the subject
+        matter or materials discussed in the manuscript. This includes employment,
+        consultancies, honoraria, stock ownership or options, expert testimony, grants
+        or patents received or pending, or royalties.</CoiStatement></MedlineCitation><PubmedData><History><PubMedPubDate
+        PubStatus=\"received\"><Year>2026</Year><Month>1</Month><Day>20</Day></PubMedPubDate><PubMedPubDate
+        PubStatus=\"revised\"><Year>2026</Year><Month>3</Month><Day>9</Day></PubMedPubDate><PubMedPubDate
+        PubStatus=\"accepted\"><Year>2026</Year><Month>3</Month><Day>17</Day></PubMedPubDate><PubMedPubDate
+        PubStatus=\"medline\"><Year>2026</Year><Month>3</Month><Day>27</Day><Hour>17</Hour><Minute>38</Minute></PubMedPubDate><PubMedPubDate
+        PubStatus=\"pubmed\"><Year>2026</Year><Month>3</Month><Day>27</Day><Hour>17</Hour><Minute>37</Minute></PubMedPubDate><PubMedPubDate
+        PubStatus=\"entrez\"><Year>2026</Year><Month>3</Month><Day>27</Day><Hour>11</Hour><Minute>22</Minute></PubMedPubDate><PubMedPubDate
+        PubStatus=\"pmc-release\"><Year>2026</Year><Month>3</Month><Day>20</Day></PubMedPubDate></History><PublicationStatus>epublish</PublicationStatus><ArticleIdList><ArticleId
+        IdType=\"pubmed\">41892868</ArticleId><ArticleId IdType=\"pmc\">PMC13028317</ArticleId><ArticleId
+        IdType=\"doi\">10.3390/medsci14010153</ArticleId><ArticleId IdType=\"pii\">medsci14010153</ArticleId></ArticleIdList><ReferenceList><Reference><Citation>Dardi
+        I., Kouvatsos T., Jabbour S.A. SGLT2 inhibitors. Biochem. Pharmacol. 2016;101:27&#x2013;39.
+        doi: 10.1016/j.bcp.2015.09.005.</Citation><ArticleIdList><ArticleId IdType=\"doi\">10.1016/j.bcp.2015.09.005</ArticleId><ArticleId
+        IdType=\"pubmed\">26362302</ArticleId></ArticleIdList></Reference><Reference><Citation>Cavallari
+        I., Crispino S.P., Segreti A., Ussia G.P., Grigioni F. Practical guidance
+        for the use of SGLT2 inhibitors in heart failure. Am. J. Cardiovasc. Drugs.
+        2023;23:609&#x2013;621. doi: 10.1007/s40256-023-00601-9.</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.1007/s40256-023-00601-9</ArticleId><ArticleId IdType=\"pubmed\">37620653</ArticleId></ArticleIdList></Reference><Reference><Citation>Shen
+        T.H., Farley J.F. Utilization and impact of SLGT2 inhibitors among diabetes
+        patients in a nationally representative survey: Findings from NHANES 2013&#x2013;2020.
+        J. Diabetes Its Complicat. 2023;37:108625. doi: 10.1016/j.jdiacomp.2023.108625.</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.1016/j.jdiacomp.2023.108625</ArticleId><ArticleId IdType=\"pubmed\">37804691</ArticleId></ArticleIdList></Reference><Reference><Citation>Gonzalez
+        J., Dave C.V. Prescribing trends of SGLT2 inhibitors among HFrEF and HFpEF
+        patients with and without T2DM, 2013&#x2013;2021. BMC Cardiovasc. Disord.
+        2024;24:285. doi: 10.1186/s12872-024-03961-5.</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.1186/s12872-024-03961-5</ArticleId><ArticleId IdType=\"pmc\">PMC11137883</ArticleId><ArticleId
+        IdType=\"pubmed\">38816795</ArticleId></ArticleIdList></Reference><Reference><Citation>Custodio
+        J.S., Jr., Roriz-Filho J., Cavalcanti C.A., Martins A., Salles J.E. Use of
+        SGLT2 inhibitors in older adults: Scientific evidence and practical aspects.
+        Drugs Aging. 2020;37:399&#x2013;409. doi: 10.1007/s40266-020-00757-y.</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.1007/s40266-020-00757-y</ArticleId><ArticleId IdType=\"pubmed\">32239461</ArticleId></ArticleIdList></Reference><Reference><Citation>van
+        Riet E.E., Hoes A.W., Wagenaar K.P., Limburg A., Landman M.A., Rutten F.H.
+        Epidemiology of heart failure: The prevalence of heart failure and ventricular
+        dysfunction in older adults over time. A systematic review. Eur. J. Heart
+        Fail. 2016;18:242&#x2013;252. doi: 10.1002/ejhf.483.</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.1002/ejhf.483</ArticleId><ArticleId IdType=\"pubmed\">26727047</ArticleId></ArticleIdList></Reference><Reference><Citation>Karam
+        Z., Tuazon J. Anatomic and physiologic changes of the aging kidney. Clin.
+        Geriatr. Med. 2013;29:555&#x2013;564. doi: 10.1016/j.cger.2013.05.006.</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.1016/j.cger.2013.05.006</ArticleId><ArticleId IdType=\"pubmed\">23849007</ArticleId></ArticleIdList></Reference><Reference><Citation>Giugliano
+        D., Longo M., Maiorino M.I., Bellastella G., Chiodini P., Solerte S.B., Esposito
+        K. Efficacy of SGLT-2 inhibitors in older adults with diabetes: Systematic
+        review with metaanalysis of cardiovascular outcome trials. Diabetes Res. Clin.
+        Pract. 2020;162:108114. doi: 10.1016/j.diabres.2020.108114.</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.1016/j.diabres.2020.108114</ArticleId><ArticleId IdType=\"pubmed\">32165164</ArticleId></ArticleIdList></Reference><Reference><Citation>Sridharan
+        K., Sivaramakrishnan G. Risk of diabetic ketoacidosis associated with sodium
+        glucose cotransporter-2 inhibitors: A network meta-analysis and meta-regression.
+        J. Clin. Med. 2024;13:1748. doi: 10.3390/jcm13061748.</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.3390/jcm13061748</ArticleId><ArticleId IdType=\"pmc\">PMC10971681</ArticleId><ArticleId
+        IdType=\"pubmed\">38541972</ArticleId></ArticleIdList></Reference><Reference><Citation>Sridharan
+        K., Sivaramakrishnan G. Risk of limb amputation and bone fractures with sodium
+        glucose cotransporter-2 inhibitors: A network meta-analysis and meta-regression.
+        Expert Opin. Drug Saf. 2025;24:797&#x2013;804. doi: 10.1080/14740338.2024.2377755.</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.1080/14740338.2024.2377755</ArticleId><ArticleId IdType=\"pubmed\">38967475</ArticleId></ArticleIdList></Reference><Reference><Citation>Sridharan
+        K., Sivaramakrishnan G. Genito-urinary infectious adverse events related to
+        sodium glucose cotransporter-2 inhibitors: A network meta-analysis and meta-regression.
+        Expert Rev. Clin. Pharmacol. 2024;17:515&#x2013;524. doi: 10.1080/17512433.2024.2355287.</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.1080/17512433.2024.2355287</ArticleId><ArticleId IdType=\"pubmed\">38733378</ArticleId></ArticleIdList></Reference><Reference><Citation>Scheen
+        A.J., Bonnet F. Efficacy and safety profile of SGLT2 inhibitors in the elderly:
+        How is the benefit/risk balance? Diabetes Metab. 2023;49:101419. doi: 10.1016/j.diabet.2023.101419.</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.1016/j.diabet.2023.101419</ArticleId><ArticleId IdType=\"pubmed\">36640828</ArticleId></ArticleIdList></Reference><Reference><Citation>Rouse
+        B., Chaimani A., Li T. Network meta-analysis: An introduction for clinicians.
+        Intern. Emerg. Med. 2017;12:103&#x2013;111. doi: 10.1007/s11739-016-1583-7.</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.1007/s11739-016-1583-7</ArticleId><ArticleId IdType=\"pmc\">PMC5247317</ArticleId><ArticleId
+        IdType=\"pubmed\">27913917</ArticleId></ArticleIdList></Reference><Reference><Citation>Clinically
+        Significant Outcomes with SGLT2 Inhibitors.  [(accessed on 4 December 2025)].
+        \ Available online:  https://osf.io/89rbe/files/5fwyk.</Citation></Reference><Reference><Citation>Hutton
+        B., Salanti G., Caldwell D.M., Chaimani A., Schmid C.H., Cameron C., Ioannidis
+        J.P., Straus S., Thorlund K., Jansen J.P., et al. The PRISMA Extension Statement
+        for Reporting of Systematic Reviews Incorporating Network Meta-analyses of
+        Health Care Interventions: Checklist and Explanations. Ann. Intern. Med. 2015;162:777&#x2013;784.
+        doi: 10.7326/M14-2385.</Citation><ArticleIdList><ArticleId IdType=\"doi\">10.7326/M14-2385</ArticleId><ArticleId
+        IdType=\"pubmed\">26030634</ArticleId></ArticleIdList></Reference><Reference><Citation>Higgins
+        J.P., Altman D.G., G&#xf8;tzsche P.C., J&#xfc;ni P., Moher D., Oxman A.D.,
+        Savovi&#x107; J., Schulz K.F. Cochrane Bias Methods Group; Cochrane Statistical
+        Methods Group; et al. The Cochrane Collaboration&#x2019;s tool for assessing
+        risk of bias in randomised trials. BMJ. 2011;343:d5928. doi: 10.1136/bmj.d5928.</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.1136/bmj.d5928</ArticleId><ArticleId IdType=\"pmc\">PMC3196245</ArticleId><ArticleId
+        IdType=\"pubmed\">22008217</ArticleId></ArticleIdList></Reference><Reference><Citation>Lin
+        L., Chu H., Murad M.H., Hong C., Qu Z., Cole S.R., Chen Y. Empirical comparison
+        of publication bias tests in meta-analysis. J. Gen. Intern. Med. 2018;33:1260&#x2013;1267.
+        doi: 10.1007/s11606-018-4425-7.</Citation><ArticleIdList><ArticleId IdType=\"doi\">10.1007/s11606-018-4425-7</ArticleId><ArticleId
+        IdType=\"pmc\">PMC6082203</ArticleId><ArticleId IdType=\"pubmed\">29663281</ArticleId></ArticleIdList></Reference><Reference><Citation>Song
+        F., Xiong T., Parekh-Bhurke S., Loke Y.K., Sutton A.J., Eastwood A.J., Holland
+        R., Chen Y.F., Glenny A.M., Deeks J.J., et al. Inconsistency between direct
+        and indirect comparisons of competing interventions: Meta-epidemiological
+        study. BMJ. 2011;16:343. doi: 10.1136/bmj.d4909.</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.1136/bmj.d4909</ArticleId><ArticleId IdType=\"pmc\">PMC3156578</ArticleId><ArticleId
+        IdType=\"pubmed\">21846695</ArticleId></ArticleIdList></Reference><Reference><Citation>Borenstein
+        M., Higgins J.P., Hedges L.V., Rothstein H.R. Basics of meta-analysis: I2
+        is not an absolute measure of heterogeneity. Res. Synth. Methods. 2017;8:5&#x2013;18.
+        doi: 10.1002/jrsm.1230.</Citation><ArticleIdList><ArticleId IdType=\"doi\">10.1002/jrsm.1230</ArticleId><ArticleId
+        IdType=\"pubmed\">28058794</ArticleId></ArticleIdList></Reference><Reference><Citation>Hultcrantz
+        M., Rind D., Akl E.A., Treweek S., Mustafa R.A., Iorio A., Alper B.S., Meerpohl
+        J.J., Murad M.H., Ansari M.T., et al. The GRADE Working Group clarifies the
+        construct of certainty of evidence. J. Clin. Epidemiol. 2017;87:4&#x2013;13.
+        doi: 10.1016/j.jclinepi.2017.05.006.</Citation><ArticleIdList><ArticleId IdType=\"doi\">10.1016/j.jclinepi.2017.05.006</ArticleId><ArticleId
+        IdType=\"pmc\">PMC6542664</ArticleId><ArticleId IdType=\"pubmed\">28529184</ArticleId></ArticleIdList></Reference><Reference><Citation>Nishiyama
+        A., Kitada K. Possible renoprotective mechanisms of SGLT2 inhibitors. Front.
+        Med. 2023;10:1115413. doi: 10.3389/fmed.2023.1115413.</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.3389/fmed.2023.1115413</ArticleId><ArticleId IdType=\"pmc\">PMC10033659</ArticleId><ArticleId
+        IdType=\"pubmed\">36968844</ArticleId></ArticleIdList></Reference><Reference><Citation>Yaribeygi
+        H., Simental-Mend&#xed;a L.E., Banach M., Bo S., Sahebkar A. The major molecular
+        mechanisms mediating the renoprotective effects of SGLT2 inhibitors: An update.
+        Biomed. Pharmacother. 2019;120:109526. doi: 10.1016/j.biopha.2019.109526.</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.1016/j.biopha.2019.109526</ArticleId></ArticleIdList></Reference><Reference><Citation>Russo
+        E., Zanetti V., Macci&#xf2; L., Benizzelli G., Carbone F., La Porta E., Esposito
+        P., Verzola D., Garibotto G., Viazzi F. SGLT2 inhibition to target kidney
+        aging. Clin. Kidney J. 2024;17:sfae133. doi: 10.1093/ckj/sfae133.</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.1093/ckj/sfae133</ArticleId><ArticleId IdType=\"pmc\">PMC11129592</ArticleId><ArticleId
+        IdType=\"pubmed\">38803397</ArticleId></ArticleIdList></Reference><Reference><Citation>Geng
+        S., Li Y., Ge J., Liu Y., Li Q., Chen X., Zhu Y., Guo X., Yuan H., Wang X.,
+        et al. Nephroprotective effect of SGLT2 inhibitors in elderly patients with
+        type 2 diabetes mellitus and hypertension: A real-world population-based cohort
+        study. Postgrad. Med. 2024;136:855&#x2013;863. doi: 10.1080/00325481.2024.2426442.</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.1080/00325481.2024.2426442</ArticleId><ArticleId IdType=\"pubmed\">39513220</ArticleId></ArticleIdList></Reference><Reference><Citation>Clemmer
+        J.S., Yen T.E., Obi Y. Modeling the renoprotective mechanisms of SGLT2 inhibition
+        in hypertensive chronic kidney disease. Physiol. Rep. 2023;11:e15836. doi:
+        10.14814/phy2.15836.</Citation><ArticleIdList><ArticleId IdType=\"doi\">10.14814/phy2.15836</ArticleId><ArticleId
+        IdType=\"pmc\">PMC10643202</ArticleId><ArticleId IdType=\"pubmed\">37957121</ArticleId></ArticleIdList></Reference><Reference><Citation>Armentaro
+        G., Maio R., Bencivenga L., Okoye C., Severini G., Cassano V., Zanobbi V.,
+        Condoleo V., Bellelli G., Rengo G., et al. The use of SGLT2 inhibitors in
+        older people: What is important? Aging Clin. Exp. Res. 2025;37:280. doi: 10.1007/s40520-025-03156-8.</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.1007/s40520-025-03156-8</ArticleId><ArticleId IdType=\"pmc\">PMC12504346</ArticleId><ArticleId
+        IdType=\"pubmed\">41055791</ArticleId></ArticleIdList></Reference><Reference><Citation>Confederat
+        L.-G., Dragostin O.-M., Condurache M.-I. SGLT2 Inhibitors and the Risk of
+        Urogenital Infections: A Concise Review. J. Clin. Med. 2025;14:1960. doi:
+        10.3390/jcm14061960.</Citation><ArticleIdList><ArticleId IdType=\"doi\">10.3390/jcm14061960</ArticleId><ArticleId
+        IdType=\"pmc\">PMC11942771</ArticleId><ArticleId IdType=\"pubmed\">40142769</ArticleId></ArticleIdList></Reference><Reference><Citation>McGovern
+        A.P., Hogg M., Shields B.M., Sattar N.A., Holman R.R., Pearson E.R., Hattersley
+        A.T., Jones A.G., Dennis J.M. Risk factors for genital infections in people
+        initiating SGLT2 inhibitors and their impact on discontinuation. BMJ Open
+        Diabetes Res. Care. 2020;8:e001238. doi: 10.1136/bmjdrc-2020-001238.</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.1136/bmjdrc-2020-001238</ArticleId><ArticleId IdType=\"pmc\">PMC7252998</ArticleId><ArticleId
+        IdType=\"pubmed\">32448787</ArticleId></ArticleIdList></Reference><Reference><Citation>Cheng
+        T.H., Lin K.C., Chuang A.T., Cheng M.C., Shao S.C., Lin S.J., Lin T.Y., Tsai
+        Y.S., Lai E.C., Hu C.Y., et al. SGLT2 Inhibitors and External Genital Infection
+        in Male Patients with Type 2 Diabetes. JAMA Netw. Open. 2025;8:e2534485. doi:
+        10.1001/jamanetworkopen.2025.34485.</Citation><ArticleIdList><ArticleId IdType=\"doi\">10.1001/jamanetworkopen.2025.34485</ArticleId><ArticleId
+        IdType=\"pmc\">PMC12481227</ArticleId><ArticleId IdType=\"pubmed\">41021225</ArticleId></ArticleIdList></Reference><Reference><Citation>Li
+        S., Xiao X., Zhang X. Hydration Status in Older Adults: Current Knowledge
+        and Future Challenges. Nutrients. 2023;15:2609. doi: 10.3390/nu15112609.</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.3390/nu15112609</ArticleId><ArticleId IdType=\"pmc\">PMC10255140</ArticleId><ArticleId
+        IdType=\"pubmed\">37299572</ArticleId></ArticleIdList></Reference><Reference><Citation>Marigold
+        J.R., Arias M., Vassallo M., Allen S.C., Kwan J.S. Autonomic dysfunction in
+        older people. Rev. Clin. Gerontol. 2011;21:28&#x2013;44. doi: 10.1017/S0959259810000286.</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.1017/S0959259810000286</ArticleId></ArticleIdList></Reference><Reference><Citation>Engelhardt
+        K., Ferguson M., Rosselli J.L. Prevention and management of genital mycotic
+        infections in the setting of sodium-glucose cotransporter 2 inhibitors. Ann.
+        Pharmacother. 2021;55:543&#x2013;548. doi: 10.1177/1060028020951928.</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.1177/1060028020951928</ArticleId><ArticleId IdType=\"pubmed\">32808541</ArticleId></ArticleIdList></Reference><Reference><Citation>Abraham
+        W.T., Lindenfeld J., Ponikowski P., Agostoni P., Butler J., Desai A.S., Filippatos
+        G., Gniot J., Fu M., Gullestad L., et al. Effect of empagliflozin on exercise
+        ability and symptoms in heart failure patients with reduced and preserved
+        ejection fraction, with and without type 2 diabetes. Eur. Heart J. 2021;42:700&#x2013;710.
+        doi: 10.1093/eurheartj/ehaa943.</Citation><ArticleIdList><ArticleId IdType=\"doi\">10.1093/eurheartj/ehaa943</ArticleId><ArticleId
+        IdType=\"pubmed\">33351892</ArticleId></ArticleIdList></Reference><Reference><Citation>Allegretti
+        A.S., Zhang W., Zhou W., Thurber T.K., Rigby S.P., Bowman-Stroud C., Trescoli
+        C., Serusclat P., Freeman M.W., Halvorsen Y.C. Safety and Effectiveness of
+        Bexagliflozin in Patients with Type 2 Diabetes Mellitus and Stage 3a/3b CKD.
+        Am. J. Kidney Dis. 2019;74:328&#x2013;337. doi: 10.1053/j.ajkd.2019.03.417.</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.1053/j.ajkd.2019.03.417</ArticleId><ArticleId IdType=\"pmc\">PMC10077840</ArticleId><ArticleId
+        IdType=\"pubmed\">31101403</ArticleId></ArticleIdList></Reference><Reference><Citation>Anker
+        S.D., Butler J., Filippatos G., Khan M.S., Marx N., Lam C.S.P., Schnaidt S.,
+        Ofstad A.P., Brueckmann M., Jamal W., et al. Effect of Empagliflozin on Cardiovascular
+        and Renal Outcomes in Patients with Heart Failure by Baseline Diabetes Status:
+        Results from the EMPEROR-Reduced Trial. Circulation. 2021;143:337&#x2013;349.
+        doi: 10.1161/CIRCULATIONAHA.120.051824.</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.1161/CIRCULATIONAHA.120.051824</ArticleId><ArticleId IdType=\"pmc\">PMC7834911</ArticleId><ArticleId
+        IdType=\"pubmed\">33175585</ArticleId></ArticleIdList></Reference><Reference><Citation>Anker
+        S.D., Butler J., Filippatos G., Ferreira J.P., Bocchi E., B&#xf6;hm M., Brunner-La
+        Rocca H.P., Choi D.J., Chopra V., Chuquiure-Valenzuela E., et al. Empagliflozin
+        in Heart Failure with a Preserved Ejection Fraction. N. Engl. J. Med. 2021;385:1451&#x2013;1461.
+        doi: 10.1056/NEJMoa2107038.</Citation><ArticleIdList><ArticleId IdType=\"doi\">10.1056/NEJMoa2107038</ArticleId><ArticleId
+        IdType=\"pubmed\">34449189</ArticleId></ArticleIdList></Reference><Reference><Citation>Bhatt
+        D.L., Szarek M., Steg P.G., Cannon C.P., Leiter L.A., McGuire D.K., Lewis
+        J.B., Riddle M.C., Voors A.A., Metra M., et al. Sotagliflozin in Patients
+        with Diabetes and Recent Worsening Heart Failure. N. Engl. J. Med. 2021;384:117&#x2013;128.
+        doi: 10.1056/NEJMoa2030183.</Citation><ArticleIdList><ArticleId IdType=\"doi\">10.1056/NEJMoa2030183</ArticleId><ArticleId
+        IdType=\"pubmed\">33200892</ArticleId></ArticleIdList></Reference><Reference><Citation>Bhatt
+        D.L., Szarek M., Pitt B., Cannon C.P., Leiter L.A., McGuire D.K., Lewis J.B.,
+        Riddle M.C., Inzucchi S.E., Kosiborod M.N., et al. Sotagliflozin in Patients
+        with Diabetes and Chronic Kidney Disease. N. Engl. J. Med. 2021;384:129&#x2013;139.
+        doi: 10.1056/NEJMoa2030186.</Citation><ArticleIdList><ArticleId IdType=\"doi\">10.1056/NEJMoa2030186</ArticleId><ArticleId
+        IdType=\"pubmed\">33200891</ArticleId></ArticleIdList></Reference><Reference><Citation>Sridhar
+        V.S., Bhatt D.L., Odutayo A., Szarek M., Davies M.J., Banks P., Pitt B., Steg
+        P.G., Cherney D.Z.I. Sotagliflozin and Kidney Outcomes, Kidney Function, and
+        Albuminuria in Type 2 Diabetes and CKD: A Secondary Analysis of the SCORED
+        Trial. Clin. J. Am. Soc. Nephrol. 2024;19:557&#x2013;564. doi: 10.2215/CJN.0000000000000414.</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.2215/CJN.0000000000000414</ArticleId><ArticleId IdType=\"pmc\">PMC11108248</ArticleId><ArticleId
+        IdType=\"pubmed\">38277468</ArticleId></ArticleIdList></Reference><Reference><Citation>Aggarwal
+        R., Bhatt D.L., Szarek M., Cannon C.P., Leiter L.A., Inzucchi S.E., Lopes
+        R.D., McGuire D.K., Lewis J.B., Riddle M.C., et al. Effect of sotagliflozin
+        on major adverse cardiovascular events: A prespecified secondary analysis
+        of the SCORED randomised trial. Lancet Diabetes Endocrinol. 2025;13:321&#x2013;332.
+        doi: 10.1016/S2213-8587(24)00362-0.</Citation><ArticleIdList><ArticleId IdType=\"doi\">10.1016/S2213-8587(24)00362-0</ArticleId><ArticleId
+        IdType=\"pubmed\">39961315</ArticleId></ArticleIdList></Reference><Reference><Citation>Charaya
+        K., Shchekochikhin D., Andreev D., Dyachuk I., Tarasenko S., Poltavskaya M.,
+        Mesitskaya D., Bogdanova A., Ananicheva N., Kuzub A. Impact of dapagliflozin
+        treatment on renal function and diuretics use in acute heart failure: A pilot
+        study. Open Heart. 2022;9:e001936. doi: 10.1136/openhrt-2021-001936.</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.1136/openhrt-2021-001936</ArticleId><ArticleId IdType=\"pmc\">PMC9131063</ArticleId><ArticleId
+        IdType=\"pubmed\">35609943</ArticleId></ArticleIdList></Reference><Reference><Citation>Cheng
+        L., Fu Q., Zhou L., Fan Y., Liu F., Fan Y., Zhang X., Lin W., Wu X. Effect
+        of SGLT-2 inhibitor, empagliflozin, on blood pressure reduction in Chinese
+        elderly hypertension patients with type 2 diabetes and its possible mechanisms.
+        Sci. Rep. 2022;12:3525. doi: 10.1038/s41598-022-07395-x.</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.1038/s41598-022-07395-x</ArticleId><ArticleId IdType=\"pmc\">PMC8894447</ArticleId><ArticleId
+        IdType=\"pubmed\">35241720</ArticleId></ArticleIdList></Reference><Reference><Citation>Cherney
+        D.Z.I., Ferrannini E., Umpierrez G.E., Peters A.L., Rosenstock J., Carroll
+        A.K., Lapuerta P., Banks P., Agarwal R. Efficacy and safety of sotagliflozin
+        in patients with type 2 diabetes and severe renal impairment. Diabetes Obes.
+        Metab. 2021;23:2632&#x2013;2642. doi: 10.1111/dom.14513.</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.1111/dom.14513</ArticleId><ArticleId IdType=\"pubmed\">34338408</ArticleId></ArticleIdList></Reference><Reference><Citation>Cherney
+        D.Z.I., Ferrannini E., Umpierrez G.E., Peters A.L., Rosenstock J., Powell
+        D.R., Davies M.J., Banks P., Agarwal R. Efficacy and safety of sotagliflozin
+        in patients with type 2 diabetes and stage 3 chronic kidney disease. Diabetes
+        Obes. Metab. 2023;25:1646&#x2013;1657. doi: 10.1111/dom.15019.</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.1111/dom.15019</ArticleId><ArticleId IdType=\"pubmed\">36782093</ArticleId></ArticleIdList></Reference><Reference><Citation>Dagogo-Jack
+        S., Pratley R.E., Cherney D.Z.I., McGuire D.K., Cosentino F., Shih W.J., Liu
+        J., Frederich R., Mancuso J.P., Raji A., et al. Glycemic efficacy and safety
+        of the SGLT2 inhibitor ertugliflozin in patients with type 2 diabetes and
+        stage 3 chronic kidney disease: An analysis from the VERTIS CV randomized
+        trial. BMJ Open Diabetes Res. Care. 2021;9:e002484. doi: 10.1136/bmjdrc-2021-002484.</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.1136/bmjdrc-2021-002484</ArticleId><ArticleId IdType=\"pmc\">PMC8499340</ArticleId><ArticleId
+        IdType=\"pubmed\">34620621</ArticleId></ArticleIdList></Reference><Reference><Citation>Damman
+        K., Beusekamp J.C., Boorsma E.M., Swart H.P., Smilde T.D.J., Elvan A., van
+        Eck J.W.M., Heerspink H.J.L., Voors A.A. Randomized, double-blind, placebo-controlled,
+        multicentre pilot study on the effects of empagliflozin on clinical outcomes
+        in patients with acute decompensated heart failure (EMPA-RESPONSE-AHF) Eur.
+        J. Heart Fail. 2020;22:713&#x2013;722. doi: 10.1002/ejhf.1713.</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.1002/ejhf.1713</ArticleId><ArticleId IdType=\"pubmed\">31912605</ArticleId></ArticleIdList></Reference><Reference><Citation>de
+        Boer R.A., N&#xfa;&#xf1;ez J., Kozlovski P., Wang Y., Proot P., Keefe D. Effects
+        of the dual sodium-glucose linked transporter inhibitor, licogliflozin vs
+        placebo or empagliflozin in patients with type 2 diabetes and heart failure.
+        Br. J. Clin. Pharmacol. 2020;86:1346&#x2013;1356. doi: 10.1111/bcp.14248.</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.1111/bcp.14248</ArticleId><ArticleId IdType=\"pmc\">PMC7318993</ArticleId><ArticleId
+        IdType=\"pubmed\">32068914</ArticleId></ArticleIdList></Reference><Reference><Citation>Dekkers
+        C.C.J., Wheeler D.C., Sj&#xf6;str&#xf6;m C.D., Stefansson B.V., Cain V., Heerspink
+        H.J.L. Effects of the sodium-glucose co-transporter 2 inhibitor dapagliflozin
+        in patients with type 2 diabetes and Stages 3b-4 chronic kidney disease. Nephrol.
+        Dial. Transplant. 2018;33:2005&#x2013;2011. doi: 10.1093/ndt/gfx350.</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.1093/ndt/gfx350</ArticleId><ArticleId IdType=\"pmc\">PMC6212718</ArticleId><ArticleId
+        IdType=\"pubmed\">29370424</ArticleId></ArticleIdList></Reference><Reference><Citation>Fioretto
+        P., Del Prato S., Buse J.B., Goldenberg R., Giorgino F., Reyner D., Langkilde
+        A.M., Sj&#xf6;str&#xf6;m C.D., Sartipy P. DERIVE Study Investigators. Efficacy
+        and safety of dapagliflozin in patients with type 2 diabetes and moderate
+        renal impairment (chronic kidney disease stage 3A): The DERIVE Study. Diabetes
+        Obes. Metab. 2018;20:2532&#x2013;2540. doi: 10.1111/dom.13413.</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.1111/dom.13413</ArticleId><ArticleId IdType=\"pmc\">PMC6175614</ArticleId><ArticleId
+        IdType=\"pubmed\">29888547</ArticleId></ArticleIdList></Reference><Reference><Citation>Fu
+        Q., Zhou L., Fan Y., Liu F., Fan Y., Zhang X., Wang L., Cheng L. Effect of
+        SGLT-2 inhibitor, dapagliflozin, on left ventricular remodeling in patients
+        with type 2 diabetes and HFrEF. BMC Cardiovasc. Disord. 2023;23:544. doi:
+        10.1186/s12872-023-03591-3.</Citation><ArticleIdList><ArticleId IdType=\"doi\">10.1186/s12872-023-03591-3</ArticleId><ArticleId
+        IdType=\"pmc\">PMC10633988</ArticleId><ArticleId IdType=\"pubmed\">37940879</ArticleId></ArticleIdList></Reference><Reference><Citation>Ge
+        T., Yang Y., Zhao Y. A study of the efficacy of sacubitril/valsartan plus
+        dapagliflozin combination treatment in pulmonary arterial hypertension due
+        to left heart disease. Perfusion. 2023;38:1697&#x2013;1704. doi: 10.1177/02676591221127924.</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.1177/02676591221127924</ArticleId><ArticleId IdType=\"pubmed\">36173344</ArticleId></ArticleIdList></Reference><Reference><Citation>Haneda
+        M., Seino Y., Inagaki N., Kaku K., Sasaki T., Fukatsu A., Kakiuchi H., Sato
+        Y., Sakai S., Samukawa Y. Influence of Renal Function on the 52-Week Efficacy
+        and Safety of the Sodium Glucose Cotransporter 2 Inhibitor Luseogliflozin
+        in Japanese Patients with Type 2 Diabetes Mellitus. Clin. Ther. 2016;38:66&#x2013;88.e20.
+        doi: 10.1016/j.clinthera.2015.10.025.</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.1016/j.clinthera.2015.10.025</ArticleId><ArticleId IdType=\"pubmed\">26718606</ArticleId></ArticleIdList></Reference><Reference><Citation>Kario
+        K., Okada K., Kato M., Nishizawa M., Yoshida T., Asano T., Uchiyama K., Niijima
+        Y., Katsuya T., Urata H., et al. Twenty-Four-Hour Blood Pressure-Lowering
+        Effect of a Sodium-Glucose Cotransporter 2 Inhibitor in Patients with Diabetes
+        and Uncontrolled Nocturnal Hypertension: Results from the Randomized, Placebo-Controlled
+        SACRA Study. Circulation. 2019;139:2089&#x2013;2097. doi: 10.1161/CIRCULATIONAHA.118.037076.</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.1161/CIRCULATIONAHA.118.037076</ArticleId><ArticleId IdType=\"pmc\">PMC6493695</ArticleId><ArticleId
+        IdType=\"pubmed\">30586745</ArticleId></ArticleIdList></Reference><Reference><Citation>Katsiadas
+        N., Xanthopoulos A., Giamouzis G., Skoularigkis S., Skopeliti N., Moustaferi
+        E., Ioannidis I., Patsilinakos S., Triposkiadis F., Skoularigis J. The effect
+        of SGLT-2i administration on red blood cell distribution width in patients
+        with heart failure and type 2 diabetes mellitus: A randomized study. Front.
+        Cardiovasc. Med. 2022;9:984092. doi: 10.3389/fcvm.2022.984092.</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.3389/fcvm.2022.984092</ArticleId><ArticleId IdType=\"pmc\">PMC9557218</ArticleId><ArticleId
+        IdType=\"pubmed\">36247420</ArticleId></ArticleIdList></Reference><Reference><Citation>Kohan
+        D.E., Fioretto P., Tang W., List J.F. Long-term study of patients with type
+        2 diabetes and moderate renal impairment shows that dapagliflozin reduces
+        weight and blood pressure but does not improve glycemic control. Kidney Int.
+        2014;85:962&#x2013;971. doi: 10.1038/ki.2013.356.</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.1038/ki.2013.356</ArticleId><ArticleId IdType=\"pmc\">PMC3973038</ArticleId><ArticleId
+        IdType=\"pubmed\">24067431</ArticleId></ArticleIdList></Reference><Reference><Citation>Lee
+        M.M.Y., Brooksbank K.J.M., Wetherall K., Mangion K., Roditi G., Campbell R.T.,
+        Berry C., Chong V., Coyle L., Docherty K.F., et al. Effect of Empagliflozin
+        on Left Ventricular Volumes in Patients with Type 2 Diabetes, or Prediabetes,
+        and Heart Failure with Reduced Ejection Fraction (SUGAR-DM-HF) Circulation.
+        2021;143:516&#x2013;525. doi: 10.1161/CIRCULATIONAHA.120.052186.</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.1161/CIRCULATIONAHA.120.052186</ArticleId><ArticleId IdType=\"pmc\">PMC7864599</ArticleId><ArticleId
+        IdType=\"pubmed\">33186500</ArticleId></ArticleIdList></Reference><Reference><Citation>Lundin
+        M., Ferrannini G., Mellbin L., Johansson I., Norhammar A., N&#xe4;sman P.,
+        Shahim B., Smetana S., Venkateshvaran A., Wang A., et al. SOdium-glucose CO-transporter
+        inhibition in patients with newly detected Glucose Abnormalities and a recent
+        Myocardial Infarction (SOCOGAMI) Diabetes Res. Clin. Pract. 2022;193:110141.
+        doi: 10.1016/j.diabres.2022.110141.</Citation><ArticleIdList><ArticleId IdType=\"doi\">10.1016/j.diabres.2022.110141</ArticleId><ArticleId
+        IdType=\"pubmed\">36336088</ArticleId></ArticleIdList></Reference><Reference><Citation>Mansouri
+        M.H., Mansouri P., Sadeghi M., Hashemi S.M., Khosravi A., Behjati M., Shahabi
+        J., Mansouri A., Zavar R., Amirpour A., et al. Antianginal effects of empagliflozin
+        in patients with type 2 diabetes and refractory angina; a randomized, double-blind
+        placebo-controlled trial (EMPT-ANGINA Trial) Clin. Cardiol. 2023;47:e24158.
+        doi: 10.1002/clc.24158.</Citation><ArticleIdList><ArticleId IdType=\"doi\">10.1002/clc.24158</ArticleId><ArticleId
+        IdType=\"pmc\">PMC10766003</ArticleId><ArticleId IdType=\"pubmed\">37721420</ArticleId></ArticleIdList></Reference><Reference><Citation>McMurray
+        J.J.V., Solomon S.D., Inzucchi S.E., K&#xf8;ber L., Kosiborod M.N., Martinez
+        F.A., Ponikowski P., Sabatine M.S., Anand I.S., B&#x11b;lohl&#xe1;vek J.,
+        et al. Dapagliflozin in Patients with Heart Failure and Reduced Ejection Fraction.
+        N. Engl. J. Med. 2019;381:1995&#x2013;2008. doi: 10.1056/NEJMoa1911303.</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.1056/NEJMoa1911303</ArticleId><ArticleId IdType=\"pubmed\">31535829</ArticleId></ArticleIdList></Reference><Reference><Citation>Packer
+        M., Anker S.D., Butler J., Filippatos G., Pocock S.J., Carson P., Januzzi
+        J., Verma S., Tsutsui H., Brueckmann M., et al. Cardiovascular and Renal Outcomes
+        with Empagliflozin in Heart Failure. N. Engl. J. Med. 2020;383:1413&#x2013;1424.
+        doi: 10.1056/NEJMoa2022190.</Citation><ArticleIdList><ArticleId IdType=\"doi\">10.1056/NEJMoa2022190</ArticleId><ArticleId
+        IdType=\"pubmed\">32865377</ArticleId></ArticleIdList></Reference><Reference><Citation>Palau
+        P., Amiguet M., Dom&#xed;nguez E., Sastre C., Mollar A., Seller J., Garcia
+        Pinilla J.M., Larumbe A., Valle A., G&#xf3;mez Doblas J.J., et al. Short-term
+        effects of dapagliflozin on maximal functional capacity in heart failure with
+        reduced ejection fraction (DAPA-VO2): A randomized clinical trial. Eur. J.
+        Heart Fail. 2022;24:1816&#x2013;1826. doi: 10.1002/ejhf.2560.</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.1002/ejhf.2560</ArticleId><ArticleId IdType=\"pubmed\">35604416</ArticleId></ArticleIdList></Reference><Reference><Citation>Provenzano
+        M., Puchades M.J., Garofalo C., Jongs N., D&#x2019;Marco L., Andreucci M.,
+        De Nicola L., Gorriz J.L., Heerspink H.J.L. ROTATE-3 study group; ROTATE-3
+        study group members. Albuminuria-Lowering Effect of Dapagliflozin, Eplerenone,
+        and Their Combination in Patients with Chronic Kidney Disease: A Randomized
+        Crossover Clinical Trial. J. Am. Soc. Nephrol. 2022;33:1569&#x2013;1580. doi:
+        10.1681/ASN.2022020207.</Citation><ArticleIdList><ArticleId IdType=\"doi\">10.1681/ASN.2022020207</ArticleId><ArticleId
+        IdType=\"pmc\">PMC9342643</ArticleId><ArticleId IdType=\"pubmed\">35440501</ArticleId></ArticleIdList></Reference><Reference><Citation>Qiu
+        R., Capuano G., Meininger G. Efficacy and safety of twice-daily treatment
+        with canagliflozin, a sodium glucose co-transporter 2 inhibitor, added on
+        to metformin monotherapy in patients with type 2 diabetes mellitus. J. Clin.
+        Transl. Endocrinol. 2014;1:54&#x2013;60. doi: 10.1016/j.jcte.2014.04.001.</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.1016/j.jcte.2014.04.001</ArticleId><ArticleId IdType=\"pmc\">PMC5685027</ArticleId><ArticleId
+        IdType=\"pubmed\">29159083</ArticleId></ArticleIdList></Reference><Reference><Citation>Ram&#xed;rez-Rodr&#xed;guez
+        A.M., Gonz&#xe1;lez-Ortiz M., Mart&#xed;nez-Abundis E. Effect of Dapagliflozin
+        on Insulin Secretion and Insulin Sensitivity in Patients with Prediabetes.
+        Exp. Clin. Endocrinol. Diabetes. 2020;128:506&#x2013;511. doi: 10.1055/a-0664-7583.</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.1055/a-0664-7583</ArticleId><ArticleId IdType=\"pubmed\">30149417</ArticleId></ArticleIdList></Reference><Reference><Citation>Rau
+        M., Thiele K., Hartmann N.K., Schuh A., Altiok E., M&#xf6;llmann J., Keszei
+        A.P., B&#xf6;hm M., Marx N., Lehrke M. Empagliflozin does not change cardiac
+        index nor systemic vascular resistance but rapidly improves left ventricular
+        filling pressure in patients with type 2 diabetes: A randomized controlled
+        study. Cardiovasc. Diabetol. 2021;20:6. doi: 10.1186/s12933-020-01175-5.</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.1186/s12933-020-01175-5</ArticleId><ArticleId IdType=\"pmc\">PMC7791833</ArticleId><ArticleId
+        IdType=\"pubmed\">33413355</ArticleId></ArticleIdList></Reference><Reference><Citation>RECOVERY
+        Collaborative Group Empagliflozin in patients admitted to hospital with COVID-19
+        (RECOVERY): A randomised, controlled, open-label, platform trial. Lancet Diabetes
+        Endocrinol. 2023;11:905&#x2013;914. doi: 10.1016/S2213-8587(23)00253-X.</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.1016/S2213-8587(23)00253-X</ArticleId><ArticleId IdType=\"pmc\">PMC10957483</ArticleId><ArticleId
+        IdType=\"pubmed\">37865101</ArticleId></ArticleIdList></Reference><Reference><Citation>Refardt
+        J., Imber C., Sailer C.O., Jeanloz N., Potasso L., Kutz A., Widmer A., Urwyler
+        S.A., Ebrahimi F., Vogt D.R., et al. A Randomized Trial of Empagliflozin to
+        Increase Plasma Sodium Levels in Patients with the Syndrome of Inappropriate
+        Antidiuresis. J. Am. Soc. Nephrol. 2020;31:615&#x2013;624. doi: 10.1681/ASN.2019090944.</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.1681/ASN.2019090944</ArticleId><ArticleId IdType=\"pmc\">PMC7062212</ArticleId><ArticleId
+        IdType=\"pubmed\">32019783</ArticleId></ArticleIdList></Reference><Reference><Citation>Schulze
+        P.C., Bogoviku J., Westphal J., Aftanski P., Haertel F., Grund S., von Haehling
+        S., Schumacher U., M&#xf6;bius-Winkler S., Busch M. Effects of Early Empagliflozin
+        Initiation on Diuresis and Kidney Function in Patients with Acute Decompensated
+        Heart Failure (EMPAG-HF) Circulation. 2022;146:289&#x2013;298. doi: 10.1161/CIRCULATIONAHA.122.059038.</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.1161/CIRCULATIONAHA.122.059038</ArticleId><ArticleId IdType=\"pubmed\">35766022</ArticleId></ArticleIdList></Reference><Reference><Citation>Scott
+        R., Morgan J., Zimmer Z., Lam R.L.H., O&#x2019;Neill E.A., Kaufman K.D., Engel
+        S.S., Raji A. A randomized clinical trial of the efficacy and safety of sitagliptin
+        compared with dapagliflozin in patients with type 2 diabetes mellitus and
+        mild renal insufficiency: The CompoSIT-R study. Diabetes Obes. Metab. 2018;20:2876&#x2013;2884.
+        doi: 10.1111/dom.13473.</Citation><ArticleIdList><ArticleId IdType=\"doi\">10.1111/dom.13473</ArticleId><ArticleId
+        IdType=\"pmc\">PMC6283039</ArticleId><ArticleId IdType=\"pubmed\">30019498</ArticleId></ArticleIdList></Reference><Reference><Citation>Tanaka
+        A., Hisauchi I., Taguchi I., Sezai A., Toyoda S., Tomiyama H., Sata M., Ueda
+        S., Oyama J.I., Kitakaze M., et al. Effects of canagliflozin in patients with
+        type 2 diabetes and chronic heart failure: A randomized trial (CANDLE) ESC
+        Heart Fail. 2020;7:1585&#x2013;1594. doi: 10.1002/ehf2.12707.</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.1002/ehf2.12707</ArticleId><ArticleId IdType=\"pmc\">PMC7373938</ArticleId><ArticleId
+        IdType=\"pubmed\">32349193</ArticleId></ArticleIdList></Reference><Reference><Citation>van
+        der Aart-van der Beek A.B., Apperloo E., Jongs N., Rouw D.B., Sj&#xf6;str&#xf6;m
+        C.D., Friedli I., Johansson L., van Raalte D.H., Hoogenberg K., Heerspink
+        H.J.L. Albuminuria-lowering effect of dapagliflozin, exenatide, and their
+        combination in patients with type 2 diabetes: A randomized cross-over clinical
+        study. Diabetes Obes. Metab. 2023;25:1758&#x2013;1768. doi: 10.1111/dom.15033.</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.1111/dom.15033</ArticleId><ArticleId IdType=\"pubmed\">36843215</ArticleId></ArticleIdList></Reference><Reference><Citation>van
+        Bommel E.J.M., Muskiet M.H.A., van Baar M.J.B., Tonneijck L., Smits M.M.,
+        Emanuel A.L., Bozovic A., Danser A.H.J., Geurts F., Hoorn E.J. The renal hemodynamic
+        effects of the SGLT2 inhibitor dapagliflozin are caused by post-glomerular
+        vasodilatation rather than pre-glomerular vasoconstriction in metformin-treated
+        patients with type 2 diabetes in the randomized, double-blind RED trial. Kidney
+        Int. 2020;97:202&#x2013;212. doi: 10.1016/j.kint.2019.09.013.</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.1016/j.kint.2019.09.013</ArticleId><ArticleId IdType=\"pubmed\">31791665</ArticleId></ArticleIdList></Reference><Reference><Citation>van
+        Meijel L.A., Tack C.J., de Galan B.E. Effect of short-term use of dapagliflozin
+        on impaired awareness of hypoglycaemia in people with type 1 diabetes. Diabetes
+        Obes. Metab. 2021;23:2582&#x2013;2589. doi: 10.1111/dom.14505.</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.1111/dom.14505</ArticleId><ArticleId IdType=\"pmc\">PMC9292159</ArticleId><ArticleId
+        IdType=\"pubmed\">34338413</ArticleId></ArticleIdList></Reference><Reference><Citation>Vianna
+        A.G.D., Lacerda C.S., Pechmann L.M., Polesel M.G., Marino E.C., Scharf M.,
+        Detsch J.M., Marques K., Sanches C.P. Improved glycaemic variability and time
+        in range with dapagliflozin versus gliclazide modified release among adults
+        with type 2 diabetes, evaluated by continuous glucose monitoring: A 12-week
+        randomized controlled trial. Diabetes Obes. Metab. 2020;22:501&#x2013;511.
+        doi: 10.1111/dom.13913.</Citation><ArticleIdList><ArticleId IdType=\"doi\">10.1111/dom.13913</ArticleId><ArticleId
+        IdType=\"pubmed\">31709738</ArticleId></ArticleIdList></Reference><Reference><Citation>Vilsb&#xf8;ll
+        T., Ekholm E., Johnsson E., Dronamraju N., Jabbour S., Lind M. Dapagliflozin
+        Plus Saxagliptin Add-on Therapy Compared with Insulin in Patients with Type
+        2 Diabetes Poorly Controlled by Metformin With or Without Sulfonylurea Therapy:
+        A Randomized Clinical Trial. Diabetes Care. 2019;42:1464&#x2013;1472. doi:
+        10.2337/dc18-1988.</Citation><ArticleIdList><ArticleId IdType=\"doi\">10.2337/dc18-1988</ArticleId><ArticleId
+        IdType=\"pubmed\">31167892</ArticleId></ArticleIdList></Reference><Reference><Citation>Vilsb&#xf8;ll
+        T., Ekholm E., Johnsson E., Garcia-Sanchez R., Dronamraju N., Jabbour S.A.,
+        Lind M. Efficacy and safety of dapagliflozin plus saxagliptin versus insulin
+        glargine over 52&#x2009;weeks as add-on to metformin with or without sulphonylurea
+        in patients with type 2 diabetes: A randomized, parallel-design, open-label,
+        Phase 3 trial. Diabetes Obes. Metab. 2020;22:957&#x2013;968. doi: 10.1111/dom.13981.</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.1111/dom.13981</ArticleId><ArticleId IdType=\"pmc\">PMC7317718</ArticleId><ArticleId
+        IdType=\"pubmed\">32003150</ArticleId></ArticleIdList></Reference><Reference><Citation>Voors
+        A.A., Angermann C.E., Teerlink J.R., Collins S.P., Kosiborod M., Biegus J.,
+        Ferreira J.P., Nassif M.E., Psotka M.A., Tromp J., et al. The SGLT2 inhibitor
+        empagliflozin in patients hospitalized for acute heart failure: A multinational
+        randomized trial. Nat. Med. 2022;28:568&#x2013;574. doi: 10.1038/s41591-021-01659-1.</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.1038/s41591-021-01659-1</ArticleId><ArticleId IdType=\"pmc\">PMC8938265</ArticleId><ArticleId
+        IdType=\"pubmed\">35228754</ArticleId></ArticleIdList></Reference><Reference><Citation>Wanner
+        C., Inzucchi S.E., Lachin J.M., Fitchett D., von Eynatten M., Mattheus M.,
+        Johansen O.E., Woerle H.J., Broedl U.C., Zinman B., et al. Empagliflozin and
+        Progression of Kidney Disease in Type 2 Diabetes. N. Engl. J. Med. 2016;375:323&#x2013;334.
+        doi: 10.1056/NEJMoa1515920.</Citation><ArticleIdList><ArticleId IdType=\"doi\">10.1056/NEJMoa1515920</ArticleId><ArticleId
+        IdType=\"pubmed\">27299675</ArticleId></ArticleIdList></Reference><Reference><Citation>Yeoh
+        S.E., Osmanska J., Petrie M.C., Brooksbank K.J.M., Clark A.L., Docherty K.F.,
+        Foley P.W.X., Guha K., Halliday C.A., Jhund P.S., et al. Dapagliflozin vs.
+        metolazone in heart failure resistant to loop diuretics. Eur. Heart J. 2023;44:2966&#x2013;2977.
+        doi: 10.1093/eurheartj/ehad341.</Citation><ArticleIdList><ArticleId IdType=\"doi\">10.1093/eurheartj/ehad341</ArticleId><ArticleId
+        IdType=\"pmc\">PMC10424881</ArticleId><ArticleId IdType=\"pubmed\">37210742</ArticleId></ArticleIdList></Reference><Reference><Citation>Albulushi
+        A., Askari K.M., Al-Abedi A.M., Al-Kulaibi M.A., Hasan M.S., Hosseini Z.,
+        Al-Rahman M.T., Tanoh D.B., Hasan A.S., Al-Helli Y., et al. Impact of SGLT2
+        inhibitors on myocardial fibrosis in diabetic HFpEF: A longitudinal study.
+        Eur. J. Med. Res. 2025;30:592. doi: 10.1186/s40001-025-02834-7.</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.1186/s40001-025-02834-7</ArticleId><ArticleId IdType=\"pmc\">PMC12235812</ArticleId><ArticleId
+        IdType=\"pubmed\">40624547</ArticleId></ArticleIdList></Reference><Reference><Citation>Bartholdy
+        K.V., Johansen N.D., Skaarup K.G., Modin D., Landler N., Langhoff A.F., Ottosen
+        C.I., Espersen C., Dons M., Borchsenius J.I., et al. Cardiac Effects of Dapagliflozin
+        in People with Chronic Kidney Disease. NEJM Evid. 2025;4:EVIDoa2500158. doi:
+        10.1056/EVIDoa2500158.</Citation><ArticleIdList><ArticleId IdType=\"doi\">10.1056/EVIDoa2500158</ArticleId><ArticleId
+        IdType=\"pubmed\">41147829</ArticleId></ArticleIdList></Reference><Reference><Citation>Benedikt
+        M., Oulhaj A., Rohrer U., Manninger M., Tripolt N.J., Pferschy P.N., Aziz
+        F., Wallner M., Kolesnik E., Gwechenberger M., et al. Ertugliflozin to reduce
+        arrhythmic burden in patients with ICDs/CRT-Ds. NEJM Evid. 2024;3:EVIDoa2400147.
+        doi: 10.1056/EVIDoa2400147.</Citation><ArticleIdList><ArticleId IdType=\"doi\">10.1056/EVIDoa2400147</ArticleId><ArticleId
+        IdType=\"pubmed\">39217453</ArticleId></ArticleIdList></Reference><Reference><Citation>Burns
+        J.M., Morris J.K., Vidoni E.D., Wilkins H.M., Choi I.Y., Lee P., Hunt S.L.,
+        Mahnken J.D., Brooks W.M., Lepping R.J., et al. Effects of the SGLT2 inhibitor
+        dapagliflozin in early Alzheimer&#x2019;s disease: A randomized controlled
+        trial. Alzheimer&#x2019;s Dement. 2025;21:e70416. doi: 10.1002/alz.70416.</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.1002/alz.70416</ArticleId><ArticleId IdType=\"pmc\">PMC12198475</ArticleId><ArticleId
+        IdType=\"pubmed\">40566796</ArticleId></ArticleIdList></Reference><Reference><Citation>Cao
+        M., Lin Q., Lin L., Zhang W., Zhang L. Efficacy and safety of empagliflozin
+        in patients over 65 with type 2 diabetes mellitus complicating cardiorenal
+        syndromes type II and IV. J. Med. Biochem. 2025;44:905&#x2013;914. doi: 10.5937/jomb0-54743.</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.5937/jomb0-54743</ArticleId><ArticleId IdType=\"pmc\">PMC12363353</ArticleId><ArticleId
+        IdType=\"pubmed\">40837364</ArticleId></ArticleIdList></Reference><Reference><Citation>Erichsen
+        J.M., Register T.C., Sutphen C., Ma D., Gaussoin S.A., Rudolph M., Rundle
+        M., Bateman J.T., Lockhart S.N., Sai K.K., et al. A phase 2A/B randomized
+        trial of metabolic modulators intranasal insulin and empagliflozin for MCI
+        and early AD. Alzheimer&#x2019;s Dement. 2025;21:e70704. doi: 10.1002/alz.70704.</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.1002/alz.70704</ArticleId><ArticleId IdType=\"pmc\">PMC12504051</ArticleId><ArticleId
+        IdType=\"pubmed\">41057918</ArticleId></ArticleIdList></Reference><Reference><Citation>Ferreira
+        J.P., Blatchford J.P., Teerlink J.R., Kosiborod M.N., Angermann C.E., Biegus
+        J., Collins S.P., Tromp J., Nassif M.E., Psotka M.A., et al. Time from admission
+        to randomization and the effect of empagliflozin in acute heart failure: A
+        post-hoc analysis from EMPULSE. Eur. J. Heart Fail. 2024;26:1976&#x2013;1983.
+        doi: 10.1002/ejhf.3369.</Citation><ArticleIdList><ArticleId IdType=\"doi\">10.1002/ejhf.3369</ArticleId><ArticleId
+        IdType=\"pubmed\">38980272</ArticleId></ArticleIdList></Reference><Reference><Citation>Fioretto
+        P., Mansfield T.A., Ptaszynska A., Yavin Y., Johnsson E., Parikh S. Long-term
+        safety of dapagliflozin in older patients with type 2 diabetes mellitus: A
+        pooled analysis of phase IIb/III studies. Drugs Aging. 2016;33:511&#x2013;522.
+        doi: 10.1007/s40266-016-0382-1.</Citation><ArticleIdList><ArticleId IdType=\"doi\">10.1007/s40266-016-0382-1</ArticleId><ArticleId
+        IdType=\"pmc\">PMC4937081</ArticleId><ArticleId IdType=\"pubmed\">27357173</ArticleId></ArticleIdList></Reference><Reference><Citation>Ferrannini
+        E., Ramos S.J., Salsali A., Tang W., List J.F. Dapagliflozin monotherapy in
+        type 2 diabetic patients with inadequate glycemic control by diet and exercise:
+        A randomized, double-blind, placebo-controlled, phase 3 trial. Diabetes Care.
+        2010;33:2217&#x2013;2224. doi: 10.2337/dc10-0612.</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.2337/dc10-0612</ArticleId><ArticleId IdType=\"pmc\">PMC2945163</ArticleId><ArticleId
+        IdType=\"pubmed\">20566676</ArticleId></ArticleIdList></Reference><Reference><Citation>Bailey
+        C.J., Gross J.L., Pieters A., Bastien A., List J.F. Effect of dapagliflozin
+        in patients with type 2 diabetes who have inadequate glycaemic control with
+        metformin: A randomised, double-blind, placebo-controlled trial. Lancet. 2010;375:2223&#x2013;2233.
+        doi: 10.1016/S0140-6736(10)60407-2.</Citation><ArticleIdList><ArticleId IdType=\"doi\">10.1016/S0140-6736(10)60407-2</ArticleId><ArticleId
+        IdType=\"pubmed\">20609968</ArticleId></ArticleIdList></Reference><Reference><Citation>Bolinder
+        J., Ljunggren &#xd6;., Kullberg J., Johansson L., Wilding J., Langkilde A.M.,
+        Sugg J., Parikh S. Effects of dapagliflozin on body weight, total fat mass,
+        and regional adipose tissue distribution in patients with type 2 diabetes
+        mellitus with inadequate glycemic control on metformin. J. Clin. Endocrinol.
+        Metab. 2012;97:1020&#x2013;1031. doi: 10.1210/jc.2011-2260.</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.1210/jc.2011-2260</ArticleId><ArticleId IdType=\"pubmed\">22238392</ArticleId></ArticleIdList></Reference><Reference><Citation>Rosenstock
+        J., Aggarwal N., Polidori D., Zhao Y., Arbit D., Usiskin K., Capuano G., Canovatchel
+        W. Canagliflozin DIA 2001 Study Group. Dose-ranging effects of canagliflozin,
+        a sodium-glucose cotransporter 2 inhibitor, as add-on to metformin in subjects
+        with type 2 diabetes. Diabetes Care. 2012;35:1232&#x2013;1238. doi: 10.2337/dc11-1926.</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.2337/dc11-1926</ArticleId><ArticleId IdType=\"pmc\">PMC3357223</ArticleId><ArticleId
+        IdType=\"pubmed\">22492586</ArticleId></ArticleIdList></Reference><Reference><Citation>Wilding
+        J.P., Woo V., Soler N.G., Pahor A., Sugg J., Rohwedder K., Parikh S. Dapagliflozin
+        006 Study Group. Long-term efficacy of dapagliflozin in patients with type
+        2 diabetes mellitus receiving high doses of insulin: A randomized trial. Ann.
+        Intern. Med. 2012;156:405&#x2013;415. doi: 10.7326/0003-4819-156-6-201203200-00003.</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.7326/0003-4819-156-6-201203200-00003</ArticleId><ArticleId
+        IdType=\"pubmed\">22431673</ArticleId></ArticleIdList></Reference><Reference><Citation>Jabbour
+        S.A., Hardy E., Sugg J., Parikh S. Study 10 Group. Dapagliflozin is effective
+        as add-on therapy to sitagliptin with or without metformin: A 24-week, multicenter,
+        randomized, double-blind, placebo-controlled study. Diabetes Care. 2014;37:740&#x2013;750.
+        doi: 10.2337/dc13-0467.</Citation><ArticleIdList><ArticleId IdType=\"doi\">10.2337/dc13-0467</ArticleId><ArticleId
+        IdType=\"pubmed\">24144654</ArticleId></ArticleIdList></Reference><Reference><Citation>Strojek
+        K., Yoon K.H., Hruba V., Elze M., Langkilde A.M., Parikh S. Effect of dapagliflozin
+        in patients with type 2 diabetes who have inadequate glycaemic control with
+        glimepiride: A randomized, 24-week, double-blind, placebo-controlled trial.
+        Diabetes Obes. Metab. 2011;13:928&#x2013;938. doi: 10.1111/j.1463-1326.2011.01434.x.</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.1111/j.1463-1326.2011.01434.x</ArticleId><ArticleId IdType=\"pubmed\">21672123</ArticleId></ArticleIdList></Reference><Reference><Citation>Cefalu
+        W.T., Leiter L.A., Yoon K.H., Arias P., Niskanen L., Xie J., Balis D.A., Canovatchel
+        W., Meininger G. Efficacy and safety of canagliflozin versus glimepiride in
+        patients with type 2 diabetes inadequately controlled with metformin (CANTATA-SU):
+        52 week results from a randomised, double-blind, phase 3 non-inferiority trial.
+        Lancet. 2013;382:941&#x2013;950. doi: 10.1016/S0140-6736(13)60683-2.</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.1016/S0140-6736(13)60683-2</ArticleId><ArticleId IdType=\"pubmed\">23850055</ArticleId></ArticleIdList></Reference><Reference><Citation>Leiter
+        L.A., Cefalu W.T., de Bruin T.W., Gause-Nilsson I., Sugg J., Parikh S.J. Dapagliflozin
+        added to usual care in individuals with type 2 diabetes mellitus with preexisting
+        cardiovascular disease: A 24-week, multicenter, randomized, double-blind,
+        placebo-controlled study with a 28-week extension. J. Am. Geriatr. Soc. 2014;62:1252&#x2013;1262.
+        doi: 10.1111/jgs.12881.</Citation><ArticleIdList><ArticleId IdType=\"doi\">10.1111/jgs.12881</ArticleId><ArticleId
+        IdType=\"pubmed\">24890683</ArticleId></ArticleIdList></Reference><Reference><Citation>Fujiki
+        S., Iijima K., Nakagawa Y., Takahashi K., Okabe M., Kusano K., Owada S., Kondo
+        Y., Tsujita K., Shimizu W., et al. Effect of empagliflozin on ventricular
+        arrhythmias in patients with type 2 diabetes treated with an implantable cardioverter-defibrillator:
+        The EMPA-ICD trial. Cardiovasc. Diabetol. 2024;23:224. doi: 10.1186/s12933-024-02309-9.</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.1186/s12933-024-02309-9</ArticleId><ArticleId IdType=\"pmc\">PMC11214255</ArticleId><ArticleId
+        IdType=\"pubmed\">38943159</ArticleId></ArticleIdList></Reference><Reference><Citation>Kang
+        D.H., Park S.J., Shin S.H., Hwang I.C., Yoon Y.E., Kim H.K., Kim M., Kim M.S.,
+        Yun S.C., Song J.M., et al. Ertugliflozin for functional mitral regurgitation
+        associated with heart failure: EFFORT trial. Circulation. 2024;149:1865&#x2013;1874.
+        doi: 10.1161/CIRCULATIONAHA.124.069144.</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.1161/CIRCULATIONAHA.124.069144</ArticleId><ArticleId IdType=\"pubmed\">38690659</ArticleId></ArticleIdList></Reference><Reference><Citation>Kawanami
+        S., Egami Y., Abe M., Osuga M., Nohara H., Ukita K., Kawamura A., Yasumoto
+        K., Okamoto N., Matsunaga-Lee Y., et al. Randomized trial to assess worsening
+        renal function by adding dapagliflozin for acute decompensated heart failure.
+        ESC Heart Fail. 2025;12:2023&#x2013;2033. doi: 10.1002/ehf2.15212.</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.1002/ehf2.15212</ArticleId><ArticleId IdType=\"pmc\">PMC12055397</ArticleId><ArticleId
+        IdType=\"pubmed\">39888286</ArticleId></ArticleIdList></Reference><Reference><Citation>Kristensen
+        D.K., Mose F.H., Buus N.H., Duus C.L., M&#xe5;rup F.H., Bech J.N., Nielsen
+        S.F. SGLT2 inhibition improves endothelium-independent vasodilatory function
+        in type 2 diabetes: A double-blind, randomized, placebo-controlled crossover
+        trial. Diabetes Obes. Metab. 2025;27:1123&#x2013;1131. doi: 10.1111/dom.16097.</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.1111/dom.16097</ArticleId><ArticleId IdType=\"pubmed\">39610328</ArticleId></ArticleIdList></Reference><Reference><Citation>Lytvyn
+        Y., Scholtes R.A., Boorsma E.M., Sridhar V.S., Kugathasan L., Liu H., Lovblom
+        L.E., Handoko L., Mosterd C.M., Floras J.S., et al. Mechanistic evaluation
+        of ertugliflozin in patients with type 2 diabetes and heart failure. Physiol.
+        Rep. 2025;13:e70275. doi: 10.14814/phy2.70275.</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.14814/phy2.70275</ArticleId><ArticleId IdType=\"pmc\">PMC11983784</ArticleId><ArticleId
+        IdType=\"pubmed\">40207988</ArticleId></ArticleIdList></Reference><Reference><Citation>McMurray
+        J.J., Docherty K.F., de Boer R.A., Hammarstedt A., Kitzman D.W., Kosiborod
+        M.N., Maria Langkilde A., Reicher B., Senni M., Shah S.J., et al. Effect of
+        dapagliflozin versus placebo on symptoms and 6-minute walk distance in patients
+        with heart failure: The DETERMINE randomized clinical trials. Circulation.
+        2024;149:825&#x2013;838. doi: 10.1161/CIRCULATIONAHA.123.065061.</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.1161/CIRCULATIONAHA.123.065061</ArticleId><ArticleId IdType=\"pubmed\">38059368</ArticleId></ArticleIdList></Reference><Reference><Citation>Monteiro
+        P., Bergenstal R.M., Toural E., Inzucchi S.E., Zinman B., Hantel S., Ki&#x161;
+        S.G., Kaspers S., George J.T., Fitchett D. Efficacy and safety of empagliflozin
+        in older patients in the EMPA-REG OUTCOME&#xae; trial. Age Ageing. 2019;48:859&#x2013;866.
+        doi: 10.1093/ageing/afz096.</Citation><ArticleIdList><ArticleId IdType=\"doi\">10.1093/ageing/afz096</ArticleId><ArticleId
+        IdType=\"pmc\">PMC7963112</ArticleId><ArticleId IdType=\"pubmed\">31579904</ArticleId></ArticleIdList></Reference><Reference><Citation>Nantsupawat
+        T., Apaijai N., Phrommintikul A., Prasertwitayakij N., Chattipakorn S.C.,
+        Chattipakorn N., Wongcharoen W. Effects of sodium-glucose cotransporter-2
+        inhibitor on atrial high-rate episodes in patients with cardiovascular implantable
+        electronic device: A randomized controlled trial. Sci. Rep. 2024;14:27649.
+        doi: 10.1038/s41598-024-74631-x.</Citation><ArticleIdList><ArticleId IdType=\"doi\">10.1038/s41598-024-74631-x</ArticleId><ArticleId
+        IdType=\"pmc\">PMC11557967</ArticleId><ArticleId IdType=\"pubmed\">39532868</ArticleId></ArticleIdList></Reference><Reference><Citation>Nielsen
+        S.F., Duus C.L., Buus N.H., Bech J.N., Mose F.H. Randomized, placebo-controlled
+        trial on the renal and systemic hemodynamic effects of empagliflozin. Kidney
+        Int. Rep. 2025;10:134&#x2013;144. doi: 10.1016/j.ekir.2024.10.019.</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.1016/j.ekir.2024.10.019</ArticleId><ArticleId IdType=\"pmc\">PMC11725969</ArticleId><ArticleId
+        IdType=\"pubmed\">39810756</ArticleId></ArticleIdList></Reference><Reference><Citation>Pastore
+        M.C., Stefanini A., Mandoli G.E., Piu P., Diviggiano E.E., Iuliano M.A., Carli
+        L., Marchese A., Martini L., Pecere A., et al. Dapagliflozin effects on cardiac
+        deformation in heart failure and secondary clinical outcome. Cardiovasc. Imaging.
+        2024;17:1399&#x2013;1408. doi: 10.1016/j.jcmg.2024.05.014.</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.1016/j.jcmg.2024.05.014</ArticleId><ArticleId IdType=\"pubmed\">39023499</ArticleId></ArticleIdList></Reference><Reference><Citation>Pratley
+        R., Dagogo-Jack S., Charbonnel B., Patel S., Hickman A., Liu J., Tarasenko
+        L., Pong A., Ellison M.C., Huyck S., et al. Efficacy and safety of ertugliflozin
+        in older patients with type 2 diabetes: A pooled analysis of phase III studies.
+        Diabetes Obes. Metab. 2020;22:2276&#x2013;2286. doi: 10.1111/dom.14150.</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.1111/dom.14150</ArticleId><ArticleId IdType=\"pubmed\">32700421</ArticleId></ArticleIdList></Reference><Reference><Citation>Terra
+        S.G., Focht K., Davies M., Frias J., Derosa G., Darekar A., Golm G., Johnson
+        J., Saur D., Lauring B., et al. Phase III, efficacy and safety study of ertugliflozin
+        monotherapy in people with type 2 diabetes mellitus inadequately controlled
+        with diet and exercise alone. Diabetes Obes. Metab. 2017;19:721&#x2013;728.
+        doi: 10.1111/dom.12888.</Citation><ArticleIdList><ArticleId IdType=\"doi\">10.1111/dom.12888</ArticleId><ArticleId
+        IdType=\"pubmed\">28116776</ArticleId></ArticleIdList></Reference><Reference><Citation>Rosenstock
+        J., Frias J., P&#xe1;ll D., Charbonnel B., Pascu R., Saur D., Darekar A.,
+        Huyck S., Shi H., Lauring B., et al. Effect of ertugliflozin on glucose control,
+        body weight, blood pressure and bone density in type 2 diabetes mellitus inadequately
+        controlled on metformin monotherapy (VERTIS MET) Diabetes Obes. Metab. 2018;20:520&#x2013;529.
+        doi: 10.1111/dom.13103.</Citation><ArticleIdList><ArticleId IdType=\"doi\">10.1111/dom.13103</ArticleId><ArticleId
+        IdType=\"pubmed\">28857451</ArticleId></ArticleIdList></Reference><Reference><Citation>Pratley
+        R.E., Eldor R., Raji A., Golm G., Huyck S.B., Qiu Y., Sunga S., Johnson J.,
+        Terra S.G., Mancuso J.P., et al. Ertugliflozin plus sitagliptin versus either
+        individual agent over 52 weeks in patients with type 2 diabetes mellitus inadequately
+        controlled with metformin: The VERTIS FACTORIAL randomized trial. Diabetes
+        Obes. Metab. 2018;20:1111&#x2013;1120. doi: 10.1111/dom.13194.</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.1111/dom.13194</ArticleId><ArticleId IdType=\"pmc\">PMC5947297</ArticleId><ArticleId
+        IdType=\"pubmed\">29266675</ArticleId></ArticleIdList></Reference><Reference><Citation>Hollander
+        P., Liu J., Hill J., Johnson J., Jiang Z.W., Golm G., Huyck S., Terra S.G.,
+        Mancuso J.P., Engel S.S., et al. Ertugliflozin Compared with Glimepiride in
+        Patients with Type 2 Diabetes Mellitus Inadequately Controlled on Metformin:
+        The VERTIS SU Randomized Study. Diabetes Ther. 2018;9:193&#x2013;207. doi:
+        10.1007/s13300-017-0354-4.</Citation><ArticleIdList><ArticleId IdType=\"doi\">10.1007/s13300-017-0354-4</ArticleId><ArticleId
+        IdType=\"pmc\">PMC5801240</ArticleId><ArticleId IdType=\"pubmed\">29282633</ArticleId></ArticleIdList></Reference><Reference><Citation>Dagogo-Jack
+        S., Liu J., Eldor R., Amorin G., Johnson J., Hille D., Liao Y., Huyck S.,
+        Golm G., Terra S.G., et al. Efficacy and safety of the addition of ertugliflozin
+        in patients with type 2 diabetes mellitus inadequately controlled with metformin
+        and sitagliptin: The VERTIS SITA2 placebo-controlled randomized study. Diabetes
+        Obes. Metab. 2018;20:530&#x2013;540. doi: 10.1111/dom.13116.</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.1111/dom.13116</ArticleId><ArticleId IdType=\"pmc\">PMC5836931</ArticleId><ArticleId
+        IdType=\"pubmed\">28921862</ArticleId></ArticleIdList></Reference><Reference><Citation>Grunberger
+        G., Camp S., Johnson J., Huyck S., Terra S.G., Mancuso J.P., Jiang Z.W., Golm
+        G., Engel S.S., Lauring B. Ertugliflozin in Patients with Stage 3 Chronic
+        Kidney Disease and Type 2 Diabetes Mellitus: The VERTIS RENAL Randomized Study.
+        Diabetes Ther. 2018;9:49&#x2013;66. doi: 10.1007/s13300-017-0337-5.</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.1007/s13300-017-0337-5</ArticleId><ArticleId IdType=\"pmc\">PMC5801223</ArticleId><ArticleId
+        IdType=\"pubmed\">29159457</ArticleId></ArticleIdList></Reference><Reference><Citation>Miller
+        S., Krumins T., Zhou H., Huyck S., Johnson J., Golm G., Terra S.G., Mancuso
+        J.P., Engel S.S., Lauring B. Ertugliflozin and Sitagliptin Co-initiation in
+        Patients with Type 2 Diabetes: The VERTIS SITA Randomized Study. Diabetes
+        Ther. 2018;9:253&#x2013;268. doi: 10.1007/s13300-017-0358-0.</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.1007/s13300-017-0358-0</ArticleId><ArticleId IdType=\"pmc\">PMC5801244</ArticleId><ArticleId
+        IdType=\"pubmed\">29313282</ArticleId></ArticleIdList></Reference><Reference><Citation>Aronson
+        R., Frias J., Goldman A., Darekar A., Lauring B., Terra S.G. Long-term efficacy
+        and safety of ertugliflozin monotherapy in patients with inadequately controlled
+        T2DM despite diet and exercise: VERTIS MONO extension study. Diabetes Obes.
+        Metab. 2018;20:1453&#x2013;1460. doi: 10.1111/dom.13251.</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.1111/dom.13251</ArticleId><ArticleId IdType=\"pmc\">PMC5969239</ArticleId><ArticleId
+        IdType=\"pubmed\">29419917</ArticleId></ArticleIdList></Reference><Reference><Citation>Reutens
+        A.T., Lekamlage D.H., Salim A., Shaw J.E., Esler M.D., Cooper M.E., Kaye D.M.
+        Effect of Empagliflozin on Whole Body, Cardiac, and Renal Sympathetic Outflows
+        in Type 2 Diabetes. JACC Adv. 2025;4:102304. doi: 10.1016/j.jacadv.2025.102304.</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.1016/j.jacadv.2025.102304</ArticleId><ArticleId IdType=\"pmc\">PMC12639828</ArticleId><ArticleId
+        IdType=\"pubmed\">41205543</ArticleId></ArticleIdList></Reference><Reference><Citation>Shigeno
+        R., Horie I., Haraguchi A., Niimi R., Chiba K., Tashiro S., Kawazoe Y., Sato
+        S., Osaki M., Kawakami A., et al. A Randomized Controlled Trial on the Effect
+        of Luseogliflozin on Bone Microarchitecture Evaluated Using HR-pQCT in Elderly
+        Type 2 Diabetes. Diabetes Ther. 2024;15:2233&#x2013;2248. doi: 10.1007/s13300-024-01634-2.</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.1007/s13300-024-01634-2</ArticleId><ArticleId IdType=\"pmc\">PMC11410743</ArticleId><ArticleId
+        IdType=\"pubmed\">39153152</ArticleId></ArticleIdList></Reference><Reference><Citation>Sinclair
+        A., Bode B., Harris S., Vijapurkar U., Mayer C., Fung A., Shaw W., Usiskin
+        K., Desai M., Meininger G. Efficacy and safety of canagliflozin compared with
+        placebo in older patients with type 2 diabetes mellitus: A pooled analysis
+        of clinical studies. BMC Endocr. Disord. 2014;14:37. doi: 10.1186/1472-6823-14-37.</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.1186/1472-6823-14-37</ArticleId><ArticleId IdType=\"pmc\">PMC4021426</ArticleId><ArticleId
+        IdType=\"pubmed\">24742013</ArticleId></ArticleIdList></Reference><Reference><Citation>Stenl&#xf6;f
+        K., Cefalu W.T., Kim K.A., Alba M., Usiskin K., Tong C., Canovatchel W., Meininger
+        G. Efficacy and safety of canagliflozin monotherapy in subjects with type
+        2 diabetes mellitus inadequately controlled with diet and exercise. Diabetes
+        Obes. Metab. 2013;15:372&#x2013;382. doi: 10.1111/dom.12054.</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.1111/dom.12054</ArticleId><ArticleId IdType=\"pmc\">PMC3593184</ArticleId><ArticleId
+        IdType=\"pubmed\">23279307</ArticleId></ArticleIdList></Reference><Reference><Citation>Bode
+        B., Stenl&#xf6;f K., Sullivan D., Fung A., Usiskin K. Efficacy and safety
+        of canagliflozin treatment in older subjects with type 2 diabetes mellitus:
+        A randomized trial. Hosp. Pract. 2013;41:72&#x2013;84. doi: 10.3810/hp.2013.04.1020.</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.3810/hp.2013.04.1020</ArticleId><ArticleId IdType=\"pubmed\">23680739</ArticleId></ArticleIdList></Reference><Reference><Citation>Lavalle-Gonz&#xe1;lez
+        F.J., Januszewicz A., Davidson J., Tong C., Qiu R., Canovatchel W., Meininger
+        G. Efficacy and safety of canagliflozin compared with placebo and sitagliptin
+        in patients with type 2 diabetes on background metformin monotherapy: A randomised
+        trial. Diabetologia. 2013;56:2582&#x2013;2592. doi: 10.1007/s00125-013-3039-1.</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.1007/s00125-013-3039-1</ArticleId><ArticleId IdType=\"pmc\">PMC3825495</ArticleId><ArticleId
+        IdType=\"pubmed\">24026211</ArticleId></ArticleIdList></Reference><Reference><Citation>Wilding
+        J.P., Charpentier G., Hollander P., Gonz&#xe1;lez-G&#xe1;lvez G., Mathieu
+        C., Vercruysse F., Usiskin K., Law G., Black S., Canovatchel W., et al. Efficacy
+        and safety of canagliflozin in patients with type 2 diabetes mellitus inadequately
+        controlled with metformin and sulphonylurea: A randomised trial. Int. J. Clin.
+        Pract. 2013;67:1267&#x2013;1282. doi: 10.1111/ijcp.12322.</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.1111/ijcp.12322</ArticleId><ArticleId IdType=\"pmc\">PMC4282288</ArticleId><ArticleId
+        IdType=\"pubmed\">24118688</ArticleId></ArticleIdList></Reference><Reference><Citation>Sinclair
+        A.J., Bode B., Harris S., Vijapurkar U., Shaw W., Desai M., Meininger G. Efficacy
+        and safety of canagliflozin in individuals aged 75 and older with type 2 diabetes
+        mellitus: A pooled analysis. J. Am. Geriatr. Soc. 2016;64:543&#x2013;552.
+        doi: 10.1111/jgs.14028.</Citation><ArticleIdList><ArticleId IdType=\"doi\">10.1111/jgs.14028</ArticleId><ArticleId
+        IdType=\"pmc\">PMC4819884</ArticleId><ArticleId IdType=\"pubmed\">27000327</ArticleId></ArticleIdList></Reference><Reference><Citation>Forst
+        T., Guthrie R., Goldenberg R., Yee J., Vijapurkar U., Meininger G., Stein
+        P. Efficacy and safety of canagliflozin over 52 weeks in patients with type
+        2 diabetes on background metformin and pioglitazone. Diabetes Obes. Metab.
+        2014;16:467&#x2013;477. doi: 10.1111/dom.12273.</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.1111/dom.12273</ArticleId><ArticleId IdType=\"pmc\">PMC4237547</ArticleId><ArticleId
+        IdType=\"pubmed\">24528605</ArticleId></ArticleIdList></Reference><Reference><Citation>Yale
+        J.F., Bakris G., Cariou B., Nieto J., David-Neto E., Yue D., Wajs E., Figueroa
+        K., Jiang J., Law G., et al. Efficacy and safety of canagliflozin over 52
+        weeks in patients with type 2 diabetes mellitus and chronic kidney disease.
+        Diabetes Obes. Metab. 2014;16:1016&#x2013;1027. doi: 10.1111/dom.12348.</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.1111/dom.12348</ArticleId><ArticleId IdType=\"pubmed\">24965700</ArticleId></ArticleIdList></Reference><Reference><Citation>Siqueira
+        S.R., Pabon M.A., Vaduganathan M., Claggett B.L., Lam C.S., Kosiborod M.N.,
+        de Boer R.A., Shah S.J., Fang J.C., Desai A.S., et al. Achieved ejection fraction
+        and effects of dapagliflozin in heart failure with improved ejection fraction.
+        Heart Fail. 2025;13:102585. doi: 10.1016/j.jchf.2025.102585.</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.1016/j.jchf.2025.102585</ArticleId><ArticleId IdType=\"pubmed\">40834567</ArticleId></ArticleIdList></Reference><Reference><Citation>Solomon
+        S.D., McMurray J.J.V., Claggett B., de Boer R.A., DeMets D., Hernandez A.F.,
+        Inzucchi S.E., Kosiborod M.N., Lam C.S.P., Martinez F., et al. Dapagliflozin
+        in Heart Failure with Mildly Reduced or Preserved Ejection Fraction. N. Engl.
+        J. Med. 2022;387:1089&#x2013;1098. doi: 10.1056/NEJMoa2206286.</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.1056/NEJMoa2206286</ArticleId><ArticleId IdType=\"pubmed\">36027570</ArticleId></ArticleIdList></Reference><Reference><Citation>Yoshihara
+        F., Imazu M., Sakuma I., Hiroi Y., Hara H., Okazaki O., Ishiguro C., Izumi
+        C., Noguchi T., Shiraiwa T., et al. DAPagliflozin for the attenuation of albuminuria
+        in Patients with hEaRt failure and type 2 diabetes (DAPPER study): A multicentre,
+        randomised, open-label, parallel-group, standard treatment-controlled trial.
+        EClinicalMedicine. 2023;66:102334. doi: 10.1016/j.eclinm.2023.102334.</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.1016/j.eclinm.2023.102334</ArticleId><ArticleId IdType=\"pmc\">PMC10772256</ArticleId><ArticleId
+        IdType=\"pubmed\">38192595</ArticleId></ArticleIdList></Reference><Reference><Citation>Zhou
+        P., Tang X., Deng Y., Wu R., Yi Y., Deng H., Cao Q. The Effect of Empagliflozin
+        on Janus Kinase 2/Signal Transducer and Activator of Transcription 3 Pathway
+        in Patients with Type 2 Cardiorenal Syndrome. Anatol. J. Cardiol. 2024;28:229&#x2013;235.
+        doi: 10.14744/AnatolJCardiol.2024.2736.</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.14744/AnatolJCardiol.2024.2736</ArticleId><ArticleId IdType=\"pmc\">PMC11059222</ArticleId><ArticleId
+        IdType=\"pubmed\">38445622</ArticleId></ArticleIdList></Reference><Reference><Citation>J&#xfc;rgens
+        M., Schou M., Hasbak P., Kj&#xe6;r A., Wolsk E., Zerahn B., Wiberg M., Brandt-Jacobsen
+        N.H., G&#xe6;de P., Rossing P., et al. Effects of Empagliflozin on Myocardial
+        Flow Reserve in Patients with Type 2 Diabetes Mellitus: The SIMPLE Trial.
+        J. Am. Heart Assoc. 2021;10:e020418. doi: 10.1161/JAHA.120.020418.</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.1161/JAHA.120.020418</ArticleId><ArticleId IdType=\"pmc\">PMC8475664</ArticleId><ArticleId
+        IdType=\"pubmed\">34278803</ArticleId></ArticleIdList></Reference><Reference><Citation>Nassif
+        M.E., Windsor S.L., Borlaug B.A., Kitzman D.W., Shah S.J., Tang F., Khariton
+        Y., Malik A.O., Khumri T., Umpierrez G., et al. The SGLT2 inhibitor dapagliflozin
+        in heart failure with preserved ejection fraction: A multicenter randomized
+        trial. Nat. Med. 2021;27:1954&#x2013;1960. doi: 10.1038/s41591-021-01536-x.</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.1038/s41591-021-01536-x</ArticleId><ArticleId IdType=\"pmc\">PMC8604725</ArticleId><ArticleId
+        IdType=\"pubmed\">34711976</ArticleId></ArticleIdList></Reference><Reference><Citation>Yabe
+        D., Shiki K., Homma G., Meinicke T., Ogura Y., Seino Y., EMPA-ELDERLY Investigators
+        Efficacy and safety of the sodium-glucose co-transporter-2 inhibitor empagliflozin
+        in elderly Japanese adults (&#x2265;65&#x2009;years) with type 2 diabetes:
+        A randomized, double-blind, placebo-controlled, 52-week clinical trial (EMPA-ELDERLY)
+        Diabetes Obes. Metab. 2023;25:3538&#x2013;3548. doi: 10.1111/dom.15249.</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.1111/dom.15249</ArticleId><ArticleId IdType=\"pubmed\">37622398</ArticleId></ArticleIdList></Reference><Reference><Citation>Antlanger
+        M., Domenig O., Kaltenecker C.C., Kovarik J.J., Rathkolb V., M&#xfc;ller M.M.,
+        Schwaiger E., Hecking M., Poglitsch M., S&#xe4;emann M.D., et al. Combined
+        sodium glucose co-transporter-2 inhibitor and angiotensin-converting enzyme
+        inhibition upregulates the renin-angiotensin system in chronic kidney disease
+        with type 2 diabetes: Results of a randomized, double-blind, placebo-controlled
+        exploratory trial. Diabetes Obes. Metab. 2022;24:816&#x2013;826.</Citation><ArticleIdList><ArticleId
+        IdType=\"pmc\">PMC9305250</ArticleId><ArticleId IdType=\"pubmed\">34984822</ArticleId></ArticleIdList></Reference><Reference><Citation>Veelen
+        A., Andriessen C., Op den Kamp Y., Erazo-Tapia E., de Ligt M., Mevenkamp J.,
+        J&#xf6;rgensen J.A., Moonen-Kornips E., Schaart G., Esterline R., et al. Effects
+        of the sodium-glucose cotransporter 2 inhibitor dapagliflozin on substrate
+        metabolism in prediabetic insulin resistant individuals: A randomized, double-blind
+        crossover trial. Metabolism. 2023;140:155396. doi: 10.1016/j.metabol.2022.155396.</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.1016/j.metabol.2022.155396</ArticleId><ArticleId IdType=\"pubmed\">36592688</ArticleId></ArticleIdList></Reference></ReferenceList></PubmedData></PubmedArticle><PubmedArticle><MedlineCitation
+        Status=\"MEDLINE\" Owner=\"NLM\" IndexingMethod=\"Curated\"><PMID Version=\"1\">41550872</PMID><DateCompleted><Year>2026</Year><Month>01</Month><Day>19</Day></DateCompleted><DateRevised><Year>2026</Year><Month>01</Month><Day>21</Day></DateRevised><Article
+        PubModel=\"Electronic-eCollection\"><Journal><ISSN IssnType=\"Print\">1664-2392</ISSN><JournalIssue
+        CitedMedium=\"Print\"><Volume>16</Volume><PubDate><Year>2025</Year></PubDate></JournalIssue><Title>Frontiers
+        in endocrinology</Title><ISOAbbreviation>Front Endocrinol (Lausanne)</ISOAbbreviation></Journal><ArticleTitle>Comparative
+        efficacy and safety of different SGLT2 inhibitor-based combination strategies
+        in HFrEF: a systematic review and network meta-analysis.</ArticleTitle><Pagination><StartPage>1742128</StartPage><MedlinePgn>1742128</MedlinePgn></Pagination><ELocationID
+        EIdType=\"pii\" ValidYN=\"Y\">1742128</ELocationID><ELocationID EIdType=\"doi\"
+        ValidYN=\"Y\">10.3389/fendo.2025.1742128</ELocationID><Abstract><AbstractText
+        Label=\"BACKGROUND\" NlmCategory=\"UNASSIGNED\">The optimal combination therapy
+        for heart failure with reduced ejection fraction (HFrEF) involving sodium-glucose
+        transporter 2 inhibitors (SGLT2i), angiotensin receptor-neprilysin inhibitors
+        (ARNI), and conventional triple therapy remains uncertain due to the lack
+        of direct comparative evidence.</AbstractText><AbstractText Label=\"METHODS\"
+        NlmCategory=\"UNASSIGNED\">We conducted a Bayesian network meta-analysis of
+        randomized controlled trials (RCTs) comparing six treatment regimens. Primary
+        outcome was the composite of cardiovascular death and hospitalization. Secondary
+        outcomes included all-cause mortality, Kansas City Cardiomyopathy Questionnaire
+        (KCCQ) scores, 6-minute walk distance (6MWD), N-terminal pro-B-type natriuretic
+        peptide (NT-proBNP) levels, and adverse events (hypotension, hyperkalemia,
+        renal events). All analyses were performed under a Bayesian statistical framework,
+        and the relative efficacy and safety of the six regimens were ranked using
+        surface under the cumulative ranking curve (SUCRA) probabilities.</AbstractText><AbstractText
+        Label=\"RESULTS\" NlmCategory=\"UNASSIGNED\">A total of 22 studies (21 RCTs)
+        involving 24,499 patients were included. For the primary composite outcome,
+        Sotagliflozin-based quadruple therapy ranked first (SUCRA: 90.8%; OR: 0.49,
+        95%CI: 0.16 to 1.47). Dapagliflozin+triple therapy (SUCRA: 76.8%; OR: 0.83,
+        95%CI: 0.69 to 0.98) and ARNI+BB+MRA (SUCRA: 76.6%; OR: 0.83, 95%CI: 0.75
+        to 0.92) demonstrated significant reductions in all-cause mortality. ARNI-based
+        triple therapy was associated with a significantly increased risk of hypotension
+        (OR: 1.67, 95%CI: 1.48 to 1.90), whereas Dapagliflozin and Empagliflozin showed
+        protective effects against renal adverse events. No regimen significantly
+        increased hyperkalemia risk. Additionally, a statistically significant interaction
+        was observed between treatment effects and baseline diabetes burden for the
+        primary outcome (<i>p</i> = 0.003).</AbstractText><AbstractText Label=\"CONCLUSIONS\"
+        NlmCategory=\"UNASSIGNED\">This network meta-analysis demonstrates that while
+        all quadruple therapy regimens improve outcomes in HFrEF, important distinctions
+        exist. Sotagliflozin-based therapy may offer advantages in preventing hospitalizations,
+        whereas Dapagliflozin and ARNI are comparable for mortality reduction. The
+        safety profiles differ significantly, particularly regarding hypotension risk
+        with ARNI and renal protection with SGLT2i. The choice of regimen should be
+        individualized based on patient priorities, comorbidities, and safety tolerability
+        profiles.</AbstractText><AbstractText Label=\"SYSTEMATIC REVIEW REGISTRATION\"
+        NlmCategory=\"UNASSIGNED\">https://www.crd.york.ac.uk/PROSPERO/view/CRD420251112344
+        , identifier CRD420251112344.</AbstractText><CopyrightInformation>Copyright
+        &#xa9; 2026 Jiang, Zhang, Tang and Tan.</CopyrightInformation></Abstract><AuthorList
+        CompleteYN=\"Y\"><Author ValidYN=\"Y\"><LastName>Jiang</LastName><ForeName>Neng</ForeName><Initials>N</Initials><AffiliationInfo><Affiliation>School
+        of Medicine, Sun Yat-Sen University, Shenzhen, Guangdong,&#xa0;China.</Affiliation></AffiliationInfo></Author><Author
+        ValidYN=\"Y\"><LastName>Zhang</LastName><ForeName>Yuling</ForeName><Initials>Y</Initials><AffiliationInfo><Affiliation>Department
+        of Cardiovascular Medicine, Sun Yat-sen Memorial Hospital, Sun Yat-sen University,
+        Guangzhou, Guangdong,&#xa0;China.</Affiliation></AffiliationInfo></Author><Author
+        ValidYN=\"Y\"><LastName>Tang</LastName><ForeName>Yue</ForeName><Initials>Y</Initials><AffiliationInfo><Affiliation>Department
+        of Cardiovascular Medicine, The Seventh Affiliated Hospital, Sun Yat-sen University,
+        Shenzhen, Guangdong,&#xa0;China.</Affiliation></AffiliationInfo></Author><Author
+        ValidYN=\"Y\"><LastName>Tan</LastName><ForeName>Hongmei</ForeName><Initials>H</Initials><AffiliationInfo><Affiliation>School
+        of Medicine, Sun Yat-Sen University, Shenzhen, Guangdong,&#xa0;China.</Affiliation></AffiliationInfo></Author></AuthorList><Language>eng</Language><PublicationTypeList><PublicationType
+        UI=\"D003160\">Comparative Study</PublicationType><PublicationType UI=\"D016428\">Journal
+        Article</PublicationType><PublicationType UI=\"D000099094\">Network Meta-Analysis</PublicationType><PublicationType
+        UI=\"D000078182\">Systematic Review</PublicationType></PublicationTypeList><ArticleDate
+        DateType=\"Electronic\"><Year>2026</Year><Month>01</Month><Day>02</Day></ArticleDate></Article><MedlineJournalInfo><Country>Switzerland</Country><MedlineTA>Front
+        Endocrinol (Lausanne)</MedlineTA><NlmUniqueID>101555782</NlmUniqueID><ISSNLinking>1664-2392</ISSNLinking></MedlineJournalInfo><ChemicalList><Chemical><RegistryNumber>0</RegistryNumber><NameOfSubstance
+        UI=\"D057911\">Angiotensin Receptor Antagonists</NameOfSubstance></Chemical><Chemical><RegistryNumber>0</RegistryNumber><NameOfSubstance
+        UI=\"D000077203\">Sodium-Glucose Transporter 2 Inhibitors</NameOfSubstance></Chemical></ChemicalList><CitationSubset>IM</CitationSubset><MeshHeadingList><MeshHeading><DescriptorName
+        UI=\"D006801\" MajorTopicYN=\"N\">Humans</DescriptorName></MeshHeading><MeshHeading><DescriptorName
+        UI=\"D057911\" MajorTopicYN=\"Y\">Angiotensin Receptor Antagonists</DescriptorName><QualifierName
+        UI=\"Q000627\" MajorTopicYN=\"N\">therapeutic use</QualifierName></MeshHeading><MeshHeading><DescriptorName
+        UI=\"D004359\" MajorTopicYN=\"N\">Drug Therapy, Combination</DescriptorName></MeshHeading><MeshHeading><DescriptorName
+        UI=\"D006333\" MajorTopicYN=\"Y\">Heart Failure</DescriptorName><QualifierName
+        UI=\"Q000188\" MajorTopicYN=\"N\">drug therapy</QualifierName><QualifierName
+        UI=\"Q000503\" MajorTopicYN=\"N\">physiopathology</QualifierName></MeshHeading><MeshHeading><DescriptorName
+        UI=\"D016032\" MajorTopicYN=\"N\">Randomized Controlled Trials as Topic</DescriptorName></MeshHeading><MeshHeading><DescriptorName
+        UI=\"D000077203\" MajorTopicYN=\"Y\">Sodium-Glucose Transporter 2 Inhibitors</DescriptorName><QualifierName
+        UI=\"Q000627\" MajorTopicYN=\"N\">therapeutic use</QualifierName><QualifierName
+        UI=\"Q000009\" MajorTopicYN=\"N\">adverse effects</QualifierName></MeshHeading><MeshHeading><DescriptorName
+        UI=\"D013318\" MajorTopicYN=\"N\">Stroke Volume</DescriptorName><QualifierName
+        UI=\"Q000187\" MajorTopicYN=\"N\">drug effects</QualifierName></MeshHeading><MeshHeading><DescriptorName
+        UI=\"D016896\" MajorTopicYN=\"N\">Treatment Outcome</DescriptorName></MeshHeading></MeshHeadingList><KeywordList
+        Owner=\"NOTNLM\"><Keyword MajorTopicYN=\"N\">cardiovascular death</Keyword><Keyword
+        MajorTopicYN=\"N\">drug combinations</Keyword><Keyword MajorTopicYN=\"N\">heart
+        failure with reduced ejection fraction</Keyword><Keyword MajorTopicYN=\"N\">network
+        meta-analysis</Keyword><Keyword MajorTopicYN=\"N\">sodium-glucose transporter
+        2 inhibitors</Keyword></KeywordList><CoiStatement>The author(s) declared that
+        this work was conducted in the absence of any commercial or financial relationships
+        that could be construed as a potential conflict of interest.</CoiStatement></MedlineCitation><PubmedData><History><PubMedPubDate
+        PubStatus=\"received\"><Year>2025</Year><Month>11</Month><Day>8</Day></PubMedPubDate><PubMedPubDate
+        PubStatus=\"revised\"><Year>2025</Year><Month>12</Month><Day>4</Day></PubMedPubDate><PubMedPubDate
+        PubStatus=\"accepted\"><Year>2025</Year><Month>12</Month><Day>8</Day></PubMedPubDate><PubMedPubDate
+        PubStatus=\"medline\"><Year>2026</Year><Month>1</Month><Day>19</Day><Hour>12</Hour><Minute>52</Minute></PubMedPubDate><PubMedPubDate
+        PubStatus=\"pubmed\"><Year>2026</Year><Month>1</Month><Day>19</Day><Hour>12</Hour><Minute>51</Minute></PubMedPubDate><PubMedPubDate
+        PubStatus=\"entrez\"><Year>2026</Year><Month>1</Month><Day>19</Day><Hour>6</Hour><Minute>12</Minute></PubMedPubDate><PubMedPubDate
+        PubStatus=\"pmc-release\"><Year>2026</Year><Month>1</Month><Day>2</Day></PubMedPubDate></History><PublicationStatus>epublish</PublicationStatus><ArticleIdList><ArticleId
+        IdType=\"pubmed\">41550872</ArticleId><ArticleId IdType=\"pmc\">PMC12807906</ArticleId><ArticleId
+        IdType=\"doi\">10.3389/fendo.2025.1742128</ArticleId></ArticleIdList><ReferenceList><Reference><Citation>Heidenreich
+        PA, Bozkurt B, Aguilar D, Allen LA, Byun JJ, Colvin MM, et al. 2022 AHA/ACC/HFSA
+        guideline for the management of heart failure: Executive summary: A report
+        of the american college of Cardiology/American heart association joint committee
+        on clinical practice guidelines. Circulation. (2022) 145:e876-e894. doi:&#xa0;
+        10.1161/CIR.0000000000001062, PMID:</Citation><ArticleIdList><ArticleId IdType=\"doi\">10.1161/CIR.0000000000001062</ArticleId><ArticleId
+        IdType=\"pubmed\">35363500</ArticleId></ArticleIdList></Reference><Reference><Citation>Ziaeian
+        B, Fonarow GC. Epidemiology and aetiology of heart failure. Nat Rev Cardiol.
+        (2016) 13:368&#x2013;78. doi:&#xa0; 10.1038/nrcardio.2016.25, PMID:</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.1038/nrcardio.2016.25</ArticleId><ArticleId IdType=\"pmc\">PMC4868779</ArticleId><ArticleId
+        IdType=\"pubmed\">26935038</ArticleId></ArticleIdList></Reference><Reference><Citation>Taylor
+        CJ, Rutten FH, Brouwer JR, Hobbs FR. Practical guidance on heart failure diagnosis
+        and management in primary care: Recent EPCCS recommendations. Br J Gen Pract.
+        (2017) 67:326&#x2013;27. doi:&#xa0; 10.3399/bjgp17X691553, PMID:</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.3399/bjgp17X691553</ArticleId><ArticleId IdType=\"pmc\">PMC5565867</ArticleId><ArticleId
+        IdType=\"pubmed\">28663432</ArticleId></ArticleIdList></Reference><Reference><Citation>McDonagh
+        TA, Metra M, Adamo M, Gardner RS, Baumbach A, B&#xf6;hm M, et al. 2021 ESC
+        Guidelines for the diagnosis and treatment of acute and chronic heart failure.
+        Eur Heart J. (2021) 42:3599&#x2013;726. doi:&#xa0; 10.1093/eurheartj/ehab368,
+        PMID:</Citation><ArticleIdList><ArticleId IdType=\"doi\">10.1093/eurheartj/ehab368</ArticleId><ArticleId
+        IdType=\"pubmed\">34447992</ArticleId></ArticleIdList></Reference><Reference><Citation>Vishram-Nielsen
+        JKK, Tomasoni D, Gustafsson F, Metra M. Contemporary drug treatment of advanced
+        heart failure with reduced ejection fraction. Drugs. (2022) 82:375&#x2013;405.
+        doi:&#xa0; 10.1007/s40265-021-01666-z, PMID:</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.1007/s40265-021-01666-z</ArticleId><ArticleId IdType=\"pmc\">PMC8820365</ArticleId><ArticleId
+        IdType=\"pubmed\">35113350</ArticleId></ArticleIdList></Reference><Reference><Citation>Yan
+        Y, Liu B, Du J, Wang J, Jing X, Liu Y, et al. SGLT2i versus ARNI in heart
+        failure with reduced ejection fraction: A systematic review and meta-analysis.
+        ESC Heart Fail. (2021) 8:2210&#x2013;19. doi:&#xa0; 10.1002/ehf2.13313, PMID:</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.1002/ehf2.13313</ArticleId><ArticleId IdType=\"pmc\">PMC8120387</ArticleId><ArticleId
+        IdType=\"pubmed\">33749159</ArticleId></ArticleIdList></Reference><Reference><Citation>Joseph
+        J, Liu C, Hui Q, Aragam K, Wang Z, Charest B, et al. Genetic architecture
+        of heart failure with preserved versus reduced ejection fraction. Nat Commun.
+        (2022) 13:7753. doi:&#xa0; 10.1038/s41467-022-35323-0, PMID:</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.1038/s41467-022-35323-0</ArticleId><ArticleId IdType=\"pmc\">PMC9751124</ArticleId><ArticleId
+        IdType=\"pubmed\">36517512</ArticleId></ArticleIdList></Reference><Reference><Citation>Tang
+        J, Wang P, Liu C, Peng J, Liu Y, Ma Q. Pharmacotherapy in patients with heart
+        failure with reduced ejection fraction: A systematic review and meta-analysis.
+        Chin Med J (Engl). (2025) 138:925&#x2013;33. doi:&#xa0; 10.1097/CM9.0000000000003118,
+        PMID:</Citation><ArticleIdList><ArticleId IdType=\"doi\">10.1097/CM9.0000000000003118</ArticleId><ArticleId
+        IdType=\"pmc\">PMC12037092</ArticleId><ArticleId IdType=\"pubmed\">38811344</ArticleId></ArticleIdList></Reference><Reference><Citation>Hutton
+        B, Salanti G, Caldwell DM, Chaimani A, Schmid CH, Cameron C, et al. The PRISMA
+        extension statement for reporting of systematic reviews incorporating network
+        meta-analyses of health care interventions: Checklist and explanations. Ann
+        Intern Med 2015. (2015) 162:777&#x2013;84. doi:&#xa0; 10.7326/M14-2385, PMID:</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.7326/M14-2385</ArticleId><ArticleId IdType=\"pubmed\">26030634</ArticleId></ArticleIdList></Reference><Reference><Citation>Komajda
+        M, B&#xf6;hm M, Borer JS, Ford I, Tavazzi L, Pannaux M, et al. Incremental
+        benefit of drug therapies for chronic heart failure with reduced ejection
+        fraction: A network meta-analysis. Eur J Heart Fail. (2018) 20:1315&#x2013;22.
+        doi:&#xa0; 10.1002/ejhf.1234, PMID:</Citation><ArticleIdList><ArticleId IdType=\"doi\">10.1002/ejhf.1234</ArticleId><ArticleId
+        IdType=\"pubmed\">29806165</ArticleId></ArticleIdList></Reference><Reference><Citation>Higgins
+        JPT, Altman DG, Gotzsche PC, Juni P, Moher D, Oxman AD, et al. The Cochrane
+        Collaboration&#x2019;s tool for assessing risk of bias in randomised trials.
+        Bmj. (2011) 343:d5928. doi:&#xa0; 10.1136/bmj.d5928, PMID:</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.1136/bmj.d5928</ArticleId><ArticleId IdType=\"pmc\">PMC3196245</ArticleId><ArticleId
+        IdType=\"pubmed\">22008217</ArticleId></ArticleIdList></Reference><Reference><Citation>Sterne
+        JAC, Savovi&#x107; J, Page MJ, Elbers RG, Blencowe NS, Boutron I, et al. RoB
+        2: A revised tool for assessing risk of bias in randomised trials. Bmj. (2019)
+        366:l4898. doi:&#xa0; 10.1136/bmj.l4898, PMID:</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.1136/bmj.l4898</ArticleId><ArticleId IdType=\"pubmed\">31462531</ArticleId></ArticleIdList></Reference><Reference><Citation>Halle
+        M, Sch&#xf6;bel C, Winzer EB, Bernhardt P, Mueller S, Sieder C, et al. A randomized
+        clinical trial on the short-term effects of 12-week sacubitril/valsartan vs.
+        Enalapril on peak oxygen consumption in patients with heart failure with reduced
+        ejection fraction: Results from theACTIVITY-HF study. Eur J Heart Fail. (2021)
+        23:2073&#x2013;82. doi:&#xa0; 10.1002/ejhf.2355, PMID:</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.1002/ejhf.2355</ArticleId><ArticleId IdType=\"pubmed\">34591356</ArticleId></ArticleIdList></Reference><Reference><Citation>McMurray
+        JJV, Packer M, Desai AS, Gong J, Lefkowitz MP, Rizkala AR, et al. Angiotensin&#x2013;neprilysin
+        inhibition versus enalapril in heart failure. N Engl J Med. (2014) 371:993&#x2013;1004.
+        doi:&#xa0; 10.1056/NEJMoa1409077, PMID:</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.1056/NEJMoa1409077</ArticleId><ArticleId IdType=\"pubmed\">25176015</ArticleId></ArticleIdList></Reference><Reference><Citation>Nassif
+        ME, Windsor SL, Tang F, Khariton Y, Husain M, Inzucchi SE, et al. Dapagliflozin
+        effects on biomarkers, symptoms, and functional status in patients with heart
+        failure with reduced ejection fraction. Circulation. (2019) 140:1463&#x2013;76.
+        doi:&#xa0; 10.1161/CIRCULATIONAHA.119.042929, PMID:</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.1161/CIRCULATIONAHA.119.042929</ArticleId><ArticleId IdType=\"pubmed\">31524498</ArticleId></ArticleIdList></Reference><Reference><Citation>Reis
+        J, Teixeira AR, Gon&#xe7;alves AV, Moreira RI, Silva TP, Tim&#xf3;teo AT,
+        et al. Dapagliflozin impact on the exercise capacity of Non-Diabetic heart
+        failure with reduced ejection fraction patients. J Clin Med. (2022) 11:2935.
+        doi:&#xa0; 10.3390/jcm11102935, PMID:</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.3390/jcm11102935</ArticleId><ArticleId IdType=\"pmc\">PMC9144118</ArticleId><ArticleId
+        IdType=\"pubmed\">35629062</ArticleId></ArticleIdList></Reference><Reference><Citation>Solomon
+        SD, Jhund PS, Claggett BL, Dewan P, K&#xf8;ber L, Kosiborod MN, et al. Effect
+        of dapagliflozin in patients with HFrEF treated with Sacubitril/Valsartan.
+        JACC: Heart Failure. (2020) 8:811&#x2013;18. doi:&#xa0; 10.1016/j.jchf.2020.04.008,
+        PMID:</Citation><ArticleIdList><ArticleId IdType=\"doi\">10.1016/j.jchf.2020.04.008</ArticleId><ArticleId
+        IdType=\"pubmed\">32653447</ArticleId></ArticleIdList></Reference><Reference><Citation>McMurray
+        JJV, Docherty KF, de Boer RA, Hammarstedt A, Kitzman DW, Kosiborod MN, et
+        al. Effect of dapagliflozin versus placebo on symptoms and 6-Minute walk distance
+        in patients with heart failure: The DETERMINE randomized clinical trials.
+        Circulation. (2024) 149:825&#x2013;38. doi:&#xa0; 10.1161/CIRCULATIONAHA.123.065061,
+        PMID:</Citation><ArticleIdList><ArticleId IdType=\"doi\">10.1161/CIRCULATIONAHA.123.065061</ArticleId><ArticleId
+        IdType=\"pubmed\">38059368</ArticleId></ArticleIdList></Reference><Reference><Citation>Abraham
+        WT, Lindenfeld J, Ponikowski P, Agostoni P, Butler J, Desai AS, et al. Effect
+        of empagliflozin on exercise ability and symptoms in heart failure patients
+        with reduced and preserved ejection fraction, with and without type 2 diabetes.
+        Eur Heart J. (2021) 42:700&#x2013;10. doi:&#xa0; 10.1093/eurheartj/ehaa943,
+        PMID:</Citation><ArticleIdList><ArticleId IdType=\"doi\">10.1093/eurheartj/ehaa943</ArticleId><ArticleId
+        IdType=\"pubmed\">33351892</ArticleId></ArticleIdList></Reference><Reference><Citation>Lee
+        MMY, Brooksbank KJM, Wetherall K, Mangion K, Roditi G, Campbell RT, et al.
+        Effect of empagliflozin on left ventricular volumes in patients with type
+        2 diabetes, or prediabetes, and heart failure with reduced ejection fraction
+        (SUGAR-DM-HF). Circulation. (2021) 143:516&#x2013;25. doi:&#xa0; 10.1161/CIRCULATIONAHA.120.052186,
+        PMID:</Citation><ArticleIdList><ArticleId IdType=\"doi\">10.1161/CIRCULATIONAHA.120.052186</ArticleId><ArticleId
+        IdType=\"pmc\">PMC7864599</ArticleId><ArticleId IdType=\"pubmed\">33186500</ArticleId></ArticleIdList></Reference><Reference><Citation>Mann
+        DL, Givertz MM, Vader JM, Starling RC, Shah P, McNulty SE, et al. Effect of
+        treatment with Sacubitril/Valsartan in patients with advanced heart failure
+        and reduced ejection fraction. JAMA Cardiol. (2022) 7:17. doi:&#xa0; 10.1001/jamacardio.2021.4567,
+        PMID:</Citation><ArticleIdList><ArticleId IdType=\"doi\">10.1001/jamacardio.2021.4567</ArticleId><ArticleId
+        IdType=\"pmc\">PMC8567189</ArticleId><ArticleId IdType=\"pubmed\">34730769</ArticleId></ArticleIdList></Reference><Reference><Citation>Vizzardi
+        EM, Nodari SM, Caretta GM, D&#x2019;Aloia AM, Pezzali NM, Faden GM, et al.
+        Effects of spironolactone on long-term mortality and morbidity in patients
+        with heart failure and mild or no symptoms. Am J Med Sci. (2014) 347:271&#x2013;76.
+        doi:&#xa0; 10.1097/MAJ.0b013e31829dd6b1, PMID:</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.1097/MAJ.0b013e31829dd6b1</ArticleId><ArticleId IdType=\"pubmed\">24196866</ArticleId></ArticleIdList></Reference><Reference><Citation>Tsutsui
+        H, Momomura S, Saito Y, Ito H, Yamamoto K, Sakata Y, et al. Efficacy and safety
+        of Sacubitril/Valsartan in Japanese patients with chronic heart failure and
+        reduced ejection fraction&#x2015; results from the PARALLEL-HF study &#x2015;.
+        Circ J. (2021) 85:584&#x2013;94. doi:&#xa0; 10.1253/circj.CJ-20-0854, PMID:</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.1253/circj.CJ-20-0854</ArticleId><ArticleId IdType=\"pubmed\">33731544</ArticleId></ArticleIdList></Reference><Reference><Citation>Piepoli
+        MF, Hussain RI, Comin Colet J, Dosantos R, Ferber P, Jaarsma T, et al. OUTSTEP-HF:
+        Randomised controlled trial comparing short-term effects of sacubitril/valsartan
+        versus enalapril on daily physical activity in patients with chronic heart
+        failure with reduced ejection fraction. Eur J Heart Fail. (2021) 23:127&#x2013;35.
+        doi:&#xa0; 10.1002/ejhf.2076, PMID:</Citation><ArticleIdList><ArticleId IdType=\"doi\">10.1002/ejhf.2076</ArticleId><ArticleId
+        IdType=\"pubmed\">33314487</ArticleId></ArticleIdList></Reference><Reference><Citation>Dos
+        Santos MR, Alves MDNN, Jord&#xe3;o CP, Pinto CEN, Correa KTS, de Souza FR,
+        et al. Sacubitril/valsartan versus enalapril on exercise capacity in patients
+        with heart failure with reduced ejection fraction: A randomized, double-blind,
+        active-controlled study. Am Heart J. (2021) 239:1&#x2013;10. doi:&#xa0; 10.1016/j.ahj.2021.05.005,
+        PMID:</Citation><ArticleIdList><ArticleId IdType=\"doi\">10.1016/j.ahj.2021.05.005</ArticleId><ArticleId
+        IdType=\"pubmed\">33992607</ArticleId></ArticleIdList></Reference><Reference><Citation>\nPalau
+        P, Amiguet M, Dom&#xed;nguez E, Sastre C, Mollar A, Seller J, et al. \nShort-t<sub>e</sub>rm
+        effects of dapagliflozin on maximal functional capacity in heart failure with
+        reduced ejection fraction (DAPA-VO2): A randomized clinical trial. Eur J Heart
+        Fail. (2022) 24:1816&#x2013;26. doi:&#xa0; 10.1002/ejhf.2560, PMID: \n\n</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.1002/ejhf.2560</ArticleId><ArticleId IdType=\"pubmed\">35604416</ArticleId></ArticleIdList></Reference><Reference><Citation>Bhatt
+        DL, Szarek M, Steg PG, Cannon CP, Leiter LA, McGuire DK, et al. Sotagliflozin
+        in patients with diabetes and recent worsening heart failure. New Engl J Med.
+        (2021) 384:117&#x2013;28. doi:&#xa0; 10.1056/NEJMoa2030183, PMID:</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.1056/NEJMoa2030183</ArticleId><ArticleId IdType=\"pubmed\">33200892</ArticleId></ArticleIdList></Reference><Reference><Citation>Zhao
+        Y, Tian LG, Zhang LX, Ma T, Di L, Wang YB, et al. The comparative effects
+        of sacubitril/valsartan versus enalapril on pulmonary hypertension due to
+        heart failure with a reduced ejection fraction. Pulm Circ. (2022) 12:e12034.
+        doi:&#xa0; 10.1002/pul2.12034, PMID:</Citation><ArticleIdList><ArticleId IdType=\"doi\">10.1002/pul2.12034</ArticleId><ArticleId
+        IdType=\"pmc\">PMC9297686</ArticleId><ArticleId IdType=\"pubmed\">35874853</ArticleId></ArticleIdList></Reference><Reference><Citation>Gao
+        Y, Xing C, Hao W, Zhao H, Wang L, Luan B, et al. The impact of Sacrubitril/Valsartan
+        on clinical treatment and hs-cTnT and NT-ProBNP serum levels and the left
+        ventricular function in patients with chronic heart failure. Int Heart J.
+        (2020) 61:1&#x2013;06. doi:&#xa0; 10.1536/ihj.19-231, PMID:</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.1536/ihj.19-231</ArticleId><ArticleId IdType=\"pubmed\">31875616</ArticleId></ArticleIdList></Reference><Reference><Citation>Voors
+        AA, Angermann CE, Teerlink JR, Collins SP, Kosiborod M, Biegus J, et al. The
+        SGLT2 inhibitor empagliflozin in patients hospitalized for acute heart failure:
+        A multinational randomized trial. Nat Med. (2022) 28:568&#x2013;74. doi:&#xa0;
+        10.1038/s41591-021-01659-1, PMID:</Citation><ArticleIdList><ArticleId IdType=\"doi\">10.1038/s41591-021-01659-1</ArticleId><ArticleId
+        IdType=\"pmc\">PMC8938265</ArticleId><ArticleId IdType=\"pubmed\">35228754</ArticleId></ArticleIdList></Reference><Reference><Citation>Jensen
+        J, Omar M, Kistorp C, Poulsen MK, Tuxen C, Gustafsson I, et al. Twelve weeks
+        of treatment with empagliflozin in patients with heart failure and reduced
+        ejection fraction: A double-blinded, randomized, and placebo-controlled trial.
+        Am Heart J. (2020) 228:47&#x2013;56. doi:&#xa0; 10.1016/j.ahj.2020.07.011,
+        PMID:</Citation><ArticleIdList><ArticleId IdType=\"doi\">10.1016/j.ahj.2020.07.011</ArticleId><ArticleId
+        IdType=\"pubmed\">32798787</ArticleId></ArticleIdList></Reference><Reference><Citation>McMurray
+        JJV, Solomon SD, Inzucchi SE, K&#xf8;ber L, Kosiborod MN, Martinez FA, et
+        al. Dapagliflozin in patients with heart failure and reduced ejection fraction.
+        N Engl J Med. (2019) 381:1995&#x2013;2008. doi:&#xa0; 10.1056/NEJMoa1911303,
+        PMID:</Citation><ArticleIdList><ArticleId IdType=\"doi\">10.1056/NEJMoa1911303</ArticleId><ArticleId
+        IdType=\"pubmed\">31535829</ArticleId></ArticleIdList></Reference><Reference><Citation>Zannad
+        F, McMurray JJ, Krum H, van Veldhuisen DJ, Swedberg K, Shi H VJ, et al. Eplerenone
+        in patients with systolic heart failure and mild symptoms. Boston: Massachusetts
+        Medical Society; (2011) p. 11&#x2013;21.</Citation></Reference><Reference><Citation>Packer
+        M, Anker SD, Butler J, Filippatos G, Pocock SJ, Carson P, et al. Cardiovascular
+        and renal outcomes with empagliflozin in heart failure. Boston: Massachusetts
+        Medical Society; (2020) p. 1413&#x2013;24.</Citation><ArticleIdList><ArticleId
+        IdType=\"pubmed\">32865377</ArticleId></ArticleIdList></Reference><Reference><Citation>Wanner
+        C, Lachin JM, Inzucchi SE, Fitchett D, Mattheus M, George J, et al. Empagliflozin
+        and clinical outcomes in patients with type 2 diabetes mellitus, established
+        cardiovascular disease, and chronic kidney disease. Circulation. (2018) 137:119&#x2013;29.
+        doi:&#xa0; 10.1161/CIRCULATIONAHA.117.028268, PMID:</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.1161/CIRCULATIONAHA.117.028268</ArticleId><ArticleId IdType=\"pubmed\">28904068</ArticleId></ArticleIdList></Reference><Reference><Citation>B&#xf6;hm
+        M, Anker S, Mahfoud F, Lauder L, Filippatos G, Ferreira JP, et al. Empagliflozin,
+        irrespective of blood pressure, improves outcomes in heart failure with preserved
+        ejection fraction: The EMPEROR-Preserved trial. Eur Heart J. (2023) 44:396&#x2013;407.
+        doi:&#xa0; 10.1093/eurheartj/ehac693, PMID:</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.1093/eurheartj/ehac693</ArticleId><ArticleId IdType=\"pmc\">PMC9890225</ArticleId><ArticleId
+        IdType=\"pubmed\">36478225</ArticleId></ArticleIdList></Reference><Reference><Citation>Vergara
+        A, Jacobs-Cacha C, Llorens-Cebria C, Ortiz A, Martinez-Diaz I, Martos N, et
+        al. Enhanced cardiorenal protective effects of combining SGLT2 inhibition,
+        endothelin receptor antagonism and RAS blockade in type 2 diabetic mice. Int
+        J Mol Sci. (2022) 23:12823. doi:&#xa0; 10.3390/ijms232112823, PMID:</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.3390/ijms232112823</ArticleId><ArticleId IdType=\"pmc\">PMC9656616</ArticleId><ArticleId
+        IdType=\"pubmed\">36361612</ArticleId></ArticleIdList></Reference><Reference><Citation>Griffin
+        M, Rao VS, Ivey-Miranda J, Fleming J, Mahoney D, Maulion C, et al. Empagliflozin
+        in heart failure. Circulation. (2020) 142:1028&#x2013;39. doi:&#xa0; 10.1161/CIRCULATIONAHA.120.045691,
+        PMID:</Citation><ArticleIdList><ArticleId IdType=\"doi\">10.1161/CIRCULATIONAHA.120.045691</ArticleId><ArticleId
+        IdType=\"pmc\">PMC7521417</ArticleId><ArticleId IdType=\"pubmed\">32410463</ArticleId></ArticleIdList></Reference><Reference><Citation>Palmer
+        BF, Clegg DJ. Kidney-Protective effects of SGLT2 inhibitors. Clin J Am Soc
+        Nephrol. (2023) 18:279&#x2013;89. doi:&#xa0; 10.2215/CJN.09380822, PMID:</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.2215/CJN.09380822</ArticleId><ArticleId IdType=\"pmc\">PMC10103214</ArticleId><ArticleId
+        IdType=\"pubmed\">36220189</ArticleId></ArticleIdList></Reference><Reference><Citation>Vallon
+        V, Verma S. Effects of SGLT2 inhibitors on kidney and cardiovascular function.
+        Annu Rev Physiol. (2021) 83:503&#x2013;28. doi:&#xa0; 10.1146/annurev-physiol-031620-095920,
+        PMID:</Citation><ArticleIdList><ArticleId IdType=\"doi\">10.1146/annurev-physiol-031620-095920</ArticleId><ArticleId
+        IdType=\"pmc\">PMC8017904</ArticleId><ArticleId IdType=\"pubmed\">33197224</ArticleId></ArticleIdList></Reference><Reference><Citation>Jangid
+        MK, Doshi GM. Cross talk on therapeutic strategies: Natriuretic peptides and
+        inhibiting neprilysin in hypertension management. Hypertens Res. (2025) 48:284&#x2013;300.
+        doi:&#xa0; 10.1038/s41440-024-01989-w, PMID:</Citation><ArticleIdList><ArticleId
+        IdType=\"doi\">10.1038/s41440-024-01989-w</ArticleId><ArticleId IdType=\"pubmed\">39543415</ArticleId></ArticleIdList></Reference><Reference><Citation>Lymperopoulos
+        A, Aukszi B. Angiotensin receptor blocker drugs and inhibition of adrenal
+        beta-arrestin-1-dependent aldosterone production: Implications for heart failure
+        therapy. World J Cardiol. (2017) 9:200. doi:&#xa0; 10.4330/wjc.v9.i3.200,
+        PMID:</Citation><ArticleIdList><ArticleId IdType=\"doi\">10.4330/wjc.v9.i3.200</ArticleId><ArticleId
+        IdType=\"pmc\">PMC5368669</ArticleId><ArticleId IdType=\"pubmed\">28400916</ArticleId></ArticleIdList></Reference><Reference><Citation>Navaneethan
+        SD, Zoungas S, Caramori ML, Chan JCN, Heerspink HJL, Hurst C, et al. Diabetes
+        management in chronic kidney disease: Synopsis of the 2020 KDIGO clinical
+        practice guideline. Ann Intern Med. (2021) 174:385&#x2013;94. doi:&#xa0; 10.7326/M20-5938,
+        PMID:</Citation><ArticleIdList><ArticleId IdType=\"doi\">10.7326/M20-5938</ArticleId><ArticleId
+        IdType=\"pubmed\">33166222</ArticleId></ArticleIdList></Reference><Reference><Citation>McDonagh
+        TA, Metra M, Adamo M, Gardner RS, Baumbach A, B&#xf6;hm M, et al. 2023 Focused
+        Update of the 2021 ESC Guidelines for the diagnosis and treatment of acute
+        and chronic heart failure. Eur Heart J. (2023) 44:3627&#x2013;39. doi:&#xa0;
+        10.1093/eurheartj/ehad195, PMID:</Citation><ArticleIdList><ArticleId IdType=\"doi\">10.1093/eurheartj/ehad195</ArticleId><ArticleId
+        IdType=\"pubmed\">37622666</ArticleId></ArticleIdList></Reference></ReferenceList></PubmedData></PubmedArticle></PubmedArticleSet>"
+    headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      Access-Control-Expose-Headers:
+      - X-RateLimit-Limit,X-RateLimit-Remaining
+      Cache-Control:
+      - private
+      Connection:
+      - Keep-Alive
+      Content-Security-Policy:
+      - upgrade-insecure-requests
+      Content-Type:
+      - text/xml; charset=UTF-8
+      Date:
+      - Tue, 21 Apr 2026 22:54:40 GMT
+      Keep-Alive:
+      - timeout=4, max=40
+      NCBI-PHID:
+      - 1D34DC232975038500004A84FDD6FEB1.1.1.m_4
+      NCBI-SID:
+      - 31431E5E15C01E60_979FSID
+      Referrer-Policy:
+      - origin-when-cross-origin
+      Server:
+      - Finatra
+      Set-Cookie:
+      - ncbi_sid=31431E5E15C01E60_979FSID; domain=.nih.gov; path=/; expires=Wed, 21
+        Apr 2027 22:54:40 GMT
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Transfer-Encoding:
+      - chunked
+      X-RateLimit-Limit:
+      - '3'
+      X-RateLimit-Remaining:
+      - '2'
+      X-UA-Compatible:
+      - IE=Edge
+      X-XSS-Protection:
+      - 1; mode=block
+      content-encoding:
+      - gzip
+    status:
+      code: 200
+      message: OK
+version: 1
