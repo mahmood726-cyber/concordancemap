@@ -2,7 +2,7 @@
 name = "concordancemap"
 version = "0.1.0"
 description = "Cross-SR concordance audit on PICO-matched drug-indication clusters"
-requires-python = ">=3.11,<3.13"
+requires-python = ">=3.11"
 dependencies = [
     "requests>=2.31",
     "lxml>=5.0",
