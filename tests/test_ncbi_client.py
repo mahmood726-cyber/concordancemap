@@ -297,3 +297,39 @@ def test_fetch_with_retries_raises_after_max(tmp_path, monkeypatch):
         fetch_with_retries(
             "http://e.com/x", {}, session=sess, limiter=limiter, cache=cache, max_retries=5
         )
+    assert len(sess.calls) == 5, "must attempt max_retries times before raising"
+
+
+def test_fetch_with_retries_non_retryable_500_raises_immediately(tmp_path):
+    """A 500 must raise MalformedResponseError on the first attempt; no sleep, no retry."""
+    cache = RequestCache(cache_dir=tmp_path)
+    sess = _FlakySession([_FakeResponse(500, b"<html>500</html>")])
+    limiter = RateLimiter(rate_per_sec=10.0, burst=10)
+
+    with pytest.raises(MalformedResponseError, match="non-2xx response 500"):
+        fetch_with_retries(
+            "http://e.com/x", {}, session=sess, limiter=limiter, cache=cache, max_retries=5,
+        )
+    assert len(sess.calls) == 1, "500 is not retryable; must not retry"
+    assert cache.get("http://e.com/x", {}) is None
+
+
+def test_fetch_with_retries_transport_error_wraps_as_malformed(tmp_path):
+    """A transport exception must become MalformedResponseError without retry."""
+    cache = RequestCache(cache_dir=tmp_path)
+    limiter = RateLimiter(rate_per_sec=10.0, burst=10)
+
+    class _ErrorSession:
+        def __init__(self):
+            self.calls: list = []
+
+        def get(self, url: str, params: dict, timeout: float):
+            self.calls.append((url, dict(params)))
+            raise ConnectionError("simulated network unreachable")
+
+    sess = _ErrorSession()
+    with pytest.raises(MalformedResponseError, match="transport error"):
+        fetch_with_retries(
+            "http://e.com/x", {}, session=sess, limiter=limiter, cache=cache, max_retries=5,
+        )
+    assert len(sess.calls) == 1, "transport errors are not retried"

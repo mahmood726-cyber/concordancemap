@@ -186,10 +186,14 @@ def fetch_with_retries(
     max_retries: int = 5,
     timeout: float = 30.0,
 ) -> bytes:
-    """Call fetch_raw with exponential backoff on 429/503.
+    """Fetch with exponential backoff on 429/503, inlining fetch_raw's
+    cache/limiter/HTTP logic (so we can inspect the raw status before
+    deciding whether to retry or fail closed).
 
-    Backoff schedule: 2s, 4s, 8s, 16s, 32s (then raise NCBIRateLimitError).
-    Any non-retryable non-2xx status raises MalformedResponseError immediately.
+    Backoff schedule with default max_retries=5: 2s, 4s, 8s, 16s, then
+    raise NCBIRateLimitError on the 5th attempt (no sleep before the
+    final raise). Any non-retryable non-2xx raises MalformedResponseError
+    immediately. Transport exceptions also raise MalformedResponseError.
     Cache hits short-circuit before any retry logic.
     """
     cached = cache.get(url, params)
@@ -204,9 +208,11 @@ def fetch_with_retries(
         except Exception as exc:
             raise MalformedResponseError(f"transport error for {url}: {exc}") from exc
 
-        if response.status_code == 200 and response.content:
-            cache.put(url, params, response.content)
-            return response.content
+        if response.status_code == 200:
+            if response.content:
+                cache.put(url, params, response.content)
+                return response.content
+            raise MalformedResponseError(f"empty body for {url}")
 
         if response.status_code in _RETRYABLE_STATUSES and attempt < max_retries - 1:
             time.sleep(backoff)
