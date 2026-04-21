@@ -24,6 +24,13 @@ truthcert_local/
 sentinel-findings.jsonl
 STUCK_FAILURES.jsonl
 
+# Secrets — never commit
+.env
+.env.*
+*.key
+*.pem
+hmac_key*
+
 # OS
 .DS_Store
 Thumbs.db
