@@ -98,14 +98,20 @@ class RequestCache:
             return None
 
     def put(self, url: str, params: dict[str, str], value: bytes) -> None:
-        """Atomic write via tmp-then-replace.
+        """Atomic write via tmp-then-replace, with orphan cleanup on failure.
 
         Path.replace() is atomic on POSIX and within-drive atomic on Windows
         NTFS. This closes the truncate-then-partial-write window that would
         otherwise let a killed process leave a zero-byte or partial-payload
         cache file that get() cannot distinguish from a valid response.
+        The try/except guarantees a failed write_bytes or replace unlinks
+        the tmp file rather than leaving a slow disk-space leak.
         """
         p = self._path(self._key(url, params))
         tmp = p.with_suffix(".tmp")
-        tmp.write_bytes(value)
-        tmp.replace(p)
+        try:
+            tmp.write_bytes(value)
+            tmp.replace(p)
+        except BaseException:
+            tmp.unlink(missing_ok=True)
+            raise

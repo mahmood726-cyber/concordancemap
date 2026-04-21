@@ -120,3 +120,21 @@ def test_cache_overwrite_replaces_value(tmp_path: Path):
     cache.put("http://e.com/x", {}, b"v1")
     cache.put("http://e.com/x", {}, b"v2")
     assert cache.get("http://e.com/x", {}) == b"v2"
+
+
+def test_cache_put_failure_cleans_up_tmp(tmp_path: Path, monkeypatch):
+    """If write_bytes raises, the .tmp file must be unlinked, not orphaned."""
+    cache = RequestCache(cache_dir=tmp_path)
+
+    # Force write_bytes to raise partway through the write
+    def fake_write(self, data):
+        raise OSError("simulated no-space-left-on-device")
+
+    monkeypatch.setattr(Path, "write_bytes", fake_write)
+
+    with pytest.raises(OSError, match="no-space-left-on-device"):
+        cache.put("http://e.com/x", {}, b"payload")
+
+    # No .tmp files should remain
+    tmp_files = list(tmp_path.glob("*.tmp"))
+    assert tmp_files == [], f"orphan tmp files remain: {tmp_files}"
