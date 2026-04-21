@@ -390,6 +390,24 @@ def test_cache_overwrite_replaces_value(tmp_path: Path):
     cache.put("http://e.com/x", {}, b"v1")
     cache.put("http://e.com/x", {}, b"v2")
     assert cache.get("http://e.com/x", {}) == b"v2"
+
+
+def test_cache_put_failure_after_write_unlinks_tmp(tmp_path: Path, monkeypatch):
+    """If replace() raises AFTER write_bytes created the .tmp file, the guard
+    must actually unlink — not just run a no-op on a never-existed file."""
+    cache = RequestCache(cache_dir=tmp_path)
+
+    def fake_replace(self, target):
+        # .tmp exists at this point — write_bytes succeeded.
+        raise OSError("simulated rename failure")
+
+    monkeypatch.setattr(Path, "replace", fake_replace)
+
+    with pytest.raises(OSError, match="rename failure"):
+        cache.put("http://e.com/x", {}, b"payload")
+
+    tmp_files = list(tmp_path.glob("*.tmp"))
+    assert tmp_files == [], f"orphan tmp files remain: {tmp_files}"
 ```
 
 - [ ] **Step 2: Run test to verify it fails**
@@ -434,17 +452,23 @@ class RequestCache:
             return None
 
     def put(self, url: str, params: dict[str, str], value: bytes) -> None:
-        """Atomic write via tmp-then-replace.
+        """Atomic write via tmp-then-replace, with orphan cleanup on failure.
 
         Path.replace() is atomic on POSIX and within-drive atomic on Windows
         NTFS. This closes the truncate-then-partial-write window that would
         otherwise let a killed process leave a zero-byte or partial-payload
         cache file that get() cannot distinguish from a valid response.
+        The try/except guarantees a failed write_bytes or replace unlinks
+        the tmp file rather than leaving a slow disk-space leak.
         """
         p = self._path(self._key(url, params))
         tmp = p.with_suffix(".tmp")
-        tmp.write_bytes(value)
-        tmp.replace(p)
+        try:
+            tmp.write_bytes(value)
+            tmp.replace(p)
+        except BaseException:
+            tmp.unlink(missing_ok=True)
+            raise
 ```
 
 - [ ] **Step 4: Run test to verify it passes**
