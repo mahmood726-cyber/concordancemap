@@ -136,6 +136,16 @@ def fetch_raw(
     """Cache-first HTTP GET. Returns raw bytes.
 
     Raises MalformedResponseError on non-2xx, empty body, or transport error.
+
+    Args:
+        url: endpoint URL.
+        params: query parameters.
+        session: requests.Session or compatible (must expose .get).
+        limiter: RateLimiter acquired once per live request (cache hits bypass).
+        cache: RequestCache consulted before network.
+        timeout: per-request timeout in seconds. Default 30.0 suits esearch;
+            efetch callers fetching large PMID batches (Task 7) should pass
+            a higher value (e.g., 120.0).
     """
     cached = cache.get(url, params)
     if cached is not None:

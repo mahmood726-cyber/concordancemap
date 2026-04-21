@@ -122,20 +122,20 @@ def test_cache_overwrite_replaces_value(tmp_path: Path):
     assert cache.get("http://e.com/x", {}) == b"v2"
 
 
-def test_cache_put_failure_cleans_up_tmp(tmp_path: Path, monkeypatch):
-    """If write_bytes raises, the .tmp file must be unlinked, not orphaned."""
+def test_cache_put_failure_after_write_unlinks_tmp(tmp_path: Path, monkeypatch):
+    """If replace() raises AFTER write_bytes created the .tmp file, the guard
+    must actually unlink — not just run a no-op on a never-existed file."""
     cache = RequestCache(cache_dir=tmp_path)
 
-    # Force write_bytes to raise partway through the write
-    def fake_write(self, data):
-        raise OSError("simulated no-space-left-on-device")
+    def fake_replace(self, target):
+        # .tmp exists at this point — write_bytes succeeded.
+        raise OSError("simulated rename failure")
 
-    monkeypatch.setattr(Path, "write_bytes", fake_write)
+    monkeypatch.setattr(Path, "replace", fake_replace)
 
-    with pytest.raises(OSError, match="no-space-left-on-device"):
+    with pytest.raises(OSError, match="rename failure"):
         cache.put("http://e.com/x", {}, b"payload")
 
-    # No .tmp files should remain
     tmp_files = list(tmp_path.glob("*.tmp"))
     assert tmp_files == [], f"orphan tmp files remain: {tmp_files}"
 
@@ -206,3 +206,25 @@ def test_fetch_raw_fail_closed_on_empty_body(tmp_path):
 
     with pytest.raises(MalformedResponseError):
         fetch_raw("http://e.com/x", {}, session=sess, limiter=limiter, cache=cache)
+
+
+def test_fetch_raw_wraps_transport_error_as_malformed(tmp_path: Path):
+    """A session.get() that raises must be re-raised as MalformedResponseError."""
+    cache = RequestCache(cache_dir=tmp_path)
+    limiter = RateLimiter(rate_per_sec=10.0, burst=10)
+
+    class _ErrorSession:
+        def get(self, url: str, params: dict, timeout: float):
+            raise ConnectionError("simulated network unreachable")
+
+    with pytest.raises(MalformedResponseError, match="transport error"):
+        fetch_raw(
+            "http://e.com/x",
+            {},
+            session=_ErrorSession(),
+            limiter=limiter,
+            cache=cache,
+        )
+
+    assert cache.get("http://e.com/x", {}) is None, \
+        "transport failure must not cache anything"
