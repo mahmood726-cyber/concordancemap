@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+.pytest_cache/
+.pytest_cache_local/
+
+# IDE
+.vscode/
+.idea/
+
+# Claude / dev
+.claude/
+PROGRESS.md
+
+# Data caches (large, regenerable; not part of source)
+data/cache/
+data/results/
+data/*.log
+
+# TruthCert / Sentinel outputs
+truthcert_local/
+sentinel-findings.jsonl
+STUCK_FAILURES.jsonl
+
+# OS
+.DS_Store
+Thumbs.db
