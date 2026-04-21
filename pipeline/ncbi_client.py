@@ -19,6 +19,7 @@ import hashlib
 import json
 import time
 from dataclasses import dataclass
+from datetime import datetime, timezone
 from pathlib import Path
 
 from lxml import etree
@@ -280,3 +281,108 @@ def esearch_pubmed(
         if text:
             pmids.append(text)
     return pmids
+
+
+@dataclass
+class SRRecord:
+    """A PubMed-indexed systematic review record (abstract level).
+
+    Mirrors the spec's Section 5.3 SRRecord dataclass.
+    """
+
+    pmid: str
+    title: str
+    abstract: str
+    mesh_descriptors: list[str]
+    publication_year: int
+    publication_type: list[str]
+    authors: list[str]
+    journal: str
+    doi: str | None
+    fetched_at: str  # ISO8601 UTC
+
+
+def _parse_pubmed_article(article_el) -> SRRecord:
+    def _text(xpath: str) -> str:
+        node = article_el.find(xpath)
+        return (node.text or "").strip() if node is not None else ""
+
+    def _all_text(xpath: str) -> list[str]:
+        return [(n.text or "").strip() for n in article_el.iterfind(xpath)]
+
+    pmid = _text(".//MedlineCitation/PMID")
+    title = _text(".//Article/ArticleTitle")
+
+    abstract_nodes = article_el.iterfind(".//Article/Abstract/AbstractText")
+    abstract = " ".join((n.text or "").strip() for n in abstract_nodes)
+
+    mesh = _all_text(".//MeshHeadingList/MeshHeading/DescriptorName")
+    pub_types = _all_text(".//Article/PublicationTypeList/PublicationType")
+
+    authors: list[str] = []
+    for author_el in article_el.iterfind(".//Article/AuthorList/Author"):
+        last = (author_el.findtext("LastName") or "").strip()
+        fore = (author_el.findtext("ForeName") or "").strip()
+        if last or fore:
+            authors.append(f"{last} {fore}".strip())
+
+    journal = _text(".//Article/Journal/Title")
+    doi_node = article_el.find(".//Article/ELocationID[@EIdType='doi']")
+    doi = (doi_node.text or "").strip() if doi_node is not None else None
+
+    year_text = _text(".//DateCompleted/Year") or _text(
+        ".//Article/Journal/JournalIssue/PubDate/Year"
+    )
+    try:
+        year = int(year_text)
+    except (TypeError, ValueError):
+        year = 0
+
+    return SRRecord(
+        pmid=pmid,
+        title=title,
+        abstract=abstract,
+        mesh_descriptors=mesh,
+        publication_year=year,
+        publication_type=pub_types,
+        authors=authors,
+        journal=journal,
+        doi=doi or None,
+        fetched_at=datetime.now(timezone.utc).isoformat(),
+    )
+
+
+def efetch_pubmed(
+    pmids: list[str],
+    *,
+    cache: RequestCache,
+    session,
+    limiter: RateLimiter,
+    api_key: str | None,
+) -> list[SRRecord]:
+    """Fetch PubMed records for the given PMIDs and parse them to SRRecord list.
+
+    Returns empty list for empty input without hitting the network.
+    Large batches may exceed the default 30s fetch_raw timeout — not yet
+    parameterised here; future enhancement if Task 12 integration observes
+    timeouts.
+    """
+    if not pmids:
+        return []
+    params: dict[str, str] = {
+        "db": "pubmed",
+        "id": ",".join(pmids),
+        "retmode": "xml",
+    }
+    if api_key:
+        params["api_key"] = api_key
+
+    body = fetch_with_retries(
+        NCBI_EFETCH_URL, params, session=session, limiter=limiter, cache=cache
+    )
+    try:
+        root = etree.fromstring(body, _XML_PARSER)
+    except etree.XMLSyntaxError as exc:
+        raise MalformedResponseError(f"efetch XML parse failed: {exc}") from exc
+
+    return [_parse_pubmed_article(art) for art in root.iter("PubmedArticle")]

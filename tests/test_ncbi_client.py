@@ -11,6 +11,8 @@ from pipeline.ncbi_client import (
     NCBIRateLimitError,
     RateLimiter,
     RequestCache,
+    SRRecord,
+    efetch_pubmed,
     esearch_pubmed,
     fetch_raw,
     fetch_with_retries,
@@ -435,3 +437,77 @@ def test_esearch_pubmed_filters_empty_pmid_elements(tmp_path):
         query="x", cache=cache, session=sess, limiter=limiter, api_key=None,
     )
     assert pmids == ["123", "456"]
+
+
+_PUBMED_SAMPLE_XML = b"""<?xml version="1.0"?>
+<PubmedArticleSet>
+<PubmedArticle>
+  <MedlineCitation>
+    <PMID>40000001</PMID>
+    <Article>
+      <ArticleTitle>Empagliflozin in Heart Failure: A Systematic Review</ArticleTitle>
+      <Abstract>
+        <AbstractText>Empagliflozin reduced hospitalization for heart failure
+        (HR 0.71, 95% CI 0.60-0.83) across 5 trials (n=15,000).</AbstractText>
+      </Abstract>
+      <AuthorList>
+        <Author><LastName>Smith</LastName><ForeName>A</ForeName></Author>
+        <Author><LastName>Jones</LastName><ForeName>B</ForeName></Author>
+      </AuthorList>
+      <Journal><Title>J Cardiol</Title></Journal>
+      <ELocationID EIdType="doi">10.1000/test.1</ELocationID>
+      <PublicationTypeList>
+        <PublicationType>Systematic Review</PublicationType>
+        <PublicationType>Meta-Analysis</PublicationType>
+      </PublicationTypeList>
+    </Article>
+    <DateCompleted><Year>2024</Year><Month>06</Month><Day>15</Day></DateCompleted>
+    <MeshHeadingList>
+      <MeshHeading><DescriptorName>Empagliflozin</DescriptorName></MeshHeading>
+      <MeshHeading><DescriptorName>Heart Failure</DescriptorName></MeshHeading>
+    </MeshHeadingList>
+  </MedlineCitation>
+</PubmedArticle>
+</PubmedArticleSet>"""
+
+
+def test_efetch_pubmed_parses_one_record(tmp_path):
+    cache = RequestCache(cache_dir=tmp_path)
+    sess = _FakeSession(_FakeResponse(200, _PUBMED_SAMPLE_XML))
+    limiter = RateLimiter(rate_per_sec=10.0, burst=10)
+
+    records = efetch_pubmed(
+        pmids=["40000001"],
+        cache=cache,
+        session=sess,
+        limiter=limiter,
+        api_key=None,
+    )
+
+    assert len(records) == 1
+    r = records[0]
+    assert isinstance(r, SRRecord)
+    assert r.pmid == "40000001"
+    assert "Empagliflozin in Heart Failure" in r.title
+    assert "HR 0.71" in r.abstract
+    assert "Empagliflozin" in r.mesh_descriptors
+    assert "Heart Failure" in r.mesh_descriptors
+    assert r.publication_year == 2024
+    assert "Systematic Review" in r.publication_type
+    assert "Meta-Analysis" in r.publication_type
+    assert r.authors == ["Smith A", "Jones B"]
+    assert r.journal == "J Cardiol"
+    assert r.doi == "10.1000/test.1"
+
+
+def test_efetch_pubmed_empty_pmids_returns_empty(tmp_path):
+    cache = RequestCache(cache_dir=tmp_path)
+    sess = _FakeSession(_FakeResponse(200, b"<PubmedArticleSet/>"))
+    limiter = RateLimiter(rate_per_sec=10.0, burst=10)
+
+    records = efetch_pubmed(
+        pmids=[], cache=cache, session=sess, limiter=limiter, api_key=None,
+    )
+
+    assert records == []
+    assert sess.calls == [], "empty pmids must not hit the network"
