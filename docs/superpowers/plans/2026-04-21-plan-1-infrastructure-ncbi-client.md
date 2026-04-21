@@ -6,7 +6,7 @@
 
 **Architecture:** Token-bucket rate limiter fronts a SHA-256-keyed disk cache fronting the raw HTTP layer. Retry-with-exponential-backoff wraps the HTTP layer. Two public APIs on top: `esearch_pubmed(query)` and `efetch_pubmed(pmids)`. TruthCert computes a SHA-256+HMAC provenance chain using a key read from env var only (never from the bundle itself). Resumability is per-pair checkpoint JSON on disk.
 
-**Tech Stack:** Python 3.11+ (NOT 3.13 — WMI deadlock risk on Windows per portfolio rule), requests, lxml, pytest, pytest-vcr (HTTP cassettes for CI).
+**Tech Stack:** Python 3.11+ (3.13 is permitted but requires the scipy WMI-deadlock monkey-patch at the scipy import site — runtime gotcha, not a version bar), requests, lxml, pytest, pytest-vcr (HTTP cassettes for CI).
 
 **Acceptance test at end of plan:** `python -m pytest -q` shows all tests passing, and a smoke script `scripts/smoke_ncbi.py` runs `esearch_pubmed("empagliflozin AND heart failure")` and `efetch_pubmed([first_3_pmids])` against cached cassettes in <10 seconds with zero live HTTP calls.
 
@@ -39,7 +39,10 @@ def test_pipeline_package_importable():
 def test_python_version_ok():
     import sys
     assert sys.version_info >= (3, 11), "Python 3.11+ required per portfolio rule"
-    assert sys.version_info < (3, 13), "Python 3.13 has WMI deadlock risk on Windows"
+    # Note: Python 3.13 is permitted but requires the scipy WMI-deadlock monkey-patch
+    # (see C:\Users\user\.claude\rules\lessons.md). That workaround lives in the
+    # orchestrator, not here — the runtime guard belongs with scipy import, not with
+    # the version check.
 ```
 
 - [ ] **Step 2: Run test to verify it fails**
@@ -75,7 +78,7 @@ Create `pyproject.toml`:
 name = "concordancemap"
 version = "0.1.0"
 description = "Cross-SR concordance audit on PICO-matched drug-indication clusters"
-requires-python = ">=3.11,<3.13"
+requires-python = ">=3.11"
 dependencies = [
     "requests>=2.31",
     "lxml>=5.0",
@@ -123,9 +126,9 @@ git add pyproject.toml pytest.ini pipeline/__init__.py tests/__init__.py tests/t
 git commit -m "$(cat <<'EOF'
 scaffold: ConcordanceMap project with pytest harness
 
-Python 3.11-3.12 pinned (3.13 has WMI deadlock risk on Windows per portfolio
-rule). pytest + pytest-vcr + vcrpy for HTTP cassettes. Sanity test proves
-the pipeline package imports cleanly.
+Python 3.11+ supported (3.13 permitted; WMI deadlock workaround applied at
+the scipy import site, not as a version bar). pytest + pytest-vcr + vcrpy
+for HTTP cassettes. Sanity test proves the pipeline package imports cleanly.
 
 Co-Authored-By: Claude Opus 4.7 (1M context) <noreply@anthropic.com>
 EOF
