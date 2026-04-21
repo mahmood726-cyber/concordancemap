@@ -2,10 +2,11 @@
 from __future__ import annotations
 
 import time
+from pathlib import Path
 
 import pytest
 
-from pipeline.ncbi_client import RateLimiter
+from pipeline.ncbi_client import RateLimiter, RequestCache
 
 
 def test_rate_limiter_allows_burst_up_to_capacity(monkeypatch):
@@ -76,3 +77,30 @@ def test_rate_limiter_rejects_bad_burst():
         RateLimiter(rate_per_sec=10.0, burst=0)
     with pytest.raises(ValueError, match="burst"):
         RateLimiter(rate_per_sec=10.0, burst=-5)
+
+
+def test_cache_miss_returns_none(tmp_path: Path):
+    cache = RequestCache(cache_dir=tmp_path)
+    assert cache.get("http://example.com/x", {"p": "1"}) is None
+
+
+def test_cache_put_then_get_roundtrip(tmp_path: Path):
+    cache = RequestCache(cache_dir=tmp_path)
+    payload = b"<xml><PMID>12345</PMID></xml>"
+    cache.put("http://example.com/x", {"p": "1"}, payload)
+    assert cache.get("http://example.com/x", {"p": "1"}) == payload
+
+
+def test_cache_key_is_sorted_params(tmp_path: Path):
+    """Params in different order must hit the same cache entry."""
+    cache = RequestCache(cache_dir=tmp_path)
+    cache.put("http://example.com/x", {"a": "1", "b": "2"}, b"X")
+    assert cache.get("http://example.com/x", {"b": "2", "a": "1"}) == b"X"
+
+
+def test_cache_is_disk_backed(tmp_path: Path):
+    """A second RequestCache instance pointing at the same dir sees prior writes."""
+    cache1 = RequestCache(cache_dir=tmp_path)
+    cache1.put("http://example.com/x", {}, b"persisted")
+    cache2 = RequestCache(cache_dir=tmp_path)
+    assert cache2.get("http://example.com/x", {}) == b"persisted"

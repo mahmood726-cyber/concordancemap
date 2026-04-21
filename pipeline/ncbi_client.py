@@ -15,8 +15,11 @@ Separate modules (created in later tasks, NOT in ncbi_client.py):
 """
 from __future__ import annotations
 
+import hashlib
+import json
 import time
 from dataclasses import dataclass
+from pathlib import Path
 
 
 @dataclass
@@ -66,3 +69,33 @@ class RateLimiter:
         time.sleep(sleep_for)
         self._refill()
         self._tokens -= 1.0
+
+
+class RequestCache:
+    """SHA-256-keyed disk cache for HTTP responses.
+
+    Key = SHA-256 of f"{url}|{json.dumps(sorted params)}". Value stored as
+    raw bytes in a file named <key>.bin under cache_dir.
+    """
+
+    def __init__(self, cache_dir: Path) -> None:
+        self.cache_dir = Path(cache_dir)
+        self.cache_dir.mkdir(parents=True, exist_ok=True)
+
+    def _key(self, url: str, params: dict[str, str]) -> str:
+        normalized = json.dumps(sorted(params.items()), separators=(",", ":"))
+        raw = f"{url}|{normalized}".encode("utf-8")
+        return hashlib.sha256(raw).hexdigest()
+
+    def _path(self, key: str) -> Path:
+        return self.cache_dir / f"{key}.bin"
+
+    def get(self, url: str, params: dict[str, str]) -> bytes | None:
+        p = self._path(self._key(url, params))
+        if not p.exists():
+            return None
+        return p.read_bytes()
+
+    def put(self, url: str, params: dict[str, str], value: bytes) -> None:
+        p = self._path(self._key(url, params))
+        p.write_bytes(value)
