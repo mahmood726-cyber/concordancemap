@@ -8,9 +8,11 @@ import pytest
 
 from pipeline.ncbi_client import (
     MalformedResponseError,
+    NCBIRateLimitError,
     RateLimiter,
     RequestCache,
     fetch_raw,
+    fetch_with_retries,
 )
 
 
@@ -230,3 +232,68 @@ def test_fetch_raw_wraps_transport_error_as_malformed(tmp_path: Path):
 
     assert cache.get("http://e.com/x", {}) is None, \
         "transport failure must not cache anything"
+
+
+class _FlakySession:
+    """Returns a sequence of fake responses, one per .get() call."""
+
+    def __init__(self, responses: list):
+        self._responses = list(responses)
+        self.calls: list[tuple[str, dict]] = []
+
+    def get(self, url: str, params: dict, timeout: float):
+        self.calls.append((url, dict(params)))
+        return self._responses.pop(0)
+
+
+def test_fetch_with_retries_succeeds_after_transient_429(tmp_path, monkeypatch):
+    cache = RequestCache(cache_dir=tmp_path)
+    sess = _FlakySession([
+        _FakeResponse(429, b"slow down"),
+        _FakeResponse(200, b"<ok/>"),
+    ])
+    limiter = RateLimiter(rate_per_sec=10.0, burst=10)
+    sleeps: list[float] = []
+    monkeypatch.setattr("pipeline.ncbi_client.time.sleep", lambda s: sleeps.append(s))
+
+    out = fetch_with_retries(
+        "http://e.com/x", {}, session=sess, limiter=limiter, cache=cache, max_retries=5
+    )
+
+    assert out == b"<ok/>"
+    assert len(sess.calls) == 2
+    assert sleeps == [2.0], f"expected one 2s backoff, got {sleeps}"
+
+
+def test_fetch_with_retries_backoff_sequence(tmp_path, monkeypatch):
+    """Four retry responses (2x 429 + 2x 503) then success -> backoffs 2, 4, 8, 16s."""
+    cache = RequestCache(cache_dir=tmp_path)
+    sess = _FlakySession([
+        _FakeResponse(429, b"x"),
+        _FakeResponse(503, b"x"),
+        _FakeResponse(429, b"x"),
+        _FakeResponse(503, b"x"),
+        _FakeResponse(200, b"<ok/>"),
+    ])
+    limiter = RateLimiter(rate_per_sec=10.0, burst=10)
+    sleeps: list[float] = []
+    monkeypatch.setattr("pipeline.ncbi_client.time.sleep", lambda s: sleeps.append(s))
+
+    out = fetch_with_retries(
+        "http://e.com/x", {}, session=sess, limiter=limiter, cache=cache, max_retries=5
+    )
+
+    assert out == b"<ok/>"
+    assert sleeps == [2.0, 4.0, 8.0, 16.0]
+
+
+def test_fetch_with_retries_raises_after_max(tmp_path, monkeypatch):
+    cache = RequestCache(cache_dir=tmp_path)
+    sess = _FlakySession([_FakeResponse(429, b"x") for _ in range(5)])
+    limiter = RateLimiter(rate_per_sec=10.0, burst=10)
+    monkeypatch.setattr("pipeline.ncbi_client.time.sleep", lambda s: None)
+
+    with pytest.raises(NCBIRateLimitError):
+        fetch_with_retries(
+            "http://e.com/x", {}, session=sess, limiter=limiter, cache=cache, max_retries=5
+        )

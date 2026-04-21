@@ -167,3 +167,59 @@ def fetch_raw(
 
     cache.put(url, params, body)
     return body
+
+
+class NCBIRateLimitError(Exception):
+    """Exceeded max retries on NCBI rate-limit (429) or service-unavailable (503)."""
+
+
+_RETRYABLE_STATUSES = {429, 503}
+
+
+def fetch_with_retries(
+    url: str,
+    params: dict[str, str],
+    *,
+    session,
+    limiter: RateLimiter,
+    cache: RequestCache,
+    max_retries: int = 5,
+    timeout: float = 30.0,
+) -> bytes:
+    """Call fetch_raw with exponential backoff on 429/503.
+
+    Backoff schedule: 2s, 4s, 8s, 16s, 32s (then raise NCBIRateLimitError).
+    Any non-retryable non-2xx status raises MalformedResponseError immediately.
+    Cache hits short-circuit before any retry logic.
+    """
+    cached = cache.get(url, params)
+    if cached is not None:
+        return cached
+
+    backoff = 2.0
+    for attempt in range(max_retries):
+        limiter.acquire()
+        try:
+            response = session.get(url, params=params, timeout=timeout)
+        except Exception as exc:
+            raise MalformedResponseError(f"transport error for {url}: {exc}") from exc
+
+        if response.status_code == 200 and response.content:
+            cache.put(url, params, response.content)
+            return response.content
+
+        if response.status_code in _RETRYABLE_STATUSES and attempt < max_retries - 1:
+            time.sleep(backoff)
+            backoff *= 2
+            continue
+
+        if response.status_code in _RETRYABLE_STATUSES:
+            raise NCBIRateLimitError(
+                f"max retries ({max_retries}) exceeded for {url} "
+                f"(final status {response.status_code})"
+            )
+        raise MalformedResponseError(
+            f"non-2xx response {response.status_code} for {url}"
+        )
+
+    raise NCBIRateLimitError(f"max retries ({max_retries}) exceeded for {url}")
