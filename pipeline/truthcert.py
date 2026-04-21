@@ -6,7 +6,11 @@ derived data as the HMAC key makes forgery trivial).
 """
 from __future__ import annotations
 
+import hashlib
+import hmac
+import json
 import os
+from typing import Any
 
 
 class TruthCertError(Exception):
@@ -46,3 +50,45 @@ def get_hmac_key() -> bytes:
             f"(got {len(encoded)}); use a randomly generated key."
         )
     return encoded
+
+
+def _canonical_payload(components: dict[str, Any]) -> bytes:
+    """Canonical JSON for hashing: recursively-sorted keys, compact, UTF-8.
+
+    ensure_ascii=False emits non-ASCII as raw UTF-8 bytes (not \\uXXXX
+    escapes). Any external verifier MUST use the same setting or it will
+    compute a different MAC for the same logical input. Float values are
+    serialized as-is via json.dumps; callers must not pre-normalize or
+    round floats, since 0.1+0.2 and 0.3 have different IEEE-754 bit
+    patterns and therefore different MACs.
+    """
+    return json.dumps(
+        components, sort_keys=True, separators=(",", ":"), ensure_ascii=False
+    ).encode("utf-8")
+
+
+def compute_chain(components: dict[str, Any]) -> str:
+    """Return the HMAC-SHA256 hex digest of the canonical components payload.
+
+    The HMAC key is read from CONCORDANCEMAP_HMAC_KEY env var (via
+    get_hmac_key), never from components itself.
+    """
+    key = get_hmac_key()
+    payload = _canonical_payload(components)
+    return hmac.new(key, payload, hashlib.sha256).hexdigest()
+
+
+def verify_chain(components: dict[str, Any], expected: str) -> bool:
+    """Constant-time verify of an HMAC chain against recomputed value.
+
+    Raises TruthCertError (not TypeError) if expected is not a str —
+    callers should not have to handle two different exception types
+    for what is fundamentally a configuration/usage error.
+    """
+    if not isinstance(expected, str):
+        raise TruthCertError(
+            f"verify_chain: expected must be a str hex digest, "
+            f"got {type(expected).__name__}"
+        )
+    actual = compute_chain(components)
+    return hmac.compare_digest(actual, expected)
