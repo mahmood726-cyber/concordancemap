@@ -21,6 +21,11 @@ import time
 from dataclasses import dataclass
 from pathlib import Path
 
+from lxml import etree
+
+NCBI_ESEARCH_URL = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi"
+NCBI_EFETCH_URL = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi"
+
 
 @dataclass
 class RateLimiter:
@@ -229,3 +234,38 @@ def fetch_with_retries(
         )
 
     raise NCBIRateLimitError(f"max retries ({max_retries}) exceeded for {url}")
+
+
+def esearch_pubmed(
+    query: str,
+    *,
+    cache: RequestCache,
+    session,
+    limiter: RateLimiter,
+    api_key: str | None,
+    retmax: int = 10000,
+) -> list[str]:
+    """Return PMIDs matching the PubMed query.
+
+    retmax default 10000 is PubMed's per-request cap; callers doing
+    larger searches should paginate via retstart (out of scope here).
+    Empty result returns empty list, not None.
+    """
+    params: dict[str, str] = {
+        "db": "pubmed",
+        "term": query,
+        "retmode": "xml",
+        "retmax": str(retmax),
+    }
+    if api_key:
+        params["api_key"] = api_key
+
+    body = fetch_with_retries(
+        NCBI_ESEARCH_URL, params, session=session, limiter=limiter, cache=cache
+    )
+    try:
+        root = etree.fromstring(body)
+    except etree.XMLSyntaxError as exc:
+        raise MalformedResponseError(f"esearch XML parse failed: {exc}") from exc
+
+    return [id_elem.text or "" for id_elem in root.iter("Id")]

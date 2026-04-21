@@ -11,6 +11,7 @@ from pipeline.ncbi_client import (
     NCBIRateLimitError,
     RateLimiter,
     RequestCache,
+    esearch_pubmed,
     fetch_raw,
     fetch_with_retries,
 )
@@ -333,3 +334,48 @@ def test_fetch_with_retries_transport_error_wraps_as_malformed(tmp_path):
             "http://e.com/x", {}, session=sess, limiter=limiter, cache=cache, max_retries=5,
         )
     assert len(sess.calls) == 1, "transport errors are not retried"
+
+
+def test_esearch_pubmed_parses_pmids_from_xml(tmp_path):
+    """Given a recorded XML response, esearch_pubmed returns the PMID list."""
+    cache = RequestCache(cache_dir=tmp_path)
+    fake_xml = b"""<?xml version="1.0"?>
+<eSearchResult>
+    <Count>3</Count>
+    <IdList>
+        <Id>40000001</Id>
+        <Id>40000002</Id>
+        <Id>40000003</Id>
+    </IdList>
+</eSearchResult>"""
+    sess = _FakeSession(_FakeResponse(200, fake_xml))
+    limiter = RateLimiter(rate_per_sec=10.0, burst=10)
+
+    pmids = esearch_pubmed(
+        query="empagliflozin AND heart failure",
+        cache=cache,
+        session=sess,
+        limiter=limiter,
+        api_key=None,
+    )
+
+    assert pmids == ["40000001", "40000002", "40000003"]
+    assert len(sess.calls) == 1
+    _, params = sess.calls[0]
+    assert params["db"] == "pubmed"
+    assert params["term"] == "empagliflozin AND heart failure"
+    assert params["retmode"] == "xml"
+
+
+def test_esearch_pubmed_empty_result_returns_empty_list(tmp_path):
+    cache = RequestCache(cache_dir=tmp_path)
+    empty_xml = b"""<?xml version="1.0"?>
+<eSearchResult><Count>0</Count><IdList/></eSearchResult>"""
+    sess = _FakeSession(_FakeResponse(200, empty_xml))
+    limiter = RateLimiter(rate_per_sec=10.0, burst=10)
+
+    pmids = esearch_pubmed(
+        query="nonsense", cache=cache, session=sess, limiter=limiter, api_key=None,
+    )
+
+    assert pmids == []
