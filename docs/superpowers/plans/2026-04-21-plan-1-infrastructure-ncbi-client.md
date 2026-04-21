@@ -192,11 +192,42 @@ def test_rate_limiter_blocks_beyond_capacity(monkeypatch):
     assert 0.09 <= sleeps[0] <= 0.11, f"expected ~0.1s sleep, got {sleeps[0]}"
 
 
-def test_rate_limiter_unauth_mode_rate():
+def test_rate_limiter_unauth_mode_rate(monkeypatch):
     """Unauth rate is 3/s; with burst=3 a 4th call blocks ~0.33s."""
+    fake_time = [0.0]
+    monkeypatch.setattr("pipeline.ncbi_client.time.monotonic", lambda: fake_time[0])
+    sleeps: list[float] = []
+
+    def fake_sleep(s: float) -> None:
+        sleeps.append(s)
+        fake_time[0] += s
+
+    monkeypatch.setattr("pipeline.ncbi_client.time.sleep", fake_sleep)
+
     rl = RateLimiter(rate_per_sec=3.0, burst=3)
-    assert rl.rate_per_sec == 3.0
-    assert rl.burst == 3
+    for _ in range(4):
+        rl.acquire()
+
+    assert len(sleeps) == 1
+    assert 0.30 <= sleeps[0] <= 0.37, f"expected ~0.333s sleep, got {sleeps[0]}"
+
+
+def test_rate_limiter_rejects_bad_rate():
+    """rate_per_sec <= 0 must fail at construction (fail closed, not later)."""
+    import pytest as _pytest
+    with _pytest.raises(ValueError, match="rate_per_sec"):
+        RateLimiter(rate_per_sec=0.0, burst=10)
+    with _pytest.raises(ValueError, match="rate_per_sec"):
+        RateLimiter(rate_per_sec=-1.0, burst=10)
+
+
+def test_rate_limiter_rejects_bad_burst():
+    """burst < 1 must fail at construction."""
+    import pytest as _pytest
+    with _pytest.raises(ValueError, match="burst"):
+        RateLimiter(rate_per_sec=10.0, burst=0)
+    with _pytest.raises(ValueError, match="burst"):
+        RateLimiter(rate_per_sec=10.0, burst=-5)
 ```
 
 - [ ] **Step 2: Run test to verify it fails**
@@ -212,14 +243,17 @@ Create `pipeline/ncbi_client.py`:
 """Cache-first, rate-limited, resumable NCBI E-utilities wrapper.
 
 Public API (added incrementally across plan tasks):
-    RateLimiter      (Task 2 — this task)
-    RequestCache     (Task 3)
-    fetch_raw        (Task 4)
-    with retries     (Task 5)
-    esearch_pubmed   (Task 6)
-    efetch_pubmed    (Task 7)
-    save_checkpoint  (Task 8)
-    log_stuck        (Task 9)
+    RateLimiter          (Task 2 — this task)
+    RequestCache         (Task 3)
+    fetch_raw            (Task 4)
+    fetch_with_retries   (Task 5)
+    esearch_pubmed       (Task 6)
+    efetch_pubmed + SRRecord (Task 7)
+
+Separate modules (created in later tasks, NOT in ncbi_client.py):
+    pipeline.checkpoint  (Task 8) — save_checkpoint / load_checkpoint
+    pipeline.stuck_log   (Task 9) — log_stuck
+    pipeline.truthcert   (Tasks 10-11) — HMAC provenance chain
 """
 from __future__ import annotations
 
@@ -231,15 +265,25 @@ from dataclasses import dataclass
 class RateLimiter:
     """Token-bucket rate limiter.
 
+    Not thread-safe. Intended for single-threaded use. For concurrent use,
+    wrap acquire() in a threading.Lock at the call site.
+
     Args:
         rate_per_sec: tokens added per second (10 with API key, 3 unauth).
-        burst: maximum bucket capacity.
+            Must be > 0.
+        burst: maximum bucket capacity. Must be >= 1.
     """
 
     rate_per_sec: float
     burst: int
 
     def __post_init__(self) -> None:
+        if self.rate_per_sec <= 0:
+            raise ValueError(
+                f"rate_per_sec must be positive, got {self.rate_per_sec}"
+            )
+        if self.burst < 1:
+            raise ValueError(f"burst must be >= 1, got {self.burst}")
         self._tokens: float = float(self.burst)
         self._last_refill: float = time.monotonic()
 
