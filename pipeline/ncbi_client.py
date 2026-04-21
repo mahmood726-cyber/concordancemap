@@ -92,10 +92,20 @@ class RequestCache:
 
     def get(self, url: str, params: dict[str, str]) -> bytes | None:
         p = self._path(self._key(url, params))
-        if not p.exists():
+        try:
+            return p.read_bytes()
+        except FileNotFoundError:
             return None
-        return p.read_bytes()
 
     def put(self, url: str, params: dict[str, str], value: bytes) -> None:
+        """Atomic write via tmp-then-replace.
+
+        Path.replace() is atomic on POSIX and within-drive atomic on Windows
+        NTFS. This closes the truncate-then-partial-write window that would
+        otherwise let a killed process leave a zero-byte or partial-payload
+        cache file that get() cannot distinguish from a valid response.
+        """
         p = self._path(self._key(url, params))
-        p.write_bytes(value)
+        tmp = p.with_suffix(".tmp")
+        tmp.write_bytes(value)
+        tmp.replace(p)

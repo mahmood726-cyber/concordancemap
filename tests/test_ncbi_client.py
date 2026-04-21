@@ -104,3 +104,19 @@ def test_cache_is_disk_backed(tmp_path: Path):
     cache1.put("http://example.com/x", {}, b"persisted")
     cache2 = RequestCache(cache_dir=tmp_path)
     assert cache2.get("http://example.com/x", {}) == b"persisted"
+
+
+def test_cache_different_urls_do_not_collide(tmp_path: Path):
+    """Same params, different URLs must produce distinct cache keys."""
+    cache = RequestCache(cache_dir=tmp_path)
+    cache.put("http://x.com", {}, b"A")
+    assert cache.get("http://y.com", {}) is None
+    assert cache.get("http://x.com", {}) == b"A"
+
+
+def test_cache_overwrite_replaces_value(tmp_path: Path):
+    """A second put() to the same key replaces the first value atomically."""
+    cache = RequestCache(cache_dir=tmp_path)
+    cache.put("http://e.com/x", {}, b"v1")
+    cache.put("http://e.com/x", {}, b"v2")
+    assert cache.get("http://e.com/x", {}) == b"v2"
