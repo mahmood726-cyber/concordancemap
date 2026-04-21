@@ -138,3 +138,71 @@ def test_cache_put_failure_cleans_up_tmp(tmp_path: Path, monkeypatch):
     # No .tmp files should remain
     tmp_files = list(tmp_path.glob("*.tmp"))
     assert tmp_files == [], f"orphan tmp files remain: {tmp_files}"
+
+
+from pipeline.ncbi_client import MalformedResponseError, fetch_raw
+
+
+class _FakeResponse:
+    def __init__(self, status_code: int, content: bytes, text: str | None = None):
+        self.status_code = status_code
+        self.content = content
+        self.text = text if text is not None else content.decode("utf-8", "replace")
+
+    def raise_for_status(self) -> None:
+        if self.status_code >= 400:
+            raise RuntimeError(f"HTTP {self.status_code}")
+
+
+class _FakeSession:
+    def __init__(self, response: _FakeResponse):
+        self._response = response
+        self.calls: list[tuple[str, dict]] = []
+
+    def get(self, url: str, params: dict, timeout: float):
+        self.calls.append((url, dict(params)))
+        return self._response
+
+
+def test_fetch_raw_cache_hit_skips_http(tmp_path):
+    cache = RequestCache(cache_dir=tmp_path)
+    cache.put("http://e.com/x", {"a": "1"}, b"cached")
+    sess = _FakeSession(_FakeResponse(200, b"fresh"))
+    limiter = RateLimiter(rate_per_sec=10.0, burst=10)
+
+    out = fetch_raw("http://e.com/x", {"a": "1"}, session=sess, limiter=limiter, cache=cache)
+
+    assert out == b"cached"
+    assert sess.calls == [], "cache hit must not hit the network"
+
+
+def test_fetch_raw_cache_miss_hits_http_and_stores(tmp_path):
+    cache = RequestCache(cache_dir=tmp_path)
+    sess = _FakeSession(_FakeResponse(200, b"<xml>ok</xml>"))
+    limiter = RateLimiter(rate_per_sec=10.0, burst=10)
+
+    out = fetch_raw("http://e.com/x", {"a": "1"}, session=sess, limiter=limiter, cache=cache)
+
+    assert out == b"<xml>ok</xml>"
+    assert len(sess.calls) == 1
+    assert cache.get("http://e.com/x", {"a": "1"}) == b"<xml>ok</xml>"
+
+
+def test_fetch_raw_fail_closed_on_non_2xx(tmp_path):
+    cache = RequestCache(cache_dir=tmp_path)
+    sess = _FakeSession(_FakeResponse(500, b"<html>500</html>"))
+    limiter = RateLimiter(rate_per_sec=10.0, burst=10)
+
+    with pytest.raises(MalformedResponseError):
+        fetch_raw("http://e.com/x", {}, session=sess, limiter=limiter, cache=cache)
+
+    assert cache.get("http://e.com/x", {}) is None, "failed response must not be cached"
+
+
+def test_fetch_raw_fail_closed_on_empty_body(tmp_path):
+    cache = RequestCache(cache_dir=tmp_path)
+    sess = _FakeSession(_FakeResponse(200, b""))
+    limiter = RateLimiter(rate_per_sec=10.0, burst=10)
+
+    with pytest.raises(MalformedResponseError):
+        fetch_raw("http://e.com/x", {}, session=sess, limiter=limiter, cache=cache)

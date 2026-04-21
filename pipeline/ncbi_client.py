@@ -115,3 +115,45 @@ class RequestCache:
         except BaseException:
             tmp.unlink(missing_ok=True)
             raise
+
+
+class MalformedResponseError(Exception):
+    """NCBI returned a non-2xx, empty, or otherwise unusable response.
+
+    Fail closed: never treat an error page as valid data (portfolio rule).
+    """
+
+
+def fetch_raw(
+    url: str,
+    params: dict[str, str],
+    *,
+    session,
+    limiter: RateLimiter,
+    cache: RequestCache,
+    timeout: float = 30.0,
+) -> bytes:
+    """Cache-first HTTP GET. Returns raw bytes.
+
+    Raises MalformedResponseError on non-2xx, empty body, or transport error.
+    """
+    cached = cache.get(url, params)
+    if cached is not None:
+        return cached
+
+    limiter.acquire()
+    try:
+        response = session.get(url, params=params, timeout=timeout)
+    except Exception as exc:
+        raise MalformedResponseError(f"transport error for {url}: {exc}") from exc
+
+    if response.status_code != 200:
+        raise MalformedResponseError(
+            f"non-2xx response {response.status_code} for {url}"
+        )
+    body: bytes = response.content
+    if not body:
+        raise MalformedResponseError(f"empty body for {url}")
+
+    cache.put(url, params, body)
+    return body
