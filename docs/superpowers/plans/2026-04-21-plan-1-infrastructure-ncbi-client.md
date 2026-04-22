@@ -2,6 +2,8 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
+> **Plan 1 status (2026-04-22):** SHIPPED. 12/12 tasks committed (last: `f566898`), 57/57 tests passing. Code-quality reviews on Tasks 5-11 produced additional tests and fail-closed checks beyond the original plan; the critical fixture change is back-ported into Task 11 below (`"k" * 16` not `"k"`, required by Task 10's 16-byte minimum-key guard added in review). Other review-driven additions are not back-ported into the task code blocks here — see `PROGRESS.md` at the repo root for the full as-built drift log (commit SHAs per task, deferred-Minor list).
+
 **Goal:** Build a cache-first, rate-limited, resumable NCBI E-utilities wrapper + TruthCert provenance module that ConcordanceMap (and downstream Papers A and C) will consume. Ships as a standalone, tested artifact.
 
 **Architecture:** Token-bucket rate limiter fronts a SHA-256-keyed disk cache fronting the raw HTTP layer. Retry-with-exponential-backoff wraps the HTTP layer. Two public APIs on top: `esearch_pubmed(query)` and `efetch_pubmed(pmids)`. TruthCert computes a SHA-256+HMAC provenance chain using a key read from env var only (never from the bundle itself). Resumability is per-pair checkpoint JSON on disk.
@@ -1525,7 +1527,7 @@ from pipeline.truthcert import compute_chain, verify_chain
 
 
 def test_compute_chain_is_deterministic(monkeypatch):
-    monkeypatch.setenv("CONCORDANCEMAP_HMAC_KEY", "k")
+    monkeypatch.setenv("CONCORDANCEMAP_HMAC_KEY", "k" * 16)
     components = {"pmids": ["1", "2", "3"], "delta": 0.42}
     a = compute_chain(components)
     b = compute_chain(components)
@@ -1535,7 +1537,7 @@ def test_compute_chain_is_deterministic(monkeypatch):
 
 
 def test_compute_chain_differs_on_input_change(monkeypatch):
-    monkeypatch.setenv("CONCORDANCEMAP_HMAC_KEY", "k")
+    monkeypatch.setenv("CONCORDANCEMAP_HMAC_KEY", "k" * 16)
     a = compute_chain({"x": 1})
     b = compute_chain({"x": 2})
     assert a != b
@@ -1543,30 +1545,30 @@ def test_compute_chain_differs_on_input_change(monkeypatch):
 
 def test_compute_chain_differs_on_key_change(monkeypatch):
     components = {"x": 1}
-    monkeypatch.setenv("CONCORDANCEMAP_HMAC_KEY", "key-a")
+    monkeypatch.setenv("CONCORDANCEMAP_HMAC_KEY", "key-a" + "z" * 11)
     a = compute_chain(components)
-    monkeypatch.setenv("CONCORDANCEMAP_HMAC_KEY", "key-b")
+    monkeypatch.setenv("CONCORDANCEMAP_HMAC_KEY", "key-b" + "z" * 11)
     b = compute_chain(components)
     assert a != b
 
 
 def test_compute_chain_is_order_invariant(monkeypatch):
     """Dict key order must not affect the hash (JSON sorted)."""
-    monkeypatch.setenv("CONCORDANCEMAP_HMAC_KEY", "k")
+    monkeypatch.setenv("CONCORDANCEMAP_HMAC_KEY", "k" * 16)
     a = compute_chain({"x": 1, "y": 2})
     b = compute_chain({"y": 2, "x": 1})
     assert a == b
 
 
 def test_verify_chain_passes_on_untampered(monkeypatch):
-    monkeypatch.setenv("CONCORDANCEMAP_HMAC_KEY", "k")
+    monkeypatch.setenv("CONCORDANCEMAP_HMAC_KEY", "k" * 16)
     components = {"pmids": ["1", "2"], "delta": 0.1}
     chain = compute_chain(components)
     assert verify_chain(components, chain) is True
 
 
 def test_verify_chain_fails_on_tampered(monkeypatch):
-    monkeypatch.setenv("CONCORDANCEMAP_HMAC_KEY", "k")
+    monkeypatch.setenv("CONCORDANCEMAP_HMAC_KEY", "k" * 16)
     components = {"pmids": ["1", "2"], "delta": 0.1}
     chain = compute_chain(components)
     tampered = {"pmids": ["1", "2"], "delta": 0.9}
@@ -1575,7 +1577,7 @@ def test_verify_chain_fails_on_tampered(monkeypatch):
 
 def test_verify_chain_uses_constant_time_compare(monkeypatch):
     """Must call hmac.compare_digest, never ==."""
-    monkeypatch.setenv("CONCORDANCEMAP_HMAC_KEY", "k")
+    monkeypatch.setenv("CONCORDANCEMAP_HMAC_KEY", "k" * 16)
     calls: list[tuple] = []
     import hmac as _hmac
 
@@ -1887,7 +1889,7 @@ After all 12 tasks are committed:
 - [ ] **Full test suite passes**
 
 Run: `python -m pytest -v`
-Expected: All tests pass. Expected counts: sanity (2) + ncbi_client (18) + checkpoint (4) + stuck_log (2) + truthcert (11) + integration (1) = **38 passed** (+/- as tests evolve).
+Expected: All tests pass. As-built counts (post-review): sanity (2) + ncbi_client (29) + checkpoint (4) + stuck_log (2) + truthcert (19) + integration (1) = **57 passed**. The original lower-bound plan estimate was 38; the additional 19 are review-driven additions in Tasks 5, 10, 11 (transport-error coverage, non-retryable-500 coverage, whitespace/min-length key guards, nested-dict order invariance, empty-components, isinstance-expected guard, wrong-length-digest).
 
 - [ ] **Smoke script runs from warm cache in <10s with zero live calls**
 
