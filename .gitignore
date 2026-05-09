@@ -27,6 +27,7 @@ STUCK_FAILURES.jsonl
 # Secrets — never commit
 .env
 .env.*
+!.env.example
 *.key
 *.pem
 hmac_key*
