@@ -500,6 +500,44 @@ def test_efetch_pubmed_parses_one_record(tmp_path):
     assert r.doi == "10.1000/test.1"
 
 
+_PUBMED_MARKUP_XML = b"""<?xml version="1.0"?>
+<PubmedArticleSet>
+<PubmedArticle>
+  <MedlineCitation>
+    <PMID>40000009</PMID>
+    <Article>
+      <ArticleTitle>Effect of <i>empagliflozin</i> on outcomes</ArticleTitle>
+      <Abstract>
+        <AbstractText Label="RESULTS">Risk was <b>significant</b> (p&lt;0.05) with HR 0.71.</AbstractText>
+      </Abstract>
+      <Journal><Title>J Cardiol</Title></Journal>
+    </Article>
+    <DateCompleted><Year>2024</Year></DateCompleted>
+  </MedlineCitation>
+</PubmedArticle>
+</PubmedArticleSet>"""
+
+
+def test_efetch_pubmed_preserves_text_around_inline_markup(tmp_path):
+    """Titles/abstracts with inline markup (<i>, <b>) must not be truncated at
+    the first child element — regression for node.text data loss."""
+    cache = RequestCache(cache_dir=tmp_path)
+    sess = _FakeSession(_FakeResponse(200, _PUBMED_MARKUP_XML))
+    limiter = RateLimiter(rate_per_sec=10.0, burst=10)
+
+    records = efetch_pubmed(
+        pmids=["40000009"], cache=cache, session=sess, limiter=limiter, api_key=None,
+    )
+
+    assert len(records) == 1
+    r = records[0]
+    # Text after the inline element must survive.
+    assert r.title == "Effect of empagliflozin on outcomes"
+    assert "significant" in r.abstract
+    assert "(p<0.05)" in r.abstract
+    assert "HR 0.71" in r.abstract
+
+
 def test_efetch_pubmed_empty_pmids_returns_empty(tmp_path):
     cache = RequestCache(cache_dir=tmp_path)
     sess = _FakeSession(_FakeResponse(200, b"<PubmedArticleSet/>"))

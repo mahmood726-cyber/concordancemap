@@ -307,14 +307,23 @@ def _parse_pubmed_article(article_el) -> SRRecord:
         node = article_el.find(xpath)
         return (node.text or "").strip() if node is not None else ""
 
+    def _full_text(xpath: str) -> str:
+        # Concatenate all descendant text so inline markup (e.g. <i>, <sup>,
+        # <b>) does not truncate the value. Plain node.text stops at the first
+        # child element, silently dropping everything after it — for PubMed
+        # abstracts and titles that routinely embed italics/superscripts this
+        # would lose statistical results (e.g. "significant (p<0.05) HR 0.71").
+        node = article_el.find(xpath)
+        return "".join(node.itertext()).strip() if node is not None else ""
+
     def _all_text(xpath: str) -> list[str]:
         return [(n.text or "").strip() for n in article_el.iterfind(xpath)]
 
     pmid = _text(".//MedlineCitation/PMID")
-    title = _text(".//Article/ArticleTitle")
+    title = _full_text(".//Article/ArticleTitle")
 
     abstract_nodes = article_el.iterfind(".//Article/Abstract/AbstractText")
-    abstract = " ".join((n.text or "").strip() for n in abstract_nodes)
+    abstract = " ".join("".join(n.itertext()).strip() for n in abstract_nodes)
 
     mesh = _all_text(".//MeshHeadingList/MeshHeading/DescriptorName")
     pub_types = _all_text(".//Article/PublicationTypeList/PublicationType")
