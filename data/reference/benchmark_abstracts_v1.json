@@ -1,0 +1,153 @@
+{
+  "_meta": {
+    "description": "Hand-labeled SR conclusion-sentence fixtures for the ConcordanceMap classifier benchmark. Synthetic/paraphrased abstracts written to exercise the deterministic classifier; NOT drawn from real PMIDs. Labels are the ground truth used to measure classifier accuracy in scripts/benchmark.py.",
+    "version": "v1",
+    "label_schema": {
+      "direction": ["benefit", "null", "harm", "AMBIGUOUS"],
+      "significance": ["sig", "nonsig", "unclear", "AMBIGUOUS"]
+    },
+    "cluster_note": "cluster_id groups fixtures into synthetic PICO clusters so the benchmark can also exercise concordance_engine end-to-end. These clusters are illustrative, not empirical findings."
+  },
+  "fixtures": [
+    {
+      "id": "F01",
+      "cluster_id": "drugA__hf__mortality",
+      "abstract": "Conclusions: The intervention significantly reduced all-cause mortality (p < 0.001).",
+      "gold_direction": "benefit",
+      "gold_significance": "sig"
+    },
+    {
+      "id": "F02",
+      "cluster_id": "drugA__hf__mortality",
+      "abstract": "Conclusions: Treatment was associated with a lower risk of death (p = 0.02).",
+      "gold_direction": "benefit",
+      "gold_significance": "sig"
+    },
+    {
+      "id": "F03",
+      "cluster_id": "drugA__hf__mortality",
+      "abstract": "Conclusions: There was no significant difference in mortality between groups.",
+      "gold_direction": "null",
+      "gold_significance": "nonsig"
+    },
+    {
+      "id": "F04",
+      "cluster_id": "drugA__hf__mortality",
+      "abstract": "Conclusions: The pooled analysis showed reduced mortality with the drug (p = 0.03).",
+      "gold_direction": "benefit",
+      "gold_significance": "sig"
+    },
+    {
+      "id": "F05",
+      "cluster_id": "drugA__hf__mortality",
+      "abstract": "Conclusions: The drug did not reduce mortality compared with placebo.",
+      "gold_direction": "null",
+      "gold_significance": "unclear"
+    },
+    {
+      "id": "F06",
+      "cluster_id": "drugB__stroke__mace",
+      "abstract": "Conclusions: The agent significantly increased the risk of major cardiovascular events (p = 0.008).",
+      "gold_direction": "harm",
+      "gold_significance": "sig"
+    },
+    {
+      "id": "F07",
+      "cluster_id": "drugB__stroke__mace",
+      "abstract": "Conclusions: Use was associated with a higher rate of stroke.",
+      "gold_direction": "harm",
+      "gold_significance": "unclear"
+    },
+    {
+      "id": "F08",
+      "cluster_id": "drugB__stroke__mace",
+      "abstract": "Conclusions: The intervention reduced the risk of major adverse cardiac events (p = 0.04).",
+      "gold_direction": "benefit",
+      "gold_significance": "sig"
+    },
+    {
+      "id": "F09",
+      "cluster_id": "drugB__stroke__mace",
+      "abstract": "Conclusions: Outcomes were comparable between the two arms.",
+      "gold_direction": "null",
+      "gold_significance": "unclear"
+    },
+    {
+      "id": "F10",
+      "cluster_id": "drugC__copd__hosp",
+      "abstract": "Conclusions: The treatment improved quality of life.",
+      "gold_direction": "benefit",
+      "gold_significance": "unclear"
+    },
+    {
+      "id": "F11",
+      "cluster_id": "drugC__copd__hosp",
+      "abstract": "Conclusions: The drug lowered the rate of hospitalization (p = 0.01).",
+      "gold_direction": "benefit",
+      "gold_significance": "sig"
+    },
+    {
+      "id": "F12",
+      "cluster_id": "drugC__copd__hosp",
+      "abstract": "Conclusions: The reduction in exacerbations was beneficial and statistically significant.",
+      "gold_direction": "benefit",
+      "gold_significance": "sig"
+    },
+    {
+      "id": "F13",
+      "cluster_id": "drugC__copd__hosp",
+      "abstract": "Conclusions: The intervention was superior to standard care for reducing admissions (p < 0.05).",
+      "gold_direction": "benefit",
+      "gold_significance": "sig"
+    },
+    {
+      "id": "F14",
+      "cluster_id": "drugD__pain__pro",
+      "abstract": "Conclusions: The difference in pain scores was not statistically significant (p = 0.31).",
+      "gold_direction": "null",
+      "gold_significance": "nonsig"
+    },
+    {
+      "id": "F15",
+      "cluster_id": "drugD__pain__pro",
+      "abstract": "Conclusions: No evidence of benefit was found for the primary outcome.",
+      "gold_direction": "null",
+      "gold_significance": "unclear"
+    },
+    {
+      "id": "F16",
+      "cluster_id": "drugD__pain__pro",
+      "abstract": "Conclusions: The treatment may reduce pain, but the evidence was inconclusive.",
+      "gold_direction": "AMBIGUOUS",
+      "gold_significance": "unclear"
+    },
+    {
+      "id": "F17",
+      "cluster_id": "drugE__infection__safety",
+      "abstract": "Conclusions: The drug reduced the risk of infection but increased the risk of bleeding.",
+      "gold_direction": "AMBIGUOUS",
+      "gold_significance": "unclear"
+    },
+    {
+      "id": "F18",
+      "cluster_id": "drugE__infection__safety",
+      "abstract": "Conclusions: Further large randomized controlled trials are warranted.",
+      "gold_direction": "AMBIGUOUS",
+      "gold_significance": "AMBIGUOUS"
+    },
+    {
+      "id": "F19",
+      "cluster_id": "drugE__infection__safety",
+      "abstract": "Conclusions: The intervention significantly reduced infection rates (p = 0.002).",
+      "gold_direction": "benefit",
+      "gold_significance": "sig"
+    },
+    {
+      "id": "F20",
+      "cluster_id": "drugE__infection__safety",
+      "abstract": "Conclusions: Adverse events were more frequent with the active drug (p = 0.04).",
+      "gold_direction": "harm",
+      "gold_significance": "sig"
+    }
+  ]
+}

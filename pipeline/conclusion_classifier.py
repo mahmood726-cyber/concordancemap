@@ -48,27 +48,35 @@ LEXICON_VERSION = "v1"
 # Each entry is (rule_name, compiled_regex). Rule names are emitted in
 # ConclusionClassification.rules_fired for calibration traceability.
 
+# An optional short noun phrase (up to two lowercase words) allowed between a
+# verb like "reduced" and its outcome noun, so "reduced infection rates" and
+# "reduced hospitalization risk" fire, while a long clause does not.
+_NP = r"(?:\s+[a-z-]+){0,2}\s+"
+_OUTCOME_NOUN = r"(?:risk|rate|rates|incidence|odds|hazard|event|events|mortalit)"
+
 _BENEFIT_PATTERNS: list[tuple[str, str]] = [
-    ("benefit.reduced_risk", r"reduc\w*\s+(?:the\s+)?(?:risk|rate|incidence|odds|hazard)"),
+    ("benefit.reduced_outcome", rf"reduc\w*(?:\s+the)?{_NP}{_OUTCOME_NOUN}"),
     ("benefit.reduced_mortality", r"reduc\w*\s+(?:all-cause\s+)?mortalit"),
-    ("benefit.lower_risk", r"lower\w*\s+(?:the\s+)?(?:risk|rate|incidence|odds|mortalit)"),
+    ("benefit.lower_outcome", rf"lower\w*(?:\s+the)?{_NP}(?:{_OUTCOME_NOUN}|mortalit)"),
     ("benefit.improved", r"improv\w+\s+(?:outcome|survival|function|symptom|quality)"),
     ("benefit.beneficial", r"\bbeneficial\b"),
     ("benefit.effective", r"\b(?:was|were|is|are)\s+effective\b"),
     ("benefit.superior", r"\bsuperior\s+to\b"),
     ("benefit.favou", r"\bfavou?r(?:ed|s|ing)?\s+(?:the\s+)?(?:intervention|treatment|drug)"),
     ("benefit.associated_lower", r"associat\w+\s+with\s+(?:a\s+)?(?:lower|reduced|decreased)"),
-    ("benefit.decreased_risk", r"decreas\w*\s+(?:the\s+)?(?:risk|rate|incidence|mortalit)"),
+    ("benefit.decreased_outcome", rf"decreas\w*(?:\s+the)?{_NP}(?:{_OUTCOME_NOUN}|mortalit)"),
+    ("benefit.less_frequent", rf"{_OUTCOME_NOUN}\s+(?:were|was)\s+less\s+(?:frequent|common)"),
 ]
 
 _HARM_PATTERNS: list[tuple[str, str]] = [
-    ("harm.increased_risk", r"increas\w*\s+(?:the\s+)?(?:risk|rate|incidence|odds|hazard|mortalit)"),
-    ("harm.higher_risk", r"higher\s+(?:risk|rate|incidence|odds|mortalit)"),
+    ("harm.increased_outcome", rf"increas\w*(?:\s+the)?{_NP}(?:{_OUTCOME_NOUN}|mortalit)"),
+    ("harm.higher_outcome", rf"higher{_NP}(?:{_OUTCOME_NOUN}|mortalit)"),
     ("harm.associated_higher", r"associat\w+\s+with\s+(?:a\s+)?(?:higher|increased|greater)\s+(?:risk|rate|odds|mortalit)"),
     ("harm.harmful", r"\bharmful\b"),
     ("harm.worse", r"\bworse(?:ned)?\s+(?:outcome|survival|prognosis)"),
     ("harm.inferior", r"\binferior\s+to\b"),
     ("harm.adverse_increase", r"(?:more|greater|increased)\s+adverse\s+events"),
+    ("harm.more_frequent", rf"(?:adverse\s+events?|{_OUTCOME_NOUN})\s+(?:were|was)\s+more\s+(?:frequent|common)"),
 ]
 
 _NULL_PATTERNS: list[tuple[str, str]] = [
